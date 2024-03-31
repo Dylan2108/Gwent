@@ -348,6 +348,7 @@
 -analyzer:"/home/dylan2108/Unity/Hub/Editor/2022.3.20f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"/home/dylan2108/Unity/Hub/Editor/2022.3.20f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/Card.cs"
+"Assets/Scripts/Deck.cs"
 -langversion:9.0
 
 /deterministic

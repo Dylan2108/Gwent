@@ -4,31 +4,47 @@ using UnityEngine;
 
 public class Card
 {
-  public string name {get;}   
+  public string Name {get; set;}
+  public Card(string name)
+  {
+    Name = name;
+  }  
 }
-public class UnitCard : Card
+public class Leader : Card //Cartas
+{
+    public Leader(string name) : base(name){}
+}
+public class Weather : Card //Cartas clima
+{
+    public Weather(string name) : base(name){}
+}
+public class Lure : Card //Cartas sennuelo
+{
+    public Lure(string name) : base(name){}
+}
+public class Clear : Card //Cartas despeje
+{
+    public Clear(string name) : base(name){}
+}
+public class Boost : Card //Cartas aumento
+{
+    public Boost(string name) : base(name){}
+}
+public class UnitCard : Card //Cartas Unidad
 {
     public int Atk {get; set;}
-    public int OriginalAtk {get;}
-    public string AtkType {get;}
-}
-public class SilverCard : UnitCard
-{
-    public SilverCard (string name,int OriginalAtk, string AtkType)
+    public string AtkType {get; set;}
+    public UnitCard(string name ,int atk , string atktype) : base(name)
     {
-        this.name = name;
-        this.OriginalAtk = OriginalAtk;
-        this.Atk = OriginalAtk;
-        this.AtkType = AtkType;
+        Atk = atk;
+        AtkType = atktype;
     }
 }
-public class GoldCard : UnitCard
+public class SilverCard : UnitCard //Cartas Plata
 {
-    public GoldCard (string name, int OriginalAtk, string AtkType)
-    {
-        this.name = name;
-        this.OriginalAtk = OriginalAtk;
-        this.Atk = OriginalAtk;
-        this.AtkType = AtkType;
-    }
+    public SilverCard (string name,int atk, string atktype) : base(name,atk,atktype){}
+}
+public class GoldCard : UnitCard // Cartas Oro
+{
+    public GoldCard (string name, int atk, string atktype) : base(name,atk,atktype){}
 }
