@@ -356,6 +356,7 @@
 "Assets/Scripts/Cards/Weather.cs"
 "Assets/Scripts/Deck.cs"
 "Assets/Scripts/Game Manager.cs"
+"Assets/Scripts/Hand.cs"
 -langversion:9.0
 
 /deterministic

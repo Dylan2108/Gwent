@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 2443
+  controlID: 13511
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 2405
+  controlID: 13488
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -242,7 +242,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 1168
     y: 0
-    width: 299
+    width: 318
     height: 941
   m_MinSize: {x: 232, y: 271}
   m_MaxSize: {x: 10002, y: 10021}
@@ -266,9 +266,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1467
+    x: 1486
     y: 0
-    width: 383
+    width: 364
     height: 941
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
@@ -744,9 +744,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -11.353946, y: 18.314804, z: -16.81893}
+    m_Target: {x: -2.4605994, y: 43.672043, z: -0.59822667}
     speed: 2
-    m_Value: {x: -11.353946, y: 18.314804, z: -16.81893}
+    m_Value: {x: -2.4605994, y: 43.672043, z: -0.59822667}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -792,13 +792,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.6371951, y: 0.00809193, z: -0.006690801, w: 0.7706318}
+    m_Target: {x: 0.61123294, y: 0.021361968, z: -0.01650731, w: 0.79099125}
     speed: 2
-    m_Value: {x: 0.63719475, y: 0.008091926, z: -0.006690797, w: 0.7706313}
+    m_Value: {x: -0.61123294, y: -0.021361968, z: 0.01650731, w: -0.7909913}
   m_Size:
-    m_Target: 10.343836
+    m_Target: 2.0388722
     speed: 2
-    m_Value: 10.343836
+    m_Value: 2.0388722
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -860,9 +860,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 78590000
-      m_LastClickedID: 22904
-      m_ExpandedIDs: 26fbffff
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 32fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -908,7 +908,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 1238
     y: 119
-    width: 297
+    width: 316
     height: 920
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -931,7 +931,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -939,16 +939,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /home/dylan2108/Descargas/Gwent/Gwent-Dylan
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: d0590000
-    m_LastClickedID: 22992
-    m_ExpandedIDs: 00000000c8590000ca590000ce59000000ca9a3b
+    m_SelectedIDs: 2a5b0000
+    m_LastClickedID: 23338
+    m_ExpandedIDs: 000000002a5b00002c5b0000385b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -976,7 +976,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000000ca9a3b
+    m_ExpandedIDs: 000000002a5b00002c5b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1003,7 +1003,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 000000002461000090610000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1052,9 +1052,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1537
+    x: 1556
     y: 119
-    width: 382
+    width: 363
     height: 920
   m_SerializedDataModeController:
     m_DataMode: 0
