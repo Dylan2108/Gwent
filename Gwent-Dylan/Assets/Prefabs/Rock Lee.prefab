@@ -119,6 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6d0407faeba68f6a6bf9c05b88d217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Rock Lee
-  Atk: 4
-  AtkType: Cuerpo a cuerpo
+  name: Rock Lee
+  atk: 4
+  atkType: Melee

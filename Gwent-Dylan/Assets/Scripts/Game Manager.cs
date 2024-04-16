@@ -13,12 +13,12 @@ public class GameManager : MonoBehaviour
    public Hand RivalHand;
    void Start()
    {
-    MyDeck.InvokeLeaderCard(PrefabLeaderCard,MyLeaderZone);
+    MyDeck.InvokeLeaderCard(PrefabLeaderCard,MyLeaderZone);//Se invocan las cartas lideres
     RivalDeck.InvokeLeaderCard(PrefabLeaderCard,RivalLeaderZone);
     for (int i = 0; i < 10; i++)
-    {
-      MyDeck.DrawCard(MyHand,i);
-      RivalDeck.DrawCard(RivalHand,i);
+    {//Se roban las cartas iniciales
+      MyDeck.DrawCard(MyHand);
+      RivalDeck.DrawCard(RivalHand);
     }
    }
 }

@@ -119,6 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a688dbd13fd84f17aef135f91eb4b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Minato Namikaze
-  Atk: 8
-  AtkType: A Distancia
+  name: Minato Namikaze
+  atk: 8
+  atkType: From Distance
