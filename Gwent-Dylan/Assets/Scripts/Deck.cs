@@ -39,8 +39,4 @@ public class Deck : MonoBehaviour
         Debug.Log("No quedan cartas en el Deck");
       }
    }
-   public void OnMouseDown()
-   {//Roba una carta al hacer click sobre el deck
-     DrawCard(hand);
-   }
 }

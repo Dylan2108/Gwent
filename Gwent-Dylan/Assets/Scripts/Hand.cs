@@ -25,6 +25,10 @@ public class Hand : MonoBehaviour
     public GameObject summonLureMenuPrefab;
     public GameObject summonClearMenuPrefab;
     public TMP_Text Points;
+    public bool isMyTurn;
+    public int playedCards = 0;
+    public static int round = 1;
+    public bool IPass;
     public void SummonGoldCard(Gold card)
     {//Invoca la carta Oro
         if(card.atkType == "Melee")
@@ -502,4 +506,5 @@ public class Hand : MonoBehaviour
         int totalpoints = meleepoints + adistancepoints + asediopoints;
         Points.text = totalpoints.ToString();
     }
+
 }
