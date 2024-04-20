@@ -10,9 +10,11 @@ public class Hand : MonoBehaviour
     public Melee meleesZones;
     public FromDistance fromDistanceZones;
     public Siege siegeZones;
+    public WeatherZone weatherZones;
     public bool[] emptyMeleeZones = new bool[7];        //Para saber las zonas disponibles en cada fila
     public bool[] emptyFromDistanceZones = new bool[7];
     public bool[] emptySiegeZones = new bool[7];
+    public static bool[] emptyWeatherZones = new bool[3];
     public void SummonGoldCard(Gold card)
     {//Invoca la carta Oro
         if(card.atkType == "Melee")
@@ -148,6 +150,28 @@ public class Hand : MonoBehaviour
                 {
                     Debug.Log("Se alcanzo el mayor numero de cartas en la fila de Asedio");
                 }
+            }
+        }
+    }
+    public void SummonWeatherCard(Weather card)
+    {
+        for(int i =0;i<emptyWeatherZones.Length;i++)
+        {
+            if(!emptyWeatherZones[i])
+            {
+                card.transform.position = weatherZones.weatherZones[i].transform.position;
+                weatherZones.cardsInWeatherZone.Add(card.gameObject);
+                int index = cardsInHand.IndexOf(card.gameObject);
+                cardsInHand.RemoveAt(index);
+                cardsInHand.Insert(index,null);
+                deck.emptyZones.RemoveAt(index);
+                deck.emptyZones.Insert(index,false);
+                emptyWeatherZones[i] = true;
+                break;
+            }
+            else if(i == 2)
+            {
+                Debug.Log("Se alcanzo el mayor numero de cartas en la zona clima");
             }
         }
     }
