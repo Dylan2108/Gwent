@@ -6771,6 +6771,7 @@ MonoBehaviour:
   summonBoostMenuPrefab: {fileID: 3514523486445435929, guid: ce428c8d0eee02b9d9a2c6b0c988a956, type: 3}
   summonLureMenuPrefab: {fileID: 4078003124742078595, guid: eacfbf58f90e3da92956747d7335e21e, type: 3}
   summonClearMenuPrefab: {fileID: 8622391391273122264, guid: 0706a7a1433c2aabd9d2970fecf9f575, type: 3}
+  Points: {fileID: 138696788}
 --- !u!1 &1167762293
 GameObject:
   m_ObjectHideFlags: 0
@@ -12265,6 +12266,7 @@ MonoBehaviour:
   summonBoostMenuPrefab: {fileID: 3514523486445435929, guid: ce428c8d0eee02b9d9a2c6b0c988a956, type: 3}
   summonLureMenuPrefab: {fileID: 4078003124742078595, guid: eacfbf58f90e3da92956747d7335e21e, type: 3}
   summonClearMenuPrefab: {fileID: 8622391391273122264, guid: 0706a7a1433c2aabd9d2970fecf9f575, type: 3}
+  Points: {fileID: 271904814}
 --- !u!1 &2080329592
 GameObject:
   m_ObjectHideFlags: 0

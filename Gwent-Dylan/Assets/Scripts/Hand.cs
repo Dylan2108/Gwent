@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Hand : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Hand : MonoBehaviour
     public GameObject summonBoostMenuPrefab;
     public GameObject summonLureMenuPrefab;
     public GameObject summonClearMenuPrefab;
+    public TMP_Text Points;
     public void SummonGoldCard(Gold card)
     {//Invoca la carta Oro
         if(card.atkType == "Melee")
@@ -39,6 +41,7 @@ public class Hand : MonoBehaviour
                     deck.emptyZones.RemoveAt(index);
                     deck.emptyZones.Insert(index,false);
                     emptyMeleeZones[i] = true;
+                    CountPoints();
                     break;
                 }
                 else if(i == 6)
@@ -61,6 +64,7 @@ public class Hand : MonoBehaviour
                 deck.emptyZones.RemoveAt(index);
                 deck.emptyZones.Insert(index,false);
                 emptyFromDistanceZones[i] = true;
+                CountPoints();
                 break;
             }
             else if(i == 6)
@@ -83,6 +87,7 @@ public class Hand : MonoBehaviour
                     deck.emptyZones.RemoveAt(index);
                     deck.emptyZones.Insert(index,false);
                     emptySiegeZones[i] = true;
+                    CountPoints();
                     break;
                 }
                 else if(i == 6)
@@ -108,6 +113,7 @@ public class Hand : MonoBehaviour
                     deck.emptyZones.RemoveAt(index);
                     deck.emptyZones.Insert(index,false);
                     emptyMeleeZones[i] = true;
+                    CountPoints();
                     break;
                 }
                 else if(i == 6)
@@ -130,6 +136,7 @@ public class Hand : MonoBehaviour
                 deck.emptyZones.RemoveAt(index);
                 deck.emptyZones.Insert(index,false);
                 emptyFromDistanceZones[i] = true;
+                CountPoints();
                 break;
             }
             else if(i == 6)
@@ -152,6 +159,7 @@ public class Hand : MonoBehaviour
                     deck.emptyZones.RemoveAt(index);
                     deck.emptyZones.Insert(index,false);
                     emptySiegeZones[i] = true;
+                    CountPoints();
                     break;
                 }
                 else if(i == 6)
@@ -428,5 +436,70 @@ public class Hand : MonoBehaviour
             }
         }
     } 
+    }
+    public int CountMeleePoints()
+    {
+        int counter = 0;
+      for(int i = 0;i<meleesZones.cardsInMeleeZone.Count;i++)
+      {
+        GameObject card = meleesZones.cardsInMeleeZone[i];
+        Gold GoldComponent = card.GetComponent<Gold>();
+        Silver SilverComponent = card.GetComponent<Silver>();
+        if(GoldComponent!=null)
+        {
+            counter += GoldComponent.atk;
+        }
+        else if(SilverComponent!=null)
+        {
+            counter += SilverComponent.atk;
+        }
+      }
+      return counter;
+    }
+    public int CountFromDistancePoints()
+    {
+        int counter = 0;
+        for(int i =0;i<fromDistanceZones.cardsInFromDistanceZones.Count;i++)
+        {
+            GameObject card = fromDistanceZones.cardsInFromDistanceZones[i];
+            Gold GoldComponent = card.GetComponent<Gold>();
+            Silver SilverComponent = card.GetComponent<Silver>();
+            if(GoldComponent!=null)
+            {
+                counter += GoldComponent.atk;
+            }
+            else if(SilverComponent != null)
+            {
+              counter += SilverComponent.atk;
+            }
+        }
+        return counter;
+    }
+    public int CountSiege()
+    {
+        int counter = 0;
+        for(int i = 0; i<siegeZones.cardsInSiegeZones.Count;i++)
+        {
+           GameObject card = siegeZones.cardsInSiegeZones[i];
+           Gold GoldComponent = card.GetComponent<Gold>();
+           Silver SilverComponent = card.GetComponent<Silver>();
+           if(GoldComponent!=null)
+           {
+            counter += GoldComponent.atk;
+           }
+           else if(SilverComponent!=null)
+           {
+            counter += SilverComponent.atk;
+           }
+        }
+        return counter;
+    }
+    public void CountPoints()
+    {
+        int meleepoints = CountMeleePoints();
+        int adistancepoints = CountFromDistancePoints();
+        int asediopoints = CountSiege();
+        int totalpoints = meleepoints + adistancepoints + asediopoints;
+        Points.text = totalpoints.ToString();
     }
 }
