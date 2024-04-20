@@ -169,8 +169,8 @@ MonoBehaviour:
     y: 0
     width: 872
     height: 483
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 5}
   m_Panes:
   - {fileID: 5}
@@ -713,9 +713,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: c42affff
-      m_LastClickedID: -54588
-      m_ExpandedIDs: e87fffff32fbffff1c5b0000
+      m_SelectedIDs: 445b0000
+      m_LastClickedID: 23364
+      m_ExpandedIDs: e87fffff32fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -810,7 +810,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Board
+    - Assets/Prefabs
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -818,16 +818,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Board
+  - Assets/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /home/dylan2108/Descargas/Gwent/Gwent-Dylan
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 545e0000
-    m_LastClickedID: 24148
-    m_ExpandedIDs: 000000003c5e00003e5e00004a5e0000505e000000ca9a3b
+    m_SelectedIDs: 505e0000
+    m_LastClickedID: 24144
+    m_ExpandedIDs: 000000003c5e00003e5e00004a5e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -880,8 +880,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: c42affff
-    m_LastClickedInstanceID: -54588
+    m_SelectedInstanceIDs: 445b0000
+    m_LastClickedInstanceID: 23364
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 000000002461000090610000
     m_RenameOverlay:
@@ -930,8 +930,8 @@ MonoBehaviour:
     y: 0
     width: 359
     height: 941
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
