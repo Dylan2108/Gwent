@@ -7,32 +7,32 @@ public class Silver : MonoBehaviour
     public string name;
     public int atk;
     public string atkType;
-    public Hand hand;
+    public Player player;
     public bool invoked;
     public void Start()
     {
-        hand = transform.parent.GetComponent<Hand>();//Toma como referencia a la mano que sea su padre
+        player = transform.parent.GetComponent<Player>();//Toma como referencia a la mano que sea su padre
     }
     public void OnMouseDown()
     {
-      if(hand.isMyTurn && hand.playedCards == 0)
+      if((player.isMyTurn && player.playedCards == 0) || player.ICanStillSummoning)
         {
          if(!invoked)
          {
-           hand.SummonSilverCard(this);
+           player.SummonSilverCard(this);
            invoked = true;
-           hand.playedCards++;
+           player.playedCards++;
          }
          else
          {
             Debug.Log("Ya esta carta esta invocada");
          }
         }
-        else if(!hand.isMyTurn)
+        else if(!player.isMyTurn)
         {
             Debug.Log("No es tu turno");
         }
-        else if(hand.playedCards!=0)
+        else if(player.playedCards!=0 && !player.ICanStillSummoning)
         {
             Debug.Log("Ya jugaste una carta este turno");
         }

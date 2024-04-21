@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,8 +11,18 @@ public class GameManager : MonoBehaviour
    public GameObject PrefabLeaderCard;
    public GameObject MyLeaderZone;
    public GameObject RivalLeaderZone;
-   public Hand MyHand;
-   public Hand RivalHand;
+   public Player MyPlayer;
+   public Player RivalPlayer;
+   public Melee MyMeleeZone;
+   public Melee RivalMeleeZone;
+   public FromDistance MyFromDistanceZone;
+   public FromDistance RivalFromDistanceZone;
+   public Siege MySiegeZone;
+   public Siege RivalSiegeZone;
+   public Graveyard MyGraveyard;
+   public Graveyard RivalGraveyard;
+   public int myPoints;
+   public int rivalPoints;
    void Start()
    {
     Debug.Log("Ronda 1");
@@ -18,57 +30,128 @@ public class GameManager : MonoBehaviour
     RivalDeck.InvokeLeaderCard(PrefabLeaderCard,RivalLeaderZone);
     for (int i = 0; i < 10; i++)
     {//Se roban las cartas iniciales
-      MyDeck.DrawCard(MyHand);
-      RivalDeck.DrawCard(RivalHand);
+      MyDeck.DrawCard();
+      RivalDeck.DrawCard();
     }
-    MyHand.isMyTurn = true;
+    MyPlayer.isMyTurn = true;
        Debug.Log("Es el turno del jugador 1");
+   }
+   void Update()
+   {
+    myPoints = MyPlayer.CountTotalPoints();
+    rivalPoints = RivalPlayer.CountTotalPoints();
+    if(Player.round == 1)
+    {
+      if(MyPlayer.IPass && RivalPlayer.IPass)
+      {
+        DecideWinner();
+        MyPlayer.CleanBoard();
+      }
+    }
+    else if(Player.round == 2)
+    {
+      
+    }
    }
    public void MyChangeTurn()
     {
-        MyHand.isMyTurn = false;
-        RivalHand.isMyTurn = true;
-        RivalHand.playedCards = 0;
+      if(MyPlayer.playedCards != 0 && !RivalPlayer.IPass)
+      {
+        MyPlayer.isMyTurn = false;
+        RivalPlayer.isMyTurn = true;
+        RivalPlayer.playedCards = 0;
         Debug.Log("Es el turno del jugador 2");
+      }
+      else if(RivalPlayer.IPass)
+      {
+        Debug.Log("No puede pasar turno, ya el jugador contrario termino su ronda");
+      }
+      else
+      {
+        Debug.Log("Debe jugar al menos una carta");
+      }
     }
     
     public void RivalChangeTurn()
     {
-      MyHand.isMyTurn = true;
-      RivalHand.isMyTurn = false;
-      MyHand.playedCards = 0;
-      Debug.Log("Es el turno del jugador 1");
+      if(RivalPlayer.playedCards != 0 && !MyPlayer.IPass)
+      {
+       MyPlayer.isMyTurn = true;
+       RivalPlayer.isMyTurn = false;
+       MyPlayer.playedCards = 0;
+       Debug.Log("Es el turno del jugador 1");
+      }
+      else if(MyPlayer.IPass)
+      {
+        Debug.Log("No puede pasar el turno ,ya el jugador contrario termino su ronda");
+      }
+      else
+      {
+        Debug.Log("Debe jugar al menos una carta");
+      }
     }
     public void MyPassRound()
     {
-      if(MyHand.playedCards == 0 || MyHand.cardsInHand.Count==0)
+      if(MyPlayer.playedCards == 0 || MyPlayer.cardsInHand.Count==0 || RivalPlayer.IPass)
       {
         Debug.Log("Jugador 1 cedio su turno");
-        MyHand.IPass = true;
+        MyPlayer.IPass = true;
+        MyPlayer.isMyTurn = false;
+        RivalPlayer.isMyTurn = true;
+        RivalPlayer.playedCards = 0;
+        RivalPlayer.ICanStillSummoning = true;
       }
       else
       {
         Debug.Log("No puede pasar de ronda en este turno");
-      }
-      if(MyHand.IPass && RivalHand.IPass)
-      {
-        Debug.Log("se acabo la ronda");
-        MyHand.IPass = false;
-        RivalHand.IPass = false;
-        MyHand.playedCards = 0;
-        RivalHand.playedCards = 0;
       }
     }
-    public void MyRivalPass()
+    public void RivalPassRound()
     {
-      if(RivalHand.playedCards == 0 || RivalHand.cardsInHand.Count==0)
+      if(RivalPlayer.playedCards == 0 || RivalPlayer.cardsInHand.Count==0 || MyPlayer.IPass)
       {
         Debug.Log("Jugador 2 cedio su turno");
-        RivalHand.IPass = true;
+        RivalPlayer.IPass = true;
+        MyPlayer.isMyTurn = true;
+        RivalPlayer.isMyTurn = false;
+        MyPlayer.playedCards = 0;
+        MyPlayer.ICanStillSummoning = true;
       }
       else
       {
         Debug.Log("No puede pasar de ronda en este turno");
       }
+    }
+    public void DecideWinner()
+    {
+       Debug.Log("Se acabo la ronda");
+        MyPlayer.IPass = false;
+        RivalPlayer.IPass = false;
+        MyPlayer.playedCards = 0;
+        RivalPlayer.playedCards = 0;
+        MyPlayer.ICanStillSummoning = false;
+        RivalPlayer.ICanStillSummoning = false;
+        Debug.Log("Calculemos los puntos para ver al ganador");
+        if(myPoints>rivalPoints)
+        {
+          Debug.Log("La Ronda fue ganada por el Jugador 1");
+          MyPlayer.RoundsWin++;
+          Player.round++;
+        }
+        else if(myPoints<rivalPoints)
+        {
+          Debug.Log("La Ronda fue ganada por el Jugador 2");
+          RivalPlayer.RoundsWin++;
+          Player.round++;
+        }
+        else if(myPoints == rivalPoints)
+        {
+          Debug.Log("La Ronda termino en empate");
+          Player.round++;
+        }
+    }
+    public void StartRound()
+    {
+       
     }
 }

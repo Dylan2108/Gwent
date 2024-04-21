@@ -5,32 +5,32 @@ using UnityEngine;
 public class Weather : MonoBehaviour
 {
    public string Name;
-   public Hand hand;
+   public Player player;
    public bool invoked;
    public void Start()
    {
-      hand = transform.parent.GetComponent<Hand>();
+      player = transform.parent.GetComponent<Player>();
    }
    public void OnMouseDown()
    {
-     if(hand.isMyTurn && hand.playedCards==0)
+     if(player.isMyTurn && player.playedCards==0 || player.ICanStillSummoning)
         {
          if(!invoked)
          {
-           hand.SummonWeatherCard(this);
+           player.SummonWeatherCard(this);
            invoked = true;
-           hand.playedCards++;
+           player.playedCards++;
          }
          else
          {
             Debug.Log("Ya jugaste esta carta");
          }
         }
-        else if(!hand.isMyTurn)
+        else if(!player.isMyTurn)
         {
             Debug.Log("No es tu turno");
         }
-        else if(hand.playedCards!=0)
+        else if(player.playedCards!=0 && !player.ICanStillSummoning)
         {
             Debug.Log("Ya invocaste una carta este turno");
         }

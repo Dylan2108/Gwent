@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Hand : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public List<GameObject> handZones = new List<GameObject>();//Las zonas de la mano donde van a estar las cartas
     public List<GameObject> cardsInHand = new List<GameObject>();//Para saber las cartas que estan en la mano actualmente
@@ -12,7 +12,7 @@ public class Hand : MonoBehaviour
     public Melee meleesZones;
     public FromDistance fromDistanceZones;
     public Siege siegeZones;
-    public WeatherZone weatherZones;
+    public Graveyard graveyard;
     public bool[] emptyMeleeZones = new bool[7];        //Para saber las zonas disponibles en cada fila
     public bool[] emptyFromDistanceZones = new bool[7];
     public bool[] emptySiegeZones = new bool[7];
@@ -24,11 +24,13 @@ public class Hand : MonoBehaviour
     public GameObject summonBoostMenuPrefab;
     public GameObject summonLureMenuPrefab;
     public GameObject summonClearMenuPrefab;
-    public TMP_Text Points;
+    public TMP_Text Score;
     public bool isMyTurn;
     public int playedCards = 0;
     public static int round = 1;
+    public int RoundsWin = 0;
     public bool IPass;
+    public bool ICanStillSummoning;
     public void SummonGoldCard(Gold card)
     {//Invoca la carta Oro
         if(card.atkType == "Melee")
@@ -45,7 +47,7 @@ public class Hand : MonoBehaviour
                     deck.emptyZones.RemoveAt(index);
                     deck.emptyZones.Insert(index,false);
                     emptyMeleeZones[i] = true;
-                    CountPoints();
+                    UpdateScore();
                     break;
                 }
                 else if(i == 6)
@@ -68,7 +70,7 @@ public class Hand : MonoBehaviour
                 deck.emptyZones.RemoveAt(index);
                 deck.emptyZones.Insert(index,false);
                 emptyFromDistanceZones[i] = true;
-                CountPoints();
+                UpdateScore();
                 break;
             }
             else if(i == 6)
@@ -91,7 +93,7 @@ public class Hand : MonoBehaviour
                     deck.emptyZones.RemoveAt(index);
                     deck.emptyZones.Insert(index,false);
                     emptySiegeZones[i] = true;
-                    CountPoints();
+                    UpdateScore();
                     break;
                 }
                 else if(i == 6)
@@ -117,7 +119,7 @@ public class Hand : MonoBehaviour
                     deck.emptyZones.RemoveAt(index);
                     deck.emptyZones.Insert(index,false);
                     emptyMeleeZones[i] = true;
-                    CountPoints();
+                    UpdateScore();
                     break;
                 }
                 else if(i == 6)
@@ -140,7 +142,7 @@ public class Hand : MonoBehaviour
                 deck.emptyZones.RemoveAt(index);
                 deck.emptyZones.Insert(index,false);
                 emptyFromDistanceZones[i] = true;
-                CountPoints();
+                UpdateScore();
                 break;
             }
             else if(i == 6)
@@ -163,7 +165,7 @@ public class Hand : MonoBehaviour
                     deck.emptyZones.RemoveAt(index);
                     deck.emptyZones.Insert(index,false);
                     emptySiegeZones[i] = true;
-                    CountPoints();
+                    UpdateScore();
                     break;
                 }
                 else if(i == 6)
@@ -179,8 +181,8 @@ public class Hand : MonoBehaviour
         {
             if(!emptyWeatherZones[i])
             {
-                card.transform.position = weatherZones.weatherZones[i].transform.position;
-                weatherZones.cardsInWeatherZone.Add(card.gameObject);
+                card.transform.position = WeatherZone.weatherZones[i].transform.position;
+                WeatherZone.cardsInWeatherZone.Add(card.gameObject);
                 int index = cardsInHand.IndexOf(card.gameObject);
                 cardsInHand.RemoveAt(index);
                 cardsInHand.Insert(index,null);
@@ -498,13 +500,33 @@ public class Hand : MonoBehaviour
         }
         return counter;
     }
-    public void CountPoints()
+    public int CountTotalPoints()
     {
         int meleepoints = CountMeleePoints();
         int adistancepoints = CountFromDistancePoints();
         int asediopoints = CountSiege();
-        int totalpoints = meleepoints + adistancepoints + asediopoints;
-        Points.text = totalpoints.ToString();
+        return meleepoints + adistancepoints + asediopoints;
     }
-
+    public void UpdateScore()
+    {
+        int totalpoints = CountTotalPoints();
+        Score.text = totalpoints.ToString();
+    }
+    public void CleanBoard()
+    {
+      foreach (var card in meleesZones.cardsInMeleeZone)
+       {
+        card.transform.position = graveyard.transform.position;
+        graveyard.cardsInGraveyard.Add(card);
+       }
+       meleesZones.cardsInMeleeZone.Clear();
+       for(int i =0;i<emptyMeleeZones.Length;i++)
+       {
+         emptyMeleeZones[i] = false;
+       }
+       if (meleesZones.cardInMeleeBoostZone!=null)
+       {
+         meleesZones.cardInMeleeBoostZone.transform.position = graveyard.transform.position;
+       } 
+    }   
 }

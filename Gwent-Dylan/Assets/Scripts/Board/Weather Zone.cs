@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class WeatherZone : MonoBehaviour
 {
-   public List<GameObject> weatherZones = new List<GameObject>();
-   public List<GameObject> cardsInWeatherZone = new List<GameObject>();
+   public static List<GameObject> weatherZones = new List<GameObject>();
+   public static List<GameObject> cardsInWeatherZone = new List<GameObject>();
 }
