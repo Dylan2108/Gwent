@@ -973,7 +973,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -548, y: 212}
+  m_AnchoredPosition: {x: -548, y: -183}
   m_SizeDelta: {x: 200, y: 42.1457}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &147388185
@@ -4634,7 +4634,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -548, y: -176}
+  m_AnchoredPosition: {x: -548, y: 207}
   m_SizeDelta: {x: 200, y: 42.1457}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &903436895
@@ -4992,6 +4992,8 @@ MonoBehaviour:
   RivalGraveyard: {fileID: 1433038569}
   myPoints: 0
   rivalPoints: 0
+  myRounds: 0
+  rivalRounds: 0
 --- !u!4 &930018473
 Transform:
   m_ObjectHideFlags: 0
@@ -5991,6 +5993,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7cf50eb31a214b18b829eb9602d97d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weatherZones:
+  - {fileID: 2011362653}
+  - {fileID: 1621145216}
+  - {fileID: 442606202}
+  cardsInWeatherZone: []
 --- !u!1 &1060689910
 GameObject:
   m_ObjectHideFlags: 0
@@ -6789,6 +6796,7 @@ MonoBehaviour:
   meleesZones: {fileID: 1381495954}
   fromDistanceZones: {fileID: 806881573}
   siegeZones: {fileID: 190254581}
+  weatherZones: {fileID: 1039458243}
   graveyard: {fileID: 1433038569}
   emptyMeleeZones: 00000000000000
   emptyFromDistanceZones: 00000000000000
@@ -6801,6 +6809,7 @@ MonoBehaviour:
   summonLureMenuPrefab: {fileID: 4078003124742078595, guid: eacfbf58f90e3da92956747d7335e21e, type: 3}
   summonClearMenuPrefab: {fileID: 8622391391273122264, guid: 0706a7a1433c2aabd9d2970fecf9f575, type: 3}
   Score: {fileID: 138696788}
+  RoundScore: {fileID: 903436895}
   isMyTurn: 0
   playedCards: 0
   RoundsWin: 0
@@ -12345,6 +12354,7 @@ MonoBehaviour:
   meleesZones: {fileID: 139217441}
   fromDistanceZones: {fileID: 2020416829}
   siegeZones: {fileID: 1265017134}
+  weatherZones: {fileID: 1039458243}
   graveyard: {fileID: 55157860}
   emptyMeleeZones: 00000000000000
   emptyFromDistanceZones: 00000000000000
@@ -12357,6 +12367,7 @@ MonoBehaviour:
   summonLureMenuPrefab: {fileID: 4078003124742078595, guid: eacfbf58f90e3da92956747d7335e21e, type: 3}
   summonClearMenuPrefab: {fileID: 8622391391273122264, guid: 0706a7a1433c2aabd9d2970fecf9f575, type: 3}
   Score: {fileID: 271904814}
+  RoundScore: {fileID: 147388185}
   isMyTurn: 0
   playedCards: 0
   RoundsWin: 0

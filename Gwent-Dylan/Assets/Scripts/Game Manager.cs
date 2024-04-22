@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
    public Graveyard RivalGraveyard;
    public int myPoints;
    public int rivalPoints;
+   public int myRounds;
+   public int rivalRounds;
    void Start()
    {
     Debug.Log("Ronda 1");
@@ -34,7 +36,7 @@ public class GameManager : MonoBehaviour
       RivalDeck.DrawCard();
     }
     MyPlayer.isMyTurn = true;
-       Debug.Log("Es el turno del jugador 1");
+    Debug.Log("Es el turno del jugador 1");
    }
    void Update()
    {
@@ -45,12 +47,30 @@ public class GameManager : MonoBehaviour
       if(MyPlayer.IPass && RivalPlayer.IPass)
       {
         DecideWinner();
-        MyPlayer.CleanBoard();
+        StartRound();
+        Debug.Log("Ronda 2");
       }
     }
     else if(Player.round == 2)
     {
-      
+       if(MyPlayer.IPass && RivalPlayer.IPass)
+       {
+        DecideWinner();
+        if(MyPlayer.RoundsWin == 2) Debug.Log("El ganador del juego es el jugador 1");
+        else if(RivalPlayer.RoundsWin == 2) Debug.Log("El ganador del juego es el jugador 2");
+        StartRound();
+        Debug.Log("Ronda 3");
+       }
+    }
+    else if(Player.round == 3)
+    {
+      if(MyPlayer.IPass && RivalPlayer.IPass)
+      {
+         DecideWinner();
+         if(MyPlayer.RoundsWin > RivalPlayer.RoundsWin) Debug.Log("El ganador del juego es el jugador 1");
+         else if(MyPlayer.RoundsWin < RivalPlayer.RoundsWin) Debug.Log("El ganador del juego es el jugador 2");
+         else if(MyPlayer.RoundsWin == RivalPlayer.RoundsWin) Debug.Log("El juego ha terminado en empate");
+      }
     }
    }
    public void MyChangeTurn()
@@ -137,12 +157,16 @@ public class GameManager : MonoBehaviour
           Debug.Log("La Ronda fue ganada por el Jugador 1");
           MyPlayer.RoundsWin++;
           Player.round++;
+          MyPlayer.isMyTurn = false;
+          RivalPlayer.isMyTurn = true;
         }
         else if(myPoints<rivalPoints)
         {
           Debug.Log("La Ronda fue ganada por el Jugador 2");
           RivalPlayer.RoundsWin++;
           Player.round++;
+          MyPlayer.isMyTurn = true;
+          RivalPlayer.isMyTurn = false;
         }
         else if(myPoints == rivalPoints)
         {
@@ -152,6 +176,18 @@ public class GameManager : MonoBehaviour
     }
     public void StartRound()
     {
-       
+        MyPlayer.CleanBoard();
+        RivalPlayer.CleanBoard();
+        MyPlayer.UpdateScore();
+        RivalPlayer.UpdateScore();
+        MyPlayer.UpdateRoundScore();
+        RivalPlayer.UpdateRoundScore();
+        for(int i =0;i<3;i++)
+        {
+          MyDeck.DrawCard();
+          RivalDeck.DrawCard();
+        }
+        if(MyPlayer.isMyTurn && !RivalPlayer.isMyTurn) Debug.Log("Es el turno del jugador 1");
+        if(!MyPlayer.isMyTurn && RivalPlayer.isMyTurn) Debug.Log("Es el turno del jugador 2"); 
     }
 }

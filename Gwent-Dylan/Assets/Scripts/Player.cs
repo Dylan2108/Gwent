@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public Melee meleesZones;
     public FromDistance fromDistanceZones;
     public Siege siegeZones;
+    public WeatherZone weatherZones;
     public Graveyard graveyard;
     public bool[] emptyMeleeZones = new bool[7];        //Para saber las zonas disponibles en cada fila
     public bool[] emptyFromDistanceZones = new bool[7];
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
     public GameObject summonLureMenuPrefab;
     public GameObject summonClearMenuPrefab;
     public TMP_Text Score;
+    public TMP_Text RoundScore;
     public bool isMyTurn;
     public int playedCards = 0;
     public static int round = 1;
@@ -181,8 +183,8 @@ public class Player : MonoBehaviour
         {
             if(!emptyWeatherZones[i])
             {
-                card.transform.position = WeatherZone.weatherZones[i].transform.position;
-                WeatherZone.cardsInWeatherZone.Add(card.gameObject);
+                card.transform.position = weatherZones.weatherZones[i].transform.position;
+                weatherZones.cardsInWeatherZone.Add(card.gameObject);
                 int index = cardsInHand.IndexOf(card.gameObject);
                 cardsInHand.RemoveAt(index);
                 cardsInHand.Insert(index,null);
@@ -512,9 +514,13 @@ public class Player : MonoBehaviour
         int totalpoints = CountTotalPoints();
         Score.text = totalpoints.ToString();
     }
+    public void UpdateRoundScore()
+    {
+        RoundScore.text = RoundsWin.ToString();
+    }
     public void CleanBoard()
     {
-      foreach (var card in meleesZones.cardsInMeleeZone)
+      foreach (var card in meleesZones.cardsInMeleeZone)//Zona Cuerpo a cuerpo
        {
         card.transform.position = graveyard.transform.position;
         graveyard.cardsInGraveyard.Add(card);
@@ -527,6 +533,50 @@ public class Player : MonoBehaviour
        if (meleesZones.cardInMeleeBoostZone!=null)
        {
          meleesZones.cardInMeleeBoostZone.transform.position = graveyard.transform.position;
-       } 
+         meleesZones.cardInMeleeBoostZone = null;
+         emptyMeleeBoost = false;
+       }
+       foreach(var card in fromDistanceZones.cardsInFromDistanceZones)//Zona A Distancia
+       {
+        card.transform.position = graveyard.transform.position;
+        graveyard.cardsInGraveyard.Add(card);
+       }
+       fromDistanceZones.cardsInFromDistanceZones.Clear();
+       for (int i = 0; i <emptyFromDistanceZones.Length; i++)
+       {
+         emptyFromDistanceZones[i] = false;
+       }
+       if(fromDistanceZones.cardInFromDistanceBoostZone!=null)
+       {
+        fromDistanceZones.cardInFromDistanceBoostZone.transform.position = graveyard.transform.position;
+        fromDistanceZones.cardInFromDistanceBoostZone = null;
+        emptyFromDistanceBoost = false;
+       }
+       foreach(var card in siegeZones.cardsInSiegeZones)//Zona Asedio
+       {
+        card.transform.position = graveyard.transform.position;
+        graveyard.cardsInGraveyard.Add(card);
+       }
+       siegeZones.cardsInSiegeZones.Clear();
+       for(int i =0;i<emptySiegeZones.Length;i++)
+       {
+        emptySiegeZones[i] = false;
+       }
+       if(siegeZones.cardInSiegeBoostZone!=null)
+       {
+        siegeZones.cardInSiegeBoostZone.transform.position = graveyard.transform.position;
+        siegeZones.cardInSiegeBoostZone = null;
+        emptySiegeBoost = false;
+       }
+       foreach(var card in weatherZones.cardsInWeatherZone)//Zona Clima
+       {
+         card.transform.position = graveyard.transform.position;
+         graveyard.cardsInGraveyard.Add(card);
+       }
+       weatherZones.cardsInWeatherZone.Clear();
+       for(int i =0;i<emptyWeatherZones.Length;i++)
+       {
+        emptyWeatherZones[i] = false;
+       }
     }   
 }
