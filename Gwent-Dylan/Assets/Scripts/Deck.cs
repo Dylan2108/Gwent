@@ -10,6 +10,7 @@ public class Deck : MonoBehaviour
    public void InvokeLeaderCard(GameObject PrefabLeaderCard,GameObject LeaderZone)
    {//Invoca la carta lider
      GameObject LeaderCard = Instantiate(PrefabLeaderCard,LeaderZone.transform.position,Quaternion.identity);
+     LeaderCard.transform.SetParent(this.transform);
    }
    public void DrawCard()
    {//Roba cartas del deck hacia la mano

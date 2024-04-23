@@ -578,5 +578,13 @@ public class Player : MonoBehaviour
        {
         emptyWeatherZones[i] = false;
        }
-    }   
+    }
+    //Efectos
+       public void EffectWeather(string row,int decrease)
+       {
+         if(row == "Melee")
+         {
+            
+         }
+       }
 }

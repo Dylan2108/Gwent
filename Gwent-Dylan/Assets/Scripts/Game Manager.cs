@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -56,8 +57,8 @@ public class GameManager : MonoBehaviour
        if(MyPlayer.IPass && RivalPlayer.IPass)
        {
         DecideWinner();
-        if(MyPlayer.RoundsWin == 2) Debug.Log("El ganador del juego es el jugador 1");
-        else if(RivalPlayer.RoundsWin == 2) Debug.Log("El ganador del juego es el jugador 2");
+        if(MyPlayer.RoundsWin == 2) SceneManager.LoadScene("Player 1 Win");
+        else if(RivalPlayer.RoundsWin == 2) SceneManager.LoadScene("Player 2 Win");
         StartRound();
         Debug.Log("Ronda 3");
        }
@@ -67,9 +68,9 @@ public class GameManager : MonoBehaviour
       if(MyPlayer.IPass && RivalPlayer.IPass)
       {
          DecideWinner();
-         if(MyPlayer.RoundsWin > RivalPlayer.RoundsWin) Debug.Log("El ganador del juego es el jugador 1");
-         else if(MyPlayer.RoundsWin < RivalPlayer.RoundsWin) Debug.Log("El ganador del juego es el jugador 2");
-         else if(MyPlayer.RoundsWin == RivalPlayer.RoundsWin) Debug.Log("El juego ha terminado en empate");
+         if(MyPlayer.RoundsWin > RivalPlayer.RoundsWin) SceneManager.LoadScene("Player 1 Win");
+         else if(MyPlayer.RoundsWin < RivalPlayer.RoundsWin) SceneManager.LoadScene("Player 2 Win");
+         else if(MyPlayer.RoundsWin == RivalPlayer.RoundsWin) SceneManager.LoadScene("Tie");
       }
     }
    }

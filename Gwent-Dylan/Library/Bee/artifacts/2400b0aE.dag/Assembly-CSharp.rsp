@@ -361,6 +361,7 @@
 "Assets/Scripts/Cards/Weather.cs"
 "Assets/Scripts/Deck.cs"
 "Assets/Scripts/Game Manager.cs"
+"Assets/Scripts/MainMenu.cs"
 "Assets/Scripts/Player.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs"
