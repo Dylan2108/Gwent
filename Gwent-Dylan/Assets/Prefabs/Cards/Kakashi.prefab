@@ -119,6 +119,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a688dbd13fd84f17aef135f91eb4b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: ' Kakashi Hatake'
+  name: Kakashi Hatake
+  originalAtk: 0
   atk: 7
   atkType: Siege
+  player: {fileID: 0}
+  invoked: 0
+  EffectActivated: 0

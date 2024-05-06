@@ -15,8 +15,8 @@ public class Leader : MonoBehaviour
    {
       if(!EffectActivated)
       {
-         deck.DrawCard();
-         EffectActivated = true;
+            deck.DrawCard();
+            EffectActivated = true;
       }
       else
       {

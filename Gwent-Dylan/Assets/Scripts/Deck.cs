@@ -29,9 +29,11 @@ public class Deck : MonoBehaviour
             emptyZones[i] = true;//ACtualiza la mano para saber que esa zona esta ocupada
             break;
           }
-          else if(i==13)
+          else if(i==9)
           {
-            Debug.Log("No hay mas espacio para cartas en la mano");
+             GameObject instantiatedCard = Instantiate(prefabCard,player.graveyard.transform.position,Quaternion.identity);
+             instantiatedCard.transform.SetParent(player.transform);
+             player.graveyard.cardsInGraveyard.Add(instantiatedCard);
           }
         }
       }

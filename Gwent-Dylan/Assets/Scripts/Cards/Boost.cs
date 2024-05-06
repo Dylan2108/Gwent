@@ -17,9 +17,18 @@ public class Boost : MonoBehaviour
         {
          if(!invoked)
          {
-           player.ShowMenuSummonBoost(this.gameObject);
-           invoked = true;
-           player.playedCards++;
+          if(this.Name == "Pildoras Ninjas")
+          {
+            player.ShowMenuSummonBoost(this.gameObject,1);
+            invoked = true;
+            player.playedCards++;
+          }
+          else if(this.Name == "Jutsu de la Alianza Shinobi")
+          {
+            player.ShowMenuSummonBoost(this.gameObject,2);
+            invoked = true;
+            player.playedCards++;
+          }
          }
          else
          {

@@ -158,16 +158,16 @@ public class GameManager : MonoBehaviour
           Debug.Log("La Ronda fue ganada por el Jugador 1");
           MyPlayer.RoundsWin++;
           Player.round++;
-          MyPlayer.isMyTurn = false;
-          RivalPlayer.isMyTurn = true;
+          MyPlayer.isMyTurn = true;
+          RivalPlayer.isMyTurn = false;
         }
         else if(myPoints<rivalPoints)
         {
           Debug.Log("La Ronda fue ganada por el Jugador 2");
           RivalPlayer.RoundsWin++;
           Player.round++;
-          MyPlayer.isMyTurn = true;
-          RivalPlayer.isMyTurn = false;
+          MyPlayer.isMyTurn = false;
+          RivalPlayer.isMyTurn = true;
         }
         else if(myPoints == rivalPoints)
         {
@@ -183,7 +183,7 @@ public class GameManager : MonoBehaviour
         RivalPlayer.UpdateScore();
         MyPlayer.UpdateRoundScore();
         RivalPlayer.UpdateRoundScore();
-        for(int i =0;i<3;i++)
+        for(int i =0;i<2;i++)
         {
           MyDeck.DrawCard();
           RivalDeck.DrawCard();

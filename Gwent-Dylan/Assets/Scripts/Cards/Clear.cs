@@ -7,6 +7,7 @@ public class Clear : MonoBehaviour
     public string Name;
     public Player player;
     public bool invoked;
+    public bool EffectActivated;
     public void Start()
     {
         player = transform.parent.GetComponent<Player>();
@@ -21,9 +22,14 @@ public class Clear : MonoBehaviour
            invoked = true;
            player.playedCards++;
          }
+         else if(invoked && ! EffectActivated)
+         {
+            player.EffectClear(3);
+            EffectActivated = true;
+         }
          else
          {
-            Debug.Log("Ya esta carta esta invocada");
+            Debug.Log("Ya el efecto de esta carta fue activado");
          }
         }
         else if(!player.isMyTurn)
