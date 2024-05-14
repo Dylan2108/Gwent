@@ -41,9 +41,45 @@ public class GameManager : MonoBehaviour
    }
    void Update()
    {
+      if(MyGraveyard.cardsInGraveyard.Count != 0)
+        {
+             foreach(var card in MyGraveyard.cardsInGraveyard)
+          {
+            Gold GoldComponent = card.GetComponent<Gold>();
+            Silver SilverComponent = card.GetComponent<Silver>();
+            Boost BoostComponent = card.GetComponent<Boost>();
+            Clear ClearComponent = card.GetComponent<Clear>();
+            Lure LureComponent = card.GetComponent<Lure>();
+            Weather WeatherComponent = card.GetComponent<Weather>();
+            if(GoldComponent != null) GoldComponent.destroyed = true;
+            else if(SilverComponent != null) SilverComponent.destroyed = true;
+            else if(BoostComponent != null) BoostComponent.destroyed = true;
+            else if(ClearComponent != null) ClearComponent.destroyed = true;
+            else if(LureComponent != null) LureComponent.destroyed = true;
+            else if(WeatherComponent != null) WeatherComponent.destroyed = true;
+           }
+        }
+      if(RivalGraveyard.cardsInGraveyard.Count != 0)
+      {
+          foreach(var card in MyGraveyard.cardsInGraveyard)
+          {
+            Gold GoldComponent = card.GetComponent<Gold>();
+            Silver SilverComponent = card.GetComponent<Silver>();
+            Boost BoostComponent = card.GetComponent<Boost>();
+            Clear ClearComponent = card.GetComponent<Clear>();
+            Lure LureComponent = card.GetComponent<Lure>();
+            Weather WeatherComponent = card.GetComponent<Weather>();
+            if(GoldComponent != null) GoldComponent.destroyed = true;
+            else if(SilverComponent != null) SilverComponent.destroyed = true;
+            else if(BoostComponent != null) BoostComponent.destroyed = true;
+            else if(ClearComponent != null) ClearComponent.destroyed = true;
+            else if(LureComponent != null) LureComponent.destroyed = true;
+            else if(WeatherComponent != null) WeatherComponent.destroyed = true;
+           }
+      }
     myPoints = MyPlayer.CountTotalPoints();
     rivalPoints = RivalPlayer.CountTotalPoints();
-    if(Player.round == 1)
+    if(MyPlayer.round == 1)
     {
       if(MyPlayer.IPass && RivalPlayer.IPass)
       {
@@ -52,7 +88,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Ronda 2");
       }
     }
-    else if(Player.round == 2)
+    else if(MyPlayer.round == 2)
     {
        if(MyPlayer.IPass && RivalPlayer.IPass)
        {
@@ -63,7 +99,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Ronda 3");
        }
     }
-    else if(Player.round == 3)
+    else if(MyPlayer.round == 3)
     {
       if(MyPlayer.IPass && RivalPlayer.IPass)
       {
@@ -157,7 +193,8 @@ public class GameManager : MonoBehaviour
         {
           Debug.Log("La Ronda fue ganada por el Jugador 1");
           MyPlayer.RoundsWin++;
-          Player.round++;
+          MyPlayer.round++;
+          RivalPlayer.round++;
           MyPlayer.isMyTurn = true;
           RivalPlayer.isMyTurn = false;
         }
@@ -165,14 +202,16 @@ public class GameManager : MonoBehaviour
         {
           Debug.Log("La Ronda fue ganada por el Jugador 2");
           RivalPlayer.RoundsWin++;
-          Player.round++;
+          MyPlayer.round++;
+          RivalPlayer.round++;
           MyPlayer.isMyTurn = false;
           RivalPlayer.isMyTurn = true;
         }
         else if(myPoints == rivalPoints)
         {
           Debug.Log("La Ronda termino en empate");
-          Player.round++;
+          MyPlayer.round++;
+          RivalPlayer.round++;
         }
     }
     public void StartRound()

@@ -42,4 +42,41 @@ public class Deck : MonoBehaviour
         Debug.Log("No quedan cartas en el Deck");
       }
    }
+   public void ChangeCards()
+   {
+    if(!player.isMyTurn)
+    {
+      Debug.Log("No es tu turno");
+    }
+    else if(player.playedCards != 0)
+    {
+       Debug.Log("Ya no puedes usar el cambio de cartas");
+    }
+    else if(player.ChangedCards)
+    {
+      Debug.Log("Ya usaste el cambio de cartas");
+    }
+    else if(!player.ChangedCards)
+    {
+       int randomIndex_1 = Random.Range(0,5);
+       int randomIndex_2 = Random.Range(6,player.cardsInHand.Count - 1);
+       GameObject card1 = player.cardsInHand[randomIndex_1];
+       GameObject card2 = player.cardsInHand[randomIndex_2];
+       player.cardsInHand.RemoveAt(randomIndex_1);
+       emptyZones[randomIndex_1] = false;
+       player.cardsInHand.RemoveAt(randomIndex_2);
+       emptyZones[randomIndex_2] = false;
+       Destroy(card1);
+       Destroy(card2);
+       for(int i = 0;i<2;i++)
+       {
+        DrawCard();
+       }
+       player.ChangedCards = true;
+    }
+   }
+   public bool CheckEffectLure()
+   {
+     return player.EffectLureIsActive;
+   }
 }

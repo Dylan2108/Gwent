@@ -13,7 +13,9 @@ public class Leader : MonoBehaviour
    }
    public void OnMouseDown()
    {
-      if(!EffectActivated)
+      bool EffectLureIsActive = deck.CheckEffectLure();
+      if(EffectLureIsActive) Debug.Log("Debe seleccionar una carta plata en el campo");
+      else if(!EffectActivated)
       {
             deck.DrawCard();
             EffectActivated = true;

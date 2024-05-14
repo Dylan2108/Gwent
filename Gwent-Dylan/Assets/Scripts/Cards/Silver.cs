@@ -7,25 +7,46 @@ public class Silver : MonoBehaviour
     public string name;
     public int originalAtk;
     public int atk;
-    public int modAtk; // Muestra las modificaciones en el atk realizadas por los climas
     public string atkType;
     public Player player;
+    public Lure LureCard;
     public bool invoked;
+    public bool destroyed;
     public bool EffectActivated;
     public void Start()
     {
         player = transform.parent.GetComponent<Player>();//Toma como referencia a la mano que sea su padre
         originalAtk = atk;
     }
+    public void Update()
+    {
+        foreach(var card in player.cardsInHand)
+        {
+            if(card != null)
+            {
+                Lure LureComponent = card.GetComponent<Lure>();
+                if(LureComponent != null) LureCard = LureComponent;
+            }
+        }
+    }
     public void OnMouseDown()
     {
-      if((player.isMyTurn && player.playedCards == 0) || player.ICanStillSummoning)
+      if(destroyed)Debug.Log("Ya esta carta fue destruida");
+      else if((player.isMyTurn && player.playedCards == 0) || player.ICanStillSummoning)
         {
-         if(!invoked)
+          if(player.EffectLureIsActive && !invoked) Debug.Log("Debe seleccionar una carta plata en el campo");
+         else if(!invoked)
          {
            player.SummonSilverCard(this);
            invoked = true;
            player.playedCards++;
+           player.ChangedCards = true;
+         }
+         else if(invoked && player.EffectLureIsActive)
+         {
+            player.EffectLure(this,LureCard);
+            player.EffectLureIsActive = false;
+            player.playedCards++;
          }
          else if(invoked && !EffectActivated)
          {
@@ -55,13 +76,7 @@ public class Silver : MonoBehaviour
             Debug.Log("Ya esta carta esta invocada");
          }
         }
-        else if(!player.isMyTurn)
-        {
-            Debug.Log("No es tu turno");
-        }
-        else if(player.playedCards!=0 && !player.ICanStillSummoning)
-        {
-            Debug.Log("Ya jugaste una carta este turno");
-        }
+        else if(!player.isMyTurn)Debug.Log("No es tu turno");
+        else if(player.playedCards!=0 && !player.ICanStillSummoning)Debug.Log("Ya jugaste una carta este turno");
     }
 }

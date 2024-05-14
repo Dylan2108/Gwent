@@ -10,6 +10,7 @@ public class Gold : MonoBehaviour
     public string atkType;
     public Player player;
     public bool invoked;
+    public bool destroyed;
     public bool EffectActivated;
     public void Start()
     {
@@ -18,13 +19,16 @@ public class Gold : MonoBehaviour
     }
     public void OnMouseDown()
     {
-        if((player.isMyTurn && player.playedCards == 0) || player.ICanStillSummoning)
+        if(destroyed)Debug.Log("Ya esta carta fue destruida");
+        else if((player.isMyTurn && player.playedCards == 0) || player.ICanStillSummoning)
         {
-         if(!invoked)
+          if(player.EffectLureIsActive) Debug.Log("Debe seleccionar una carta plata en el campo");
+          else if(!invoked)
          {
            player.SummonGoldCard(this);
            invoked = true;
            player.playedCards++;
+           player.ChangedCards  = true;
          }
          else if(invoked && !EffectActivated)
          {
@@ -74,13 +78,7 @@ public class Gold : MonoBehaviour
             Debug.Log("Ya esta carta esta convocada");
          }
         }
-        else if(!player.isMyTurn)
-        {
-            Debug.Log("No es tu turno");
-        }
-        else if(player.playedCards!=0 && !player.ICanStillSummoning)
-        {
-            Debug.Log("Ya jugaste una carta este turno");
-        }
+        else if(!player.isMyTurn)Debug.Log("No es tu turno");
+        else if(player.playedCards!=0 && !player.ICanStillSummoning)Debug.Log("Ya jugaste una carta este turno");
     }
 }
