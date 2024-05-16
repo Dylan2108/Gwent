@@ -42,23 +42,23 @@ public class Deck : MonoBehaviour
         Debug.Log("No quedan cartas en el Deck");
       }
    }
-   public void ChangeCards()
+   public void ChangeCards()//Permite enviar descartar 2 cartas y robar 2 desde el deck 
    {
-    if(!player.isMyTurn)
+    if(!player.isMyTurn)//Veriica si no es el turno del jugador
     {
       Debug.Log("No es tu turno");
     }
-    else if(player.playedCards != 0)
+    else if(player.playedCards != 0)//Verifica si el jugador ya jugo una carta
     {
        Debug.Log("Ya no puedes usar el cambio de cartas");
     }
-    else if(player.ChangedCards)
+    else if(player.ChangedCards)//Verifica si ya se uso el cambio de cartas
     {
       Debug.Log("Ya usaste el cambio de cartas");
     }
-    else if(!player.ChangedCards)
+    else if(!player.ChangedCards)//Verifica si no se ha usado el cambio de cartas
     {
-       int randomIndex_1 = Random.Range(0,5);
+       int randomIndex_1 = Random.Range(0,5);//Selecciona dos cartas  al azar de la mano
        int randomIndex_2 = Random.Range(6,player.cardsInHand.Count - 1);
        GameObject card1 = player.cardsInHand[randomIndex_1];
        GameObject card2 = player.cardsInHand[randomIndex_2];
@@ -66,17 +66,21 @@ public class Deck : MonoBehaviour
        emptyZones[randomIndex_1] = false;
        player.cardsInHand.RemoveAt(randomIndex_2);
        emptyZones[randomIndex_2] = false;
-       Destroy(card1);
+       Destroy(card1);                        //Descarta esas 2 cartas
        Destroy(card2);
-       for(int i = 0;i<2;i++)
+       for(int i = 0;i<2;i++)//Roba 2 cartas
        {
         DrawCard();
        }
-       player.ChangedCards = true;
+       player.ChangedCards = true;//ya se uso el cambio de cartas
     }
    }
    public bool CheckEffectLure()
    {
-     return player.EffectLureIsActive;
+     return player.EffectLureIsActive;//Para poder saber si esta activo el efecto senuelo(Carta Lider) 
+   }
+   public void IncrementPlayedCards()
+   {
+     player.playedCards++; //Para poder aumentar el numero de cartas jugadas(Carta Lider);
    }
 }

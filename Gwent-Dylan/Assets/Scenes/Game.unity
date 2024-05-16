@@ -7007,6 +7007,10 @@ MonoBehaviour:
   emptyFromDistanceZones: 00000000000000
   emptySiegeZones: 00000000000000
   emptyWeatherZones: 000000
+  WeathersCardsInField:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   emptyMeleeBoost: 0
   emptyFromDistanceBoost: 0
   emptySiegeBoost: 0
@@ -12531,6 +12535,10 @@ MonoBehaviour:
   emptyFromDistanceZones: 00000000000000
   emptySiegeZones: 00000000000000
   emptyWeatherZones: 000000
+  WeathersCardsInField:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   emptyMeleeBoost: 0
   emptyFromDistanceBoost: 0
   emptySiegeBoost: 0

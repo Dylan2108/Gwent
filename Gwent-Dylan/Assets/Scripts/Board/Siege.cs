@@ -6,6 +6,6 @@ public class Siege : MonoBehaviour
 {
     public List<GameObject> siegeZones = new List<GameObject>();//Las zonas donde van a ser invocadas las cartas
     public List<GameObject> cardsInSiegeZones = new List<GameObject>();//Las cartas que se encuentran actualmente en la fila
-    public GameObject siegeBoostZone;
-    public GameObject cardInSiegeBoostZone;
+    public GameObject siegeBoostZone;//Espacio para la carta aumento
+    public GameObject cardInSiegeBoostZone;//Carta aumento
 }

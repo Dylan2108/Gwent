@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public bool[] emptyFromDistanceZones = new bool[7]; //Zonas disponibles para convocar(A Distancia)
     public bool[] emptySiegeZones = new bool[7]; //Zonas disponibles para convocar(Asedio)
     public bool[] emptyWeatherZones = new bool[3]; //Zonas disponibles para convocar(Clima)
+    public List<GameObject>WeathersCardsInField = new List<GameObject>();//Para saber las cartas clima que estan actualmente en el campo
     public bool emptyMeleeBoost;  //Zonas disponibles para convocar(Aumento de Cuerpo a Cuerpo)
     public bool emptyFromDistanceBoost; //Zonas disponibles para convocar(Aumento de A Distancia)
     public bool emptySiegeBoost; //Zonas disponibles para convocar(Aumento de Asedio)
@@ -193,6 +194,8 @@ public class Player : MonoBehaviour
                 deck.emptyZones.RemoveAt(index);
                 deck.emptyZones.Insert(index,false);
                 emptyWeatherZones[i] = true; // Se marcan los espacios de la carta clima como ocupados
+                WeathersCardsInField[i] = card.gameObject;
+                RivalPlayer.WeathersCardsInField[i] = card.gameObject;
                 RivalPlayer.emptyWeatherZones[i] = true;
                 break;
             }
@@ -436,6 +439,7 @@ public class Player : MonoBehaviour
            graveyard.cardsInGraveyard.Add(weatherZones.cardsInWeatherZone[i]);
            weatherZones.cardsInWeatherZone[i] = null;
           }
+          if(WeathersCardsInField[i] != null) WeathersCardsInField[i] = null;
        }
        for(int i =0;i<emptyWeatherZones.Length;i++)
        {//Pone todos los espacios en blanco
@@ -605,6 +609,9 @@ public class Player : MonoBehaviour
                 if(RivalPlayer.weatherZones.cardsInWeatherZone[i] != null)
                 {//Se destruyen las cartas clima
                     RivalPlayer.weatherZones.cardsInWeatherZone[i].transform.position = RivalPlayer.graveyard.transform.position;
+                    int index = RivalPlayer.WeathersCardsInField.IndexOf(RivalPlayer.weatherZones.cardsInWeatherZone[i]);
+                    RivalPlayer.WeathersCardsInField[index] = null;
+                    WeathersCardsInField[index] = null;
                     RivalPlayer.graveyard.cardsInGraveyard.Add(RivalPlayer.weatherZones.cardsInWeatherZone[i]);
                     Weather WeatherComponent = RivalPlayer.weatherZones.cardsInWeatherZone[i].GetComponent<Weather>();
                     RivalPlayer.weatherZones.cardsInWeatherZone[i] = null;
@@ -637,6 +644,9 @@ public class Player : MonoBehaviour
                 if(weatherZones.cardsInWeatherZone[i] != null)
                 {//Se eliminan las cartas climas
                     weatherZones.cardsInWeatherZone[i].transform.position = graveyard.transform.position;
+                    int index = WeathersCardsInField.IndexOf(weatherZones.cardsInWeatherZone[i]);
+                    WeathersCardsInField[index] = null;
+                    RivalPlayer.WeathersCardsInField[index] = null;
                     graveyard.cardsInGraveyard.Add(weatherZones.cardsInWeatherZone[i]);
                     Weather WeatherComponent = weatherZones.cardsInWeatherZone[i].GetComponent<Weather>();
                     weatherZones.cardsInWeatherZone[i] = null;
@@ -672,6 +682,9 @@ public class Player : MonoBehaviour
                   if(weatherZones.cardsInWeatherZone[i] != null)
                 {//Se eliminan las cartas climas
                      weatherZones.cardsInWeatherZone[i].transform.position = graveyard.transform.position;
+                     int index = WeathersCardsInField.IndexOf(weatherZones.cardsInWeatherZone[i]);
+                     WeathersCardsInField[index] = null;
+                     RivalPlayer.WeathersCardsInField[index] = null;
                      graveyard.cardsInGraveyard.Add(weatherZones.cardsInWeatherZone[i]);
                      Weather WeatherComponent = weatherZones.cardsInWeatherZone[i].GetComponent<Weather>();
                      weatherZones.cardsInWeatherZone [i] = null;
@@ -698,6 +711,9 @@ public class Player : MonoBehaviour
                 if(RivalPlayer.weatherZones.cardsInWeatherZone[i] != null)
                 {//Se eliminan las cartas clima
                       RivalPlayer.weatherZones.cardsInWeatherZone[i].transform.position = RivalPlayer.graveyard.transform.position;
+                      int index = WeathersCardsInField.IndexOf(RivalPlayer.weatherZones.cardsInWeatherZone[i]);
+                      RivalPlayer.WeathersCardsInField[index] = null;
+                      WeathersCardsInField[index] = null;
                       RivalPlayer.graveyard.cardsInGraveyard.Add(RivalPlayer.weatherZones.cardsInWeatherZone[i]);
                       Weather WeatherComponent = RivalPlayer.weatherZones.cardsInWeatherZone[i].GetComponent<Weather>();
                       RivalPlayer.weatherZones.cardsInWeatherZone[i] = null;
@@ -737,6 +753,8 @@ public class Player : MonoBehaviour
                      meleesZones.cardsInMeleeZone.Insert(indexOfChoosenCards,LureCard.gameObject);
                      choosencard.transform.position = handZones[indexOfLureCard].transform.position;
                      LureCard.transform.position = meleesZones.meleesZones[indexOfChoosenCards].transform.position;
+                     choosencard.invoked = false;         //Al volver la carta a la man se permite volver a invocarla
+                     choosencard.EffectActivated = false; //y activar su efecto;
                    }
                    else if(fromDistanceZones.cardsInFromDistanceZones.Contains(choosencard.gameObject))
                    {
@@ -745,6 +763,8 @@ public class Player : MonoBehaviour
                     fromDistanceZones.cardsInFromDistanceZones.Insert(indexOfChoosenCards,LureCard.gameObject);
                     choosencard.transform.position = handZones[indexOfLureCard].transform.position;
                     LureCard.transform.position = fromDistanceZones.fromDistanceZones[indexOfChoosenCards].transform.position;
+                    choosencard.invoked = false;
+                    choosencard.EffectActivated = false;
                    }
                    else if(siegeZones.cardsInSiegeZones.Contains(choosencard.gameObject))
                    {
@@ -753,6 +773,8 @@ public class Player : MonoBehaviour
                     siegeZones.cardsInSiegeZones.Insert(indexOfChoosenCards,LureCard.gameObject);
                     choosencard.transform.position = handZones[indexOfLureCard].transform.position;
                     LureCard.transform.position = siegeZones.siegeZones[indexOfChoosenCards].transform.position;
+                    choosencard.invoked = false;
+                    choosencard.EffectActivated = false;
                    }
                 }
        }
@@ -788,77 +810,86 @@ public class Player : MonoBehaviour
        //Efectos Carta Unidad
        public void EliminateCardLessAtk()//Efecto que elimina la carta con menos atk del rival
        {
-        GameObject CardToEliminate = null;
-        int lessAtk = int.MaxValue;
+        GameObject CardToEliminate = null;//La carta que va a ser eliminada
+        int lessAtk = int.MaxValue;//La variable que va a guardar el menor ataque de todas las cartas
         for(int i = 0;i<RivalPlayer.meleesZones.cardsInMeleeZone.Count;i++)
-        {
-          GameObject card = RivalPlayer.meleesZones.cardsInMeleeZone[i];
-          Gold GoldComponent = card.GetComponent<Gold>();
-          Silver SilverComponent = card.GetComponent<Silver>();
-          if(GoldComponent != null)
-          {
-            if(GoldComponent.atk < lessAtk)
+        {//Recorre la zona Cuerpo a cuerpo del rival
+            if(RivalPlayer.meleesZones.cardsInMeleeZone[i] != null)
             {
-                lessAtk = GoldComponent.atk;
-                CardToEliminate = card;
-            }
-          }
-          else if(SilverComponent != null)
-          {
-            if(SilverComponent.atk < lessAtk)
-            {
+                GameObject card = RivalPlayer.meleesZones.cardsInMeleeZone[i];
+                Gold GoldComponent = card.GetComponent<Gold>();//Se verifica si la carta es de oro o plata
+                Silver SilverComponent = card.GetComponent<Silver>();
+                if(GoldComponent != null)
+               {
+                  if(GoldComponent.atk < lessAtk)
+                  {
+                       lessAtk = GoldComponent.atk;//Se actualiza el menor ataque y  
+                       CardToEliminate = card;     //la carta que va a ser eliminada 
+                  }
+               }
+               else if(SilverComponent != null)
+              {
+                 if(SilverComponent.atk < lessAtk)
+               {
                 lessAtk = SilverComponent.atk;
                 CardToEliminate = card;
+               }
+              }  
             }
-          }  
         }
         for(int i = 0;i<RivalPlayer.fromDistanceZones.cardsInFromDistanceZones.Count;i++)
-        {
-            GameObject card = RivalPlayer.fromDistanceZones.cardsInFromDistanceZones[i];
-            Gold GoldComponent = card.GetComponent<Gold>();
-            Silver SilverComponent = card.GetComponent<Silver>();
-            if(GoldComponent != null)
+        {//Se recorre la fila A Distancia del rival
+            if(RivalPlayer.fromDistanceZones.cardsInFromDistanceZones[i] !=null)
             {
-                if(GoldComponent.atk < lessAtk)
-                {
-                    lessAtk = GoldComponent.atk;
-                    CardToEliminate = card;
-                }
-            }
-            else if(SilverComponent != null)
-            {
-                if(SilverComponent.atk < lessAtk)
-                {
+                GameObject card = RivalPlayer.fromDistanceZones.cardsInFromDistanceZones[i];
+                Gold GoldComponent = card.GetComponent<Gold>();//Se verifica si la carta es de oro o plata
+                Silver SilverComponent = card.GetComponent<Silver>();
+                if(GoldComponent != null)
+               {
+                   if(GoldComponent.atk < lessAtk)
+                   {
+                     lessAtk = GoldComponent.atk;//Se actualiza el menor ataque y
+                     CardToEliminate = card;     //la carta que va a ser eliminada
+                   }
+               }
+                else if(SilverComponent != null)
+               {
+                  if(SilverComponent.atk < lessAtk)
+                  {
                     lessAtk = SilverComponent.atk;
                     CardToEliminate = card;
-                }
+                  }
+               }
             }
         }
         for(int i = 0 ;i<RivalPlayer.siegeZones.cardsInSiegeZones.Count;i++)
-        {
-            GameObject card = RivalPlayer.siegeZones.cardsInSiegeZones[i];
-            Gold GoldComponent = card.GetComponent<Gold>();
-            Silver SilverComponent = card.GetComponent<Silver>();
-            if(GoldComponent != null)
+        {//Se recorre la fila Asedio del rival
+            if(RivalPlayer.siegeZones.cardsInSiegeZones[i] !=null)
             {
-                if(GoldComponent.atk < lessAtk)
-                {
-                    lessAtk = GoldComponent.atk;
-                    CardToEliminate = card;
-                }
-            }
-            else if(SilverComponent != null)
-            {
+                GameObject card = RivalPlayer.siegeZones.cardsInSiegeZones[i];
+                Gold GoldComponent = card.GetComponent<Gold>();//Se verifica si la carta es de oro o plata
+                Silver SilverComponent = card.GetComponent<Silver>();
+                if(GoldComponent != null)
+               {
+                  if(GoldComponent.atk < lessAtk)
+                   {
+                    lessAtk = GoldComponent.atk;//Se actualiza el menor ataque y
+                    CardToEliminate = card;     //la carta que va a ser eliminada
+                   }
+               }
+               else if(SilverComponent != null)
+               {
                 if(SilverComponent.atk < lessAtk)
                 {
                     lessAtk = SilverComponent.atk;
                     CardToEliminate = card;
                 }
+               }
             }
         }
         if(CardToEliminate != null)
         {
-          CardToEliminate.transform.position = RivalPlayer.graveyard.transform.position;
+          CardToEliminate.transform.position = RivalPlayer.graveyard.transform.position;//Se envia la carta eliminada al cementerio
           RivalPlayer.graveyard.cardsInGraveyard.Add(CardToEliminate);
           if(RivalPlayer.meleesZones.cardsInMeleeZone.Contains(CardToEliminate))
           {
@@ -888,77 +919,86 @@ public class Player : MonoBehaviour
        }
        public void EliminateCardHigherAtk()//Efecto que elimina la carta con mas atk del rival
        {
-         GameObject CardToEliminate = null;
-         int higheratk = int.MinValue;
+         GameObject CardToEliminate = null;//La carta que va a ser eliminada
+         int higheratk = int.MinValue;//La variable que va a guardar el menor ataque de todas las cartas
          for(int i = 0;i<RivalPlayer.meleesZones.cardsInMeleeZone.Count;i++)
-        {
-          GameObject card = RivalPlayer.meleesZones.cardsInMeleeZone[i];
-          Gold GoldComponent = card.GetComponent<Gold>();
-          Silver SilverComponent = card.GetComponent<Silver>();
-          if(GoldComponent != null)
+        {//Recorre la zona Cuerpo a cuerpo del rival
+          if(RivalPlayer.meleesZones.cardsInMeleeZone[i] != null)
           {
-            if(GoldComponent.atk > higheratk)
-            {
-                higheratk = GoldComponent.atk;
-                CardToEliminate = card;
-            }
-          }
-          else if(SilverComponent != null)
-          {
-            if(SilverComponent.atk > higheratk)
-            {
-                higheratk = SilverComponent.atk;
-                CardToEliminate = card;
-            }
-          }  
-        }
-        for(int i = 0;i<RivalPlayer.fromDistanceZones.cardsInFromDistanceZones.Count;i++)
-        {
-            GameObject card = RivalPlayer.fromDistanceZones.cardsInFromDistanceZones[i];
-            Gold GoldComponent = card.GetComponent<Gold>();
+            GameObject card = RivalPlayer.meleesZones.cardsInMeleeZone[i];
+            Gold GoldComponent = card.GetComponent<Gold>();//Se verifica si la carta es de oro o plata
             Silver SilverComponent = card.GetComponent<Silver>();
-            if(GoldComponent != null)
+             if(GoldComponent != null)
             {
-                if(GoldComponent.atk > higheratk)
-                {
-                    higheratk = GoldComponent.atk;
-                    CardToEliminate = card;
-                }
+              if(GoldComponent.atk > higheratk)
+              {
+                higheratk = GoldComponent.atk;//Se actualiza el mayor ataque y
+                CardToEliminate = card;       //la carta que va a ser eliminada
+              }
             }
             else if(SilverComponent != null)
             {
+              if(SilverComponent.atk > higheratk)
+              {
+                higheratk = SilverComponent.atk;
+                CardToEliminate = card;
+              }
+            }  
+          }
+        }
+        for(int i = 0;i<RivalPlayer.fromDistanceZones.cardsInFromDistanceZones.Count;i++)
+        {//Recore la zona A Distancia del rival
+            if(RivalPlayer.fromDistanceZones.cardsInFromDistanceZones[i] != null)
+            {
+                GameObject card = RivalPlayer.fromDistanceZones.cardsInFromDistanceZones[i];
+                Gold GoldComponent = card.GetComponent<Gold>();//Se verfica si la carta es de oro o plata
+                Silver SilverComponent = card.GetComponent<Silver>();
+                if(GoldComponent != null)
+                {
+                 if(GoldComponent.atk > higheratk)
+                  {
+                    higheratk = GoldComponent.atk;//Se acualiza el mayor ataque y
+                    CardToEliminate = card;       //la carta que va a ser eliminada
+                  }
+                }
+                else if(SilverComponent != null)
+               {
                 if(SilverComponent.atk > higheratk)
                 {
                     higheratk = SilverComponent.atk;
                     CardToEliminate = card;
                 }
+               }
             }
         }
         for(int i = 0 ;i<RivalPlayer.siegeZones.cardsInSiegeZones.Count;i++)
-        {
-            GameObject card = RivalPlayer.siegeZones.cardsInSiegeZones[i];
-            Gold GoldComponent = card.GetComponent<Gold>();
-            Silver SilverComponent = card.GetComponent<Silver>();
-            if(GoldComponent != null)
+        {//Recorre la zona Asedio del rival
+            if(RivalPlayer.siegeZones.cardsInSiegeZones[i] != null)
             {
-                if(GoldComponent.atk > higheratk)
-                {
-                    higheratk = GoldComponent.atk;
-                    CardToEliminate = card;
-                }
-            }
-            else if(SilverComponent != null)
-            {
+                 GameObject card = RivalPlayer.siegeZones.cardsInSiegeZones[i];
+                 Gold GoldComponent = card.GetComponent<Gold>();//Se verifica si la carta es de oro  o plata 
+                 Silver SilverComponent = card.GetComponent<Silver>();
+                 if(GoldComponent != null)
+               {
+                   if(GoldComponent.atk > higheratk)
+                   {
+                    higheratk = GoldComponent.atk;//Se actualiza el mayor ataque y
+                    CardToEliminate = card;       //la carta que va a ser eliminada
+                  }
+               }
+               else if(SilverComponent != null)
+               {
                 if(SilverComponent.atk > higheratk)
                 {
                     higheratk = SilverComponent.atk;
                     CardToEliminate = card;
                 }
+               }
             }
         }
         if(CardToEliminate != null)
         {
-          CardToEliminate.transform.position = RivalPlayer.graveyard.transform.position;
+          CardToEliminate.transform.position = RivalPlayer.graveyard.transform.position;//Se envia la carta eliminada al cementerio
           RivalPlayer.graveyard.cardsInGraveyard.Add(CardToEliminate);
           if(RivalPlayer.meleesZones.cardsInMeleeZone.Contains(CardToEliminate))
           {
@@ -986,21 +1026,21 @@ public class Player : MonoBehaviour
           }
         }
        }
-       public void InvokeWeatherCardEffect()
+       public void InvokeWeatherCardEffect()//Permite invocar una carta clima que este en la mano
        {
         for(int i = 0;i<cardsInHand.Count;i++)
-        {
+        {//Verifica si hay alguna carta clima en la mano
             if(cardsInHand[i] != null)
             {
              GameObject card = cardsInHand[i];
              Weather WeatherComponent = card.GetComponent<Weather>();
              if(WeatherComponent != null)
              {
-                SummonWeatherCard(WeatherComponent);
+                SummonWeatherCard(WeatherComponent);//Invoca la carta clima
                 WeatherComponent.invoked = true;
                 if(WeatherComponent.Name == "Kirin")
                {
-                 ShowMenuWeatherEffect(WeatherComponent,2);
+                 ShowMenuWeatherEffect(WeatherComponent,2);//Activa el efecto de la carta clima
                }
                else if(WeatherComponent.Name == "Jutsu Bola de Fuego")
                {
@@ -1012,21 +1052,21 @@ public class Player : MonoBehaviour
             }
         }
        }
-       public void InvokeBoostCardEffect(string row)
+       public void InvokeBoostCardEffect(string row)//Permite invocar una carta aumento de la mano
        {
           for(int i = 0;i<cardsInHand.Count;i++)
-          {
+          {//Verifica si hay alguna carta aumento en la mano
             if(cardsInHand[i] != null)
             {
                 GameObject card = cardsInHand[i];
                 Boost BoostComponent = card.GetComponent<Boost>();
                 if(BoostComponent != null)
                 {
-                    SummonBoostCard(BoostComponent.gameObject,row,null);
+                    SummonBoostCard(BoostComponent.gameObject,row,null);//Invoca la carta aumento
                     BoostComponent.invoked = true;
                     if(BoostComponent.Name == "Pildoras Ninjas") 
                     {
-                       EffectBoost(row,1);
+                       EffectBoost(row,1); //Activa el efecto de la carta aumento
                     }
                     else if(BoostComponent.Name == "Jutsu de la Alianza Shinobi")
                     {
@@ -1041,16 +1081,16 @@ public class Player : MonoBehaviour
        public int CalculateProm()//Calcula el promedio de las cartas del campo
        {
           int prom = 0;//Lo hago con un entero para tener el promedio redondeado y no tener numeros con coma
-          int totalcards = 0;
-          int totalatk = 0;
+          int totalcards = 0; //El numero de cartas de oro y plata totales en el campo
+          int totalatk = 0; //El ataque total de todas las cartas oro y plata  en el campo
           for(int i = 0;i < meleesZones.cardsInMeleeZone.Count;i++)
           {
             if(meleesZones.cardsInMeleeZone[i] != null)
-            {
+            {//Se recorre la fila Cuerpo a cuerpo
                 GameObject card = meleesZones.cardsInMeleeZone[i];
                 Gold GoldComponent = card.GetComponent<Gold>();
                 Silver SilverComponent = card.GetComponent<Silver>();
-                if(GoldComponent != null)
+                if(GoldComponent != null)//Se actualiza la cantidad de cartas y el ataque total 
                 {
                     totalcards++;
                     totalatk += GoldComponent.atk;
@@ -1063,13 +1103,13 @@ public class Player : MonoBehaviour
             }
           }
           for(int i = 0;i<fromDistanceZones.cardsInFromDistanceZones.Count;i++)
-          {
+          {//Se recorre la fila A Distancia
             if(fromDistanceZones.cardsInFromDistanceZones[i] != null)
             {
                 GameObject card = fromDistanceZones.cardsInFromDistanceZones[i];
                 Gold GoldComponent = card.GetComponent<Gold>();
                 Silver SilverComponent = card.GetComponent<Silver>();
-                if(GoldComponent != null)
+                if(GoldComponent != null)//Se actualiza la cantidad de cartas y el ataque total
                 {
                     totalcards++;
                     totalatk += GoldComponent.atk;
@@ -1082,13 +1122,13 @@ public class Player : MonoBehaviour
             }
           }
           for(int i = 0;i<siegeZones.cardsInSiegeZones.Count;i++)
-          {
+          {//Se recorre la fila Asedio
             if(siegeZones.cardsInSiegeZones[i] != null)
             {
                 GameObject card = siegeZones.cardsInSiegeZones[i];
                 Gold GoldComponent = card.GetComponent<Gold>();
                 Silver SilverComponent = card.GetComponent<Silver>();
-                if(GoldComponent != null)
+                if(GoldComponent != null)//Se actualiza la cantidad de cartas y el ataque total
                 {
                     totalcards++;
                     totalatk += GoldComponent.atk;
@@ -1103,11 +1143,11 @@ public class Player : MonoBehaviour
           for(int i = 0;i<RivalPlayer.meleesZones.cardsInMeleeZone.Count;i++)
           {
             if(RivalPlayer.meleesZones.cardsInMeleeZone[i] != null)
-            {
+            {//Recorre la fila Cuerpo a cuerpo del rival
                 GameObject card = RivalPlayer.meleesZones.cardsInMeleeZone[i];
                 Gold GoldComponent = card.GetComponent<Gold>();
                 Silver SilverComponent = card.GetComponent<Silver>();
-                if(GoldComponent != null)
+                if(GoldComponent != null)//Se actualiza la cantidad de cartas y el ataque total
                 {
                     totalcards++;
                     totalatk += GoldComponent.atk;
@@ -1120,13 +1160,13 @@ public class Player : MonoBehaviour
             }
           }
           for(int i = 0; i<RivalPlayer.fromDistanceZones.cardsInFromDistanceZones.Count;i++)
-          {
+          {//Recorre la fila A Distancia del rival
             if(RivalPlayer.fromDistanceZones.cardsInFromDistanceZones[i] != null)
             {
                 GameObject card = RivalPlayer.fromDistanceZones.cardsInFromDistanceZones[i];
                 Gold GoldComponent = card.GetComponent<Gold>();
                 Silver SilverComponent = card.GetComponent<Silver>();
-                if(GoldComponent != null)
+                if(GoldComponent != null)//Se actualiza la cantidad de cartas y el ataque total
                 {
                     totalcards++;
                     totalatk += GoldComponent.atk;
@@ -1139,13 +1179,13 @@ public class Player : MonoBehaviour
             }
           }
           for(int i =0;i<RivalPlayer.siegeZones.cardsInSiegeZones.Count;i++)
-          {
+          {//Recore la fila Asedio del rival
             if(RivalPlayer.siegeZones.cardsInSiegeZones[i] != null)
             {
                 GameObject card = RivalPlayer.siegeZones.cardsInSiegeZones[i];
                 Gold GoldComponent = card.GetComponent<Gold>();
                 Silver SilverComponent = card.GetComponent<Silver>();
-                if(GoldComponent != null)
+                if(GoldComponent != null)//Se actualiza la cantidad de cartas y el ataque total
                 {
                     totalcards++;
                     totalatk += GoldComponent.atk;
@@ -1162,11 +1202,11 @@ public class Player : MonoBehaviour
        }
        public void EffectProm()//Efecto que iguala mis cartas al promedio de las cartas en el campo
        {
-         int prom = CalculateProm();
+         int prom = CalculateProm();//El promedio de las cartas en el campo(Redondeado)
          for(int i = 0 ;i<meleesZones.cardsInMeleeZone.Count;i++)
-         {
+         {//Recorre la fila Cuerpo a cuerpo
             if(meleesZones.cardsInMeleeZone[i] != null)
-            {
+            {//Iguala el ataque de cada carta al promedio
                 GameObject card = meleesZones.cardsInMeleeZone[i];
                 Gold GoldComponent = card.GetComponent<Gold>();
                 Silver SilverComponent = card.GetComponent<Silver>();
@@ -1175,9 +1215,9 @@ public class Player : MonoBehaviour
             }
          }
          for(int i =0;i<fromDistanceZones.cardsInFromDistanceZones.Count;i++)
-         {
+         {//Recorre la fila A Distancia
             if(fromDistanceZones.cardsInFromDistanceZones[i] != null)
-            {
+            {//Iguala el ataque de cada  carta al promedio
                 GameObject card = fromDistanceZones.cardsInFromDistanceZones[i];
                 Gold GoldComponent = card.GetComponent<Gold>();
                 Silver SilverComponent = card.GetComponent<Silver>();
@@ -1186,9 +1226,9 @@ public class Player : MonoBehaviour
             }
          }
          for(int i =0;i<siegeZones.cardsInSiegeZones.Count;i++)
-         {
+         {//Recorre la fila Asedio
             if(siegeZones.cardsInSiegeZones[i] != null)
-            {
+            {//Iguala el ataque de cada carta al promedio
                 GameObject card = siegeZones.cardsInSiegeZones[i];
                 Gold GoldComponent = card.GetComponent<Gold>();
                 Silver SilverComponent = card.GetComponent<Silver>();
@@ -1229,60 +1269,72 @@ public class Player : MonoBehaviour
          }
        }
        public void EliminateRow()//Efecto que elimina todas las cartas de la fila con menor cantidad de cartas
-       {
+       {//Se escoge la fila con menos cartas del rival
         int min = Mathf.Min(RivalPlayer.meleesZones.cardsInMeleeZone.Count,Mathf.Min(RivalPlayer.fromDistanceZones.cardsInFromDistanceZones.Count,RivalPlayer.siegeZones.cardsInSiegeZones.Count));
-        if(min == RivalPlayer.meleesZones.cardsInMeleeZone.Count)
-        {
-            foreach(var card in RivalPlayer.meleesZones.cardsInMeleeZone)
+        if(min == RivalPlayer.meleesZones.cardsInMeleeZone.Count && min != 0)
+        {//Verifica si la fila con menos cartas es la Cuerpo a cuerpo
+            for(int i = 0;i<RivalPlayer.meleesZones.cardsInMeleeZone.Count;i++)
             {
-                card.transform.position = graveyard.transform.position;
-                graveyard.cardsInGraveyard.Add(card);
+                if(RivalPlayer.meleesZones.cardsInMeleeZone[i] != null)
+                {//Envia las cartas de la fila al cementerio
+                    GameObject card = RivalPlayer.meleesZones.cardsInMeleeZone[i];
+                    card.transform.position = graveyard.transform.position;
+                    graveyard.cardsInGraveyard.Add(card);
+                    card = null;
+                }
             }
-            RivalPlayer.meleesZones.cardsInMeleeZone.Clear();
             for(int i = 0 ;i<RivalPlayer.emptyMeleeZones.Length;i++)
-            {
+            {//Deja todos los espacios en blanco
                 RivalPlayer.emptyMeleeZones[i] = false;
             }
             if(RivalPlayer.meleesZones.cardInMeleeBoostZone != null)
-            {
+            {//Envia al cementerio la carta Aumento
                 RivalPlayer.meleesZones.cardInMeleeBoostZone.transform.position = graveyard.transform.position;
                 RivalPlayer.meleesZones.cardInMeleeBoostZone = null;
                 RivalPlayer.emptyMeleeBoost = false;
             }
         }
-        else if(min == RivalPlayer.fromDistanceZones.cardsInFromDistanceZones.Count)
-        {
-            foreach(var card in RivalPlayer.fromDistanceZones.cardsInFromDistanceZones)
+        else if(min == RivalPlayer.fromDistanceZones.cardsInFromDistanceZones.Count && min !=0)
+        {//Verifica si la fila con menos cartas es la de A Distancia
+            for(int i = 0;i<RivalPlayer.fromDistanceZones.cardsInFromDistanceZones.Count;i++)
             {
-                card.transform.position = graveyard.transform.position;
-                graveyard.cardsInGraveyard.Add(card);
+                if(RivalPlayer.fromDistanceZones.cardsInFromDistanceZones[i] != null)
+                {//Envia las cartas de la fila al cementerio
+                    GameObject card = RivalPlayer.fromDistanceZones.cardsInFromDistanceZones[i];
+                    card.transform.position = graveyard.transform.position;
+                    graveyard.cardsInGraveyard.Add(card);
+                    card = null;
+                }
             }
-            RivalPlayer.fromDistanceZones.cardsInFromDistanceZones.Clear();
             for(int i = 0 ;i<RivalPlayer.emptyFromDistanceZones.Length;i++)
-            {
+            {//Deja todos los espacios en blanco
                 RivalPlayer.emptyFromDistanceZones[i] = false;
             }
             if(RivalPlayer.fromDistanceZones.cardInFromDistanceBoostZone != null)
-            {
+            {//Envia al cementerio la  carta Aumento  
                 RivalPlayer.fromDistanceZones.cardInFromDistanceBoostZone.transform.position = graveyard.transform.position;
                 RivalPlayer.fromDistanceZones.cardInFromDistanceBoostZone = null;
                 RivalPlayer.emptyFromDistanceBoost = false;
             }
         }
-        else if(min == RivalPlayer.siegeZones.cardsInSiegeZones.Count)
-        {
-            foreach(var card in RivalPlayer.siegeZones.cardsInSiegeZones)
+        else if(min == RivalPlayer.siegeZones.cardsInSiegeZones.Count && min != 0)
+        {//Verifica si la fila con menos cartas es la de Asedio
+            for(int i = 0;i<RivalPlayer.siegeZones.cardsInSiegeZones.Count;i++)
             {
-                card.transform.position = graveyard.transform.position;
-                graveyard.cardsInGraveyard.Add(card);
+                if(RivalPlayer.siegeZones.cardsInSiegeZones[i] != null)
+                {//Envia todas las cartas de la fila al cementerio
+                    GameObject card = RivalPlayer.siegeZones.cardsInSiegeZones[i];
+                    card.transform.position = graveyard.transform.position;
+                    graveyard.cardsInGraveyard.Add(card);
+                    card = null;
+                }
             }
-            RivalPlayer.siegeZones.cardsInSiegeZones.Clear();
             for(int i =0;i<RivalPlayer.emptySiegeZones.Length;i++)
-            {
+            {//Deja todos los espacios en blanco
                 RivalPlayer.emptySiegeZones[i] = false;
             }
             if(RivalPlayer.siegeZones.cardInSiegeBoostZone != null)
-            {
+            {//Envia al cementerio la carta Aumnento
                 RivalPlayer.siegeZones.cardInSiegeBoostZone.transform.position = graveyard.transform.position;
                 RivalPlayer.siegeZones.cardInSiegeBoostZone = null;
                 RivalPlayer.emptySiegeBoost = false;

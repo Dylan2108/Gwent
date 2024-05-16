@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Silver : MonoBehaviour
 {//Cartas Plata
-    public string name;
-    public int originalAtk;
+    public string name;//Nombre
+    public int originalAtk;//Ataque
     public int atk;
-    public string atkType;
-    public Player player;
-    public Lure LureCard;
-    public bool invoked;
-    public bool destroyed;
-    public bool EffectActivated;
+    public string atkType;//Tipo de ataque 
+    public Player player;//Jugador que posee la carta 
+    public Lure LureCard;//La carta senuelo que puede elegir a esta carta como objetivo
+    public bool invoked;//Para saber  si esta invocada
+    public bool destroyed;//Para saber si ue destruida 
+    public bool EffectActivated;//Para saber si el efecto fue activado
     public void Start()
     {
-        player = transform.parent.GetComponent<Player>();//Toma como referencia a la mano que sea su padre
+        player = transform.parent.GetComponent<Player>();//Toma como referencia al jugador que sea su padre
         originalAtk = atk;
     }
     public void Update()
@@ -24,7 +24,7 @@ public class Silver : MonoBehaviour
         {
             if(card != null)
             {
-                Lure LureComponent = card.GetComponent<Lure>();
+                Lure LureComponent = card.GetComponent<Lure>();//Trata de encontrar a la carta senuelo
                 if(LureComponent != null) LureCard = LureComponent;
             }
         }
@@ -36,39 +36,43 @@ public class Silver : MonoBehaviour
         {
           if(player.EffectLureIsActive && !invoked) Debug.Log("Debe seleccionar una carta plata en el campo");
          else if(!invoked)
-         {
+         {//Invoca la carta
            player.SummonSilverCard(this);
            invoked = true;
            player.playedCards++;
            player.ChangedCards = true;
          }
          else if(invoked && player.EffectLureIsActive)
-         {
+         {//Activa el efecto de la carta senuelo
             player.EffectLure(this,LureCard);
             player.EffectLureIsActive = false;
             player.playedCards++;
          }
          else if(invoked && !EffectActivated)
-         {
+         {//Activa el efecto de la carta plata
             if(this.name == "Gaara")
             {
                 player.EliminateCardLessAtk();
                 EffectActivated = true;
+                player.playedCards++;
             }
             else if(this.name == "Hinata Hyuga")
             {
                 player.InvokeWeatherCardEffect();
                 EffectActivated = true;
+                player.playedCards++;
             }
             else if(this.name == "Rock Lee")
             {
                 player.InvokeBoostCardEffect("Melee");
                 EffectActivated = true;
+                player.playedCards++;
             }
             else if(this.name == "Sakura Haruno")
             {
                 player.EffectDrawCard();
                 EffectActivated = true;
+                player.playedCards++;
             }
          }
          else

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Clear : MonoBehaviour
 {
-    public string Name;
-    public Player player;
-    public bool invoked;
-    public bool destroyed;
+    public string Name;//Nombre
+    public Player player;//El jugador que posee la carta
+    public bool invoked;//Para saber si la carta esta invocada
+    public bool destroyed;//Para saber si la carta fue destruida
     public void Start()
     {
-        player = transform.parent.GetComponent<Player>();
+        player = transform.parent.GetComponent<Player>();//Toma como referencia al jugador que sea su padre
     }
     public void OnMouseDown()
     {
@@ -19,7 +19,7 @@ public class Clear : MonoBehaviour
         {
          if(player.EffectLureIsActive) Debug.Log("Debe seleccionar una carta plata en el campo");
          else if(!invoked)
-         {
+         {//Invoca la carta y activa su efecto
            player.SummonClearCard(this.gameObject);
            invoked = true;
            player.playedCards++;

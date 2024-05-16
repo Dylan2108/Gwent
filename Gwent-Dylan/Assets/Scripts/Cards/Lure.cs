@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Lure : MonoBehaviour
 {
-    public string Name;
-    public Player player;
-    public bool invoked;
-    public bool destroyed;
+    public string Name;//Nombre
+    public Player player;//El jugador que posee la carta
+    public bool invoked;//Para saber si la carta fue invocada
+    public bool destroyed;//Para saber si la carta fue destruida
     public void Start()
     {
-       player = transform.parent.GetComponent<Player>();
+       player = transform.parent.GetComponent<Player>();//Toma como referencia al jugador que la posee
     }
     public void OnMouseDown()
     {
@@ -20,8 +20,7 @@ public class Lure : MonoBehaviour
         {
           if(amountofsilvercards == 0) Debug.Log("No hay ninguna carta plata para seleccionar");
          else if(!invoked)
-         {
-           //Aqui quiero que se active el efecto de la carta senuelo
+         {//Para comenzar a intentar activar el efecto de la carta
            Debug.Log("Seleccione una carta plata en el campo");
            player.EffectLureIsActive = true;
            invoked = true;

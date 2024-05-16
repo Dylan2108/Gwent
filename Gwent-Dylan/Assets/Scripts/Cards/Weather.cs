@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Weather : MonoBehaviour
 {
-   public string Name;
-   public Player player;
-   public bool invoked;
-   public bool destroyed;
-   public List<Silver> affectedCards = new List<Silver>();
+   public string Name;//Nombre
+   public Player player;//El jugador que posee la carta
+   public bool invoked;//Para saber si la carta fue invocada
+   public bool destroyed;//Para saber si la carta fue destruida
+   public List<Silver> affectedCards = new List<Silver>();//Lista que contiene las cartas a las cuales les fue modificado su ataque
    public void Start()
    {
-      player = transform.parent.GetComponent<Player>();
+      player = transform.parent.GetComponent<Player>();//Toma como referencia al padre de la carta
    }
    public void OnMouseDown()
    {
@@ -20,7 +20,7 @@ public class Weather : MonoBehaviour
         {
          if(player.EffectLureIsActive) Debug.Log("Debe seleccionar una carta plata en el campo");
          else if(!invoked)
-         {
+         {//Invoca la carta y activa el efecto
            player.SummonWeatherCard(this);
            invoked = true;
            player.playedCards++;
