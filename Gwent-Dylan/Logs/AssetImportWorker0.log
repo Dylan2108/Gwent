@@ -715,3 +715,516 @@ Start importing Assets/Scripts/Gwent-Compiler/Error.cs using Guid(2c4f53b09ed868
  -> (artifact id: 'be3313d0c3496069d86d963723c6ffa2') in 0.002329 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1235.838563 seconds.
+  path: Assets/Scripts/Gwent-Compiler/Lexer.cs
+  artifactKey: Guid(036dbbb01aa5ccf85b29f1e705c3d814) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Gwent-Compiler/Lexer.cs using Guid(036dbbb01aa5ccf85b29f1e705c3d814) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: '79cb9954e1b8a8c27f8bee43c08e584d') in 0.001544 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.900 seconds
+Native extension for LinuxStandalone target not found
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.885 seconds
+Domain Reload Profiling: 2784ms
+	BeginReloadAssembly (249ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (11ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (71ms)
+	RebuildCommonClasses (77ms)
+	RebuildNativeTypeToScriptingClass (23ms)
+	initialDomainReloadingComplete (59ms)
+	LoadAllAssembliesAndSetupDomain (490ms)
+		LoadAssemblies (553ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (46ms)
+			TypeCache.Refresh (17ms)
+				TypeCache.ScanAssembly (2ms)
+			ScanForSourceGeneratedMonoScriptInfo (14ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1886ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (755ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (17ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (114ms)
+			ProcessInitializeOnLoadAttributes (548ms)
+			ProcessInitializeOnLoadMethodAttributes (58ms)
+			AfterProcessingInitializeOnLoad (12ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (9ms)
+Refreshing native plugins compatible for Editor in 2.07 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3134 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 14 unused Assets / (28.4 KB). Loaded Objects now: 3640.
+Memory consumption went from 114.1 MB to 114.0 MB.
+Total: 12.787269 ms (FindLiveObjects: 0.857462 ms CreateObjectMapping: 0.334739 ms MarkObjects: 11.476576 ms  DeleteObjects: 0.113654 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/Deck.cs: e243a42c075c65ac07485da234f1aad3 -> df396a88cac14245c45bc1a8e101d8d4
+  custom:scripting/monoscript/fileName/MainMenu.cs: bcc0f9052176b2186a7114234ef44a73 -> c093076ba5753d7bec74a8a751ffb653
+  custom:scripting/monoscript/fileName/Graveyard.cs: 75aa80fcd4f693927cd55fdf11ad6c33 -> e9ebbdeaa2f604a18075511460d2d07f
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/Silver.cs: c030aa0df993d41a756ae2eb92518d3d -> 878fd2892f16589759a346023a4ec600
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/Weather Zone.cs: f9ea77b43f195d7600601fa01b943b5f -> fe9af5adf610e5fc6ef80b7f6e1ca49d
+  custom:scripting/monoscript/fileName/Weather.cs: 6986cf6770a3b9f15be4f51b94c7460d -> 00dffe87f054648ffb48a291374576d6
+  custom:scripting/monoscript/fileName/Siege.cs: 4d18a1045f17cd993e326dee7e8ba8a1 -> 6815872d2fca059aa75a70932f771d44
+  custom:scripting/monoscript/fileName/Token.cs: eaaf38c2d587e5e76126b9ad860e251e -> 
+  custom:CustomObjectIndexerAttribute: 232f87dd983dbecb2a4e21e08eb2cef8 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/Clear.cs: 8c664a8230fba69fba6c930b91a1769e -> 5507f0dc756d333e9ca527f087a732a8
+  custom:scripting/monoscript/fileName/Boost.cs: 9b773d3cdb8d3df2fd2e018059458977 -> 58e483b06cca625c5b81cbcc1548ea0b
+  custom:scripting/monoscript/fileName/FromDistance.cs: 1ec810003ea4f3d8c1f3a23722960b65 -> 226fd868a3ca3f1b880b80d846058dd1
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:scripting/monoscript/fileName/Lure.cs: b4e9134aab7e433aa3994e30162b3be8 -> 4dba3651f0e0f00863f465b4aa486ae0
+  custom:scripting/monoscript/fileName/Leader.cs: 3ee81729774188e9d32f256fcd418669 -> dec995df4fc75b887223c5fff5667830
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: 2f0ff77a95e0ac474e3e8eeba4e2f7cb -> 
+  custom:scripting/monoscript/fileName/Melee.cs: e7d23c07d9b9a3f338da9daadea8bcc3 -> ae40d6e12f37f63d37309bc8ed7b48e7
+  custom:scripting/monoscript/fileName/Gold.cs: 9ea5f2aaf266988785e592b92dfc73e3 -> 8508c2357b30f30a8b45b43953b419dc
+  custom:scripting/monoscript/fileName/Game Manager.cs: f6182d712e34e20e3202214886862cdb -> 9933fbcc6190e2a9171c2ec8808a053e
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/Error.cs: 392cfd501603dfdbc9c86428b6e5f918 -> 
+  custom:scripting/monoscript/fileName/Player.cs: 5bb3fdd25abedb90511c7231fb5a2164 -> 007e2e63cbf915a2b71612a7f593548a
+  custom:scripting/monoscript/fileName/Lexer.cs: 3a17243c048ed4362094f6e08a4ef7ae -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: dc1f6d08fed667c725723a7e96487899 -> f480ba5b22d9a7299d1665876007f550
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.830 seconds
+Native extension for LinuxStandalone target not found
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.590 seconds
+Domain Reload Profiling: 2419ms
+	BeginReloadAssembly (256ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (12ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (72ms)
+	RebuildCommonClasses (78ms)
+	RebuildNativeTypeToScriptingClass (18ms)
+	initialDomainReloadingComplete (59ms)
+	LoadAllAssembliesAndSetupDomain (416ms)
+		LoadAssemblies (495ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (26ms)
+			TypeCache.Refresh (11ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1591ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (843ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (15ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (114ms)
+			ProcessInitializeOnLoadAttributes (639ms)
+			ProcessInitializeOnLoadMethodAttributes (55ms)
+			AfterProcessingInitializeOnLoad (11ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (11ms)
+Refreshing native plugins compatible for Editor in 2.58 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3135 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 14 unused Assets / (28.5 KB). Loaded Objects now: 3643.
+Memory consumption went from 114.3 MB to 114.3 MB.
+Total: 9.702280 ms (FindLiveObjects: 0.825352 ms CreateObjectMapping: 0.166783 ms MarkObjects: 8.571314 ms  DeleteObjects: 0.135695 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/Deck.cs: e243a42c075c65ac07485da234f1aad3 -> df396a88cac14245c45bc1a8e101d8d4
+  custom:scripting/monoscript/fileName/MainMenu.cs: bcc0f9052176b2186a7114234ef44a73 -> c093076ba5753d7bec74a8a751ffb653
+  custom:scripting/monoscript/fileName/Graveyard.cs: 75aa80fcd4f693927cd55fdf11ad6c33 -> e9ebbdeaa2f604a18075511460d2d07f
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/Silver.cs: c030aa0df993d41a756ae2eb92518d3d -> 878fd2892f16589759a346023a4ec600
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/Weather Zone.cs: f9ea77b43f195d7600601fa01b943b5f -> fe9af5adf610e5fc6ef80b7f6e1ca49d
+  custom:scripting/monoscript/fileName/Weather.cs: 6986cf6770a3b9f15be4f51b94c7460d -> 00dffe87f054648ffb48a291374576d6
+  custom:scripting/monoscript/fileName/Siege.cs: 4d18a1045f17cd993e326dee7e8ba8a1 -> 6815872d2fca059aa75a70932f771d44
+  custom:scripting/monoscript/fileName/Token.cs: eaaf38c2d587e5e76126b9ad860e251e -> 
+  custom:CustomObjectIndexerAttribute: 232f87dd983dbecb2a4e21e08eb2cef8 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/Clear.cs: 8c664a8230fba69fba6c930b91a1769e -> 5507f0dc756d333e9ca527f087a732a8
+  custom:scripting/monoscript/fileName/Boost.cs: 9b773d3cdb8d3df2fd2e018059458977 -> 58e483b06cca625c5b81cbcc1548ea0b
+  custom:scripting/monoscript/fileName/FromDistance.cs: 1ec810003ea4f3d8c1f3a23722960b65 -> 226fd868a3ca3f1b880b80d846058dd1
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:scripting/monoscript/fileName/Lure.cs: b4e9134aab7e433aa3994e30162b3be8 -> 4dba3651f0e0f00863f465b4aa486ae0
+  custom:scripting/monoscript/fileName/Leader.cs: 3ee81729774188e9d32f256fcd418669 -> dec995df4fc75b887223c5fff5667830
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: 2f0ff77a95e0ac474e3e8eeba4e2f7cb -> 
+  custom:scripting/monoscript/fileName/Melee.cs: e7d23c07d9b9a3f338da9daadea8bcc3 -> ae40d6e12f37f63d37309bc8ed7b48e7
+  custom:scripting/monoscript/fileName/Gold.cs: 9ea5f2aaf266988785e592b92dfc73e3 -> 8508c2357b30f30a8b45b43953b419dc
+  custom:scripting/monoscript/fileName/Game Manager.cs: f6182d712e34e20e3202214886862cdb -> 9933fbcc6190e2a9171c2ec8808a053e
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/Error.cs: 392cfd501603dfdbc9c86428b6e5f918 -> 
+  custom:scripting/monoscript/fileName/Player.cs: 5bb3fdd25abedb90511c7231fb5a2164 -> 007e2e63cbf915a2b71612a7f593548a
+  custom:scripting/monoscript/fileName/Lexer.cs: 3a17243c048ed4362094f6e08a4ef7ae -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: dc1f6d08fed667c725723a7e96487899 -> f480ba5b22d9a7299d1665876007f550
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.806 seconds
+Native extension for LinuxStandalone target not found
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.529 seconds
+Domain Reload Profiling: 2334ms
+	BeginReloadAssembly (249ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (12ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (80ms)
+	RebuildCommonClasses (75ms)
+	RebuildNativeTypeToScriptingClass (18ms)
+	initialDomainReloadingComplete (58ms)
+	LoadAllAssembliesAndSetupDomain (403ms)
+		LoadAssemblies (480ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (28ms)
+			TypeCache.Refresh (11ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (12ms)
+	FinalizeReload (1530ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (748ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (15ms)
+			SetLoadedEditorAssemblies (6ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (109ms)
+			ProcessInitializeOnLoadAttributes (552ms)
+			ProcessInitializeOnLoadMethodAttributes (53ms)
+			AfterProcessingInitializeOnLoad (12ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (10ms)
+Refreshing native plugins compatible for Editor in 2.52 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3135 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 14 unused Assets / (28.5 KB). Loaded Objects now: 3646.
+Memory consumption went from 114.3 MB to 114.3 MB.
+Total: 20.500701 ms (FindLiveObjects: 0.702541 ms CreateObjectMapping: 0.157536 ms MarkObjects: 19.527641 ms  DeleteObjects: 0.109346 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/Deck.cs: e243a42c075c65ac07485da234f1aad3 -> df396a88cac14245c45bc1a8e101d8d4
+  custom:scripting/monoscript/fileName/MainMenu.cs: bcc0f9052176b2186a7114234ef44a73 -> c093076ba5753d7bec74a8a751ffb653
+  custom:scripting/monoscript/fileName/Graveyard.cs: 75aa80fcd4f693927cd55fdf11ad6c33 -> e9ebbdeaa2f604a18075511460d2d07f
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/Silver.cs: c030aa0df993d41a756ae2eb92518d3d -> 878fd2892f16589759a346023a4ec600
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/Weather Zone.cs: f9ea77b43f195d7600601fa01b943b5f -> fe9af5adf610e5fc6ef80b7f6e1ca49d
+  custom:scripting/monoscript/fileName/Weather.cs: 6986cf6770a3b9f15be4f51b94c7460d -> 00dffe87f054648ffb48a291374576d6
+  custom:scripting/monoscript/fileName/Siege.cs: 4d18a1045f17cd993e326dee7e8ba8a1 -> 6815872d2fca059aa75a70932f771d44
+  custom:scripting/monoscript/fileName/Token.cs: eaaf38c2d587e5e76126b9ad860e251e -> 
+  custom:CustomObjectIndexerAttribute: 232f87dd983dbecb2a4e21e08eb2cef8 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/Clear.cs: 8c664a8230fba69fba6c930b91a1769e -> 5507f0dc756d333e9ca527f087a732a8
+  custom:scripting/monoscript/fileName/Boost.cs: 9b773d3cdb8d3df2fd2e018059458977 -> 58e483b06cca625c5b81cbcc1548ea0b
+  custom:scripting/monoscript/fileName/FromDistance.cs: 1ec810003ea4f3d8c1f3a23722960b65 -> 226fd868a3ca3f1b880b80d846058dd1
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:scripting/monoscript/fileName/Lure.cs: b4e9134aab7e433aa3994e30162b3be8 -> 4dba3651f0e0f00863f465b4aa486ae0
+  custom:scripting/monoscript/fileName/Leader.cs: 3ee81729774188e9d32f256fcd418669 -> dec995df4fc75b887223c5fff5667830
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: 2f0ff77a95e0ac474e3e8eeba4e2f7cb -> 
+  custom:scripting/monoscript/fileName/Melee.cs: e7d23c07d9b9a3f338da9daadea8bcc3 -> ae40d6e12f37f63d37309bc8ed7b48e7
+  custom:scripting/monoscript/fileName/Gold.cs: 9ea5f2aaf266988785e592b92dfc73e3 -> 8508c2357b30f30a8b45b43953b419dc
+  custom:scripting/monoscript/fileName/Game Manager.cs: f6182d712e34e20e3202214886862cdb -> 9933fbcc6190e2a9171c2ec8808a053e
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/Error.cs: 392cfd501603dfdbc9c86428b6e5f918 -> 
+  custom:scripting/monoscript/fileName/Player.cs: 5bb3fdd25abedb90511c7231fb5a2164 -> 007e2e63cbf915a2b71612a7f593548a
+  custom:scripting/monoscript/fileName/Lexer.cs: 3a17243c048ed4362094f6e08a4ef7ae -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: dc1f6d08fed667c725723a7e96487899 -> f480ba5b22d9a7299d1665876007f550
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.873 seconds
+Native extension for LinuxStandalone target not found
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.549 seconds
+Domain Reload Profiling: 2422ms
+	BeginReloadAssembly (276ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (13ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (82ms)
+	RebuildCommonClasses (77ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (58ms)
+	LoadAllAssembliesAndSetupDomain (444ms)
+		LoadAssemblies (504ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (49ms)
+			TypeCache.Refresh (17ms)
+				TypeCache.ScanAssembly (2ms)
+			ScanForSourceGeneratedMonoScriptInfo (16ms)
+			ResolveRequiredComponents (12ms)
+	FinalizeReload (1551ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (833ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (17ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (116ms)
+			ProcessInitializeOnLoadAttributes (616ms)
+			ProcessInitializeOnLoadMethodAttributes (66ms)
+			AfterProcessingInitializeOnLoad (12ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (10ms)
+Refreshing native plugins compatible for Editor in 3.20 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3135 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 14 unused Assets / (28.4 KB). Loaded Objects now: 3649.
+Memory consumption went from 114.3 MB to 114.3 MB.
+Total: 10.017653 ms (FindLiveObjects: 1.106320 ms CreateObjectMapping: 0.880796 ms MarkObjects: 7.909560 ms  DeleteObjects: 0.115497 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/Deck.cs: e243a42c075c65ac07485da234f1aad3 -> df396a88cac14245c45bc1a8e101d8d4
+  custom:scripting/monoscript/fileName/MainMenu.cs: bcc0f9052176b2186a7114234ef44a73 -> c093076ba5753d7bec74a8a751ffb653
+  custom:scripting/monoscript/fileName/Graveyard.cs: 75aa80fcd4f693927cd55fdf11ad6c33 -> e9ebbdeaa2f604a18075511460d2d07f
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/Silver.cs: c030aa0df993d41a756ae2eb92518d3d -> 878fd2892f16589759a346023a4ec600
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/Weather Zone.cs: f9ea77b43f195d7600601fa01b943b5f -> fe9af5adf610e5fc6ef80b7f6e1ca49d
+  custom:scripting/monoscript/fileName/Weather.cs: 6986cf6770a3b9f15be4f51b94c7460d -> 00dffe87f054648ffb48a291374576d6
+  custom:scripting/monoscript/fileName/Siege.cs: 4d18a1045f17cd993e326dee7e8ba8a1 -> 6815872d2fca059aa75a70932f771d44
+  custom:scripting/monoscript/fileName/Token.cs: eaaf38c2d587e5e76126b9ad860e251e -> 
+  custom:CustomObjectIndexerAttribute: 232f87dd983dbecb2a4e21e08eb2cef8 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/Clear.cs: 8c664a8230fba69fba6c930b91a1769e -> 5507f0dc756d333e9ca527f087a732a8
+  custom:scripting/monoscript/fileName/Boost.cs: 9b773d3cdb8d3df2fd2e018059458977 -> 58e483b06cca625c5b81cbcc1548ea0b
+  custom:scripting/monoscript/fileName/FromDistance.cs: 1ec810003ea4f3d8c1f3a23722960b65 -> 226fd868a3ca3f1b880b80d846058dd1
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:scripting/monoscript/fileName/Lure.cs: b4e9134aab7e433aa3994e30162b3be8 -> 4dba3651f0e0f00863f465b4aa486ae0
+  custom:scripting/monoscript/fileName/Leader.cs: 3ee81729774188e9d32f256fcd418669 -> dec995df4fc75b887223c5fff5667830
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: 2f0ff77a95e0ac474e3e8eeba4e2f7cb -> 
+  custom:scripting/monoscript/fileName/Melee.cs: e7d23c07d9b9a3f338da9daadea8bcc3 -> ae40d6e12f37f63d37309bc8ed7b48e7
+  custom:scripting/monoscript/fileName/Gold.cs: 9ea5f2aaf266988785e592b92dfc73e3 -> 8508c2357b30f30a8b45b43953b419dc
+  custom:scripting/monoscript/fileName/Game Manager.cs: f6182d712e34e20e3202214886862cdb -> 9933fbcc6190e2a9171c2ec8808a053e
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/Error.cs: 392cfd501603dfdbc9c86428b6e5f918 -> 
+  custom:scripting/monoscript/fileName/Player.cs: 5bb3fdd25abedb90511c7231fb5a2164 -> 007e2e63cbf915a2b71612a7f593548a
+  custom:scripting/monoscript/fileName/Lexer.cs: 3a17243c048ed4362094f6e08a4ef7ae -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: dc1f6d08fed667c725723a7e96487899 -> f480ba5b22d9a7299d1665876007f550
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.818 seconds
+Native extension for LinuxStandalone target not found
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.616 seconds
+Domain Reload Profiling: 2433ms
+	BeginReloadAssembly (252ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (11ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (86ms)
+	RebuildCommonClasses (75ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (57ms)
+	LoadAllAssembliesAndSetupDomain (414ms)
+		LoadAssemblies (476ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (45ms)
+			TypeCache.Refresh (17ms)
+				TypeCache.ScanAssembly (2ms)
+			ScanForSourceGeneratedMonoScriptInfo (14ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1617ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (859ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (15ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (111ms)
+			ProcessInitializeOnLoadAttributes (655ms)
+			ProcessInitializeOnLoadMethodAttributes (58ms)
+			AfterProcessingInitializeOnLoad (12ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (10ms)
+Refreshing native plugins compatible for Editor in 2.09 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3135 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 14 unused Assets / (28.4 KB). Loaded Objects now: 3652.
+Memory consumption went from 114.3 MB to 114.3 MB.
+Total: 8.377209 ms (FindLiveObjects: 0.907536 ms CreateObjectMapping: 0.254458 ms MarkObjects: 7.074941 ms  DeleteObjects: 0.135635 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/Deck.cs: e243a42c075c65ac07485da234f1aad3 -> df396a88cac14245c45bc1a8e101d8d4
+  custom:scripting/monoscript/fileName/MainMenu.cs: bcc0f9052176b2186a7114234ef44a73 -> c093076ba5753d7bec74a8a751ffb653
+  custom:scripting/monoscript/fileName/Graveyard.cs: 75aa80fcd4f693927cd55fdf11ad6c33 -> e9ebbdeaa2f604a18075511460d2d07f
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/Silver.cs: c030aa0df993d41a756ae2eb92518d3d -> 878fd2892f16589759a346023a4ec600
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/Weather Zone.cs: f9ea77b43f195d7600601fa01b943b5f -> fe9af5adf610e5fc6ef80b7f6e1ca49d
+  custom:scripting/monoscript/fileName/Weather.cs: 6986cf6770a3b9f15be4f51b94c7460d -> 00dffe87f054648ffb48a291374576d6
+  custom:scripting/monoscript/fileName/Siege.cs: 4d18a1045f17cd993e326dee7e8ba8a1 -> 6815872d2fca059aa75a70932f771d44
+  custom:scripting/monoscript/fileName/Token.cs: eaaf38c2d587e5e76126b9ad860e251e -> 
+  custom:CustomObjectIndexerAttribute: 232f87dd983dbecb2a4e21e08eb2cef8 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/Clear.cs: 8c664a8230fba69fba6c930b91a1769e -> 5507f0dc756d333e9ca527f087a732a8
+  custom:scripting/monoscript/fileName/Boost.cs: 9b773d3cdb8d3df2fd2e018059458977 -> 58e483b06cca625c5b81cbcc1548ea0b
+  custom:scripting/monoscript/fileName/FromDistance.cs: 1ec810003ea4f3d8c1f3a23722960b65 -> 226fd868a3ca3f1b880b80d846058dd1
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:scripting/monoscript/fileName/Lure.cs: b4e9134aab7e433aa3994e30162b3be8 -> 4dba3651f0e0f00863f465b4aa486ae0
+  custom:scripting/monoscript/fileName/Leader.cs: 3ee81729774188e9d32f256fcd418669 -> dec995df4fc75b887223c5fff5667830
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: 2f0ff77a95e0ac474e3e8eeba4e2f7cb -> 
+  custom:scripting/monoscript/fileName/Melee.cs: e7d23c07d9b9a3f338da9daadea8bcc3 -> ae40d6e12f37f63d37309bc8ed7b48e7
+  custom:scripting/monoscript/fileName/Gold.cs: 9ea5f2aaf266988785e592b92dfc73e3 -> 8508c2357b30f30a8b45b43953b419dc
+  custom:scripting/monoscript/fileName/Game Manager.cs: f6182d712e34e20e3202214886862cdb -> 9933fbcc6190e2a9171c2ec8808a053e
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/Error.cs: 392cfd501603dfdbc9c86428b6e5f918 -> 
+  custom:scripting/monoscript/fileName/Player.cs: 5bb3fdd25abedb90511c7231fb5a2164 -> 007e2e63cbf915a2b71612a7f593548a
+  custom:scripting/monoscript/fileName/Lexer.cs: 3a17243c048ed4362094f6e08a4ef7ae -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: dc1f6d08fed667c725723a7e96487899 -> f480ba5b22d9a7299d1665876007f550
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.832 seconds
+Native extension for LinuxStandalone target not found
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.501 seconds
+Domain Reload Profiling: 2332ms
+	BeginReloadAssembly (253ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (11ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (78ms)
+	RebuildCommonClasses (75ms)
+	RebuildNativeTypeToScriptingClass (16ms)
+	initialDomainReloadingComplete (58ms)
+	LoadAllAssembliesAndSetupDomain (428ms)
+		LoadAssemblies (496ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (47ms)
+			TypeCache.Refresh (17ms)
+				TypeCache.ScanAssembly (2ms)
+			ScanForSourceGeneratedMonoScriptInfo (15ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1502ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (780ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (15ms)
+			SetLoadedEditorAssemblies (6ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (110ms)
+			ProcessInitializeOnLoadAttributes (579ms)
+			ProcessInitializeOnLoadMethodAttributes (57ms)
+			AfterProcessingInitializeOnLoad (12ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (10ms)
+Refreshing native plugins compatible for Editor in 2.34 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3135 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 14 unused Assets / (28.4 KB). Loaded Objects now: 3655.
+Memory consumption went from 114.3 MB to 114.3 MB.
+Total: 9.457549 ms (FindLiveObjects: 0.927033 ms CreateObjectMapping: 0.703122 ms MarkObjects: 7.713922 ms  DeleteObjects: 0.109776 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/Deck.cs: e243a42c075c65ac07485da234f1aad3 -> df396a88cac14245c45bc1a8e101d8d4
+  custom:scripting/monoscript/fileName/MainMenu.cs: bcc0f9052176b2186a7114234ef44a73 -> c093076ba5753d7bec74a8a751ffb653
+  custom:scripting/monoscript/fileName/Graveyard.cs: 75aa80fcd4f693927cd55fdf11ad6c33 -> e9ebbdeaa2f604a18075511460d2d07f
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/Silver.cs: c030aa0df993d41a756ae2eb92518d3d -> 878fd2892f16589759a346023a4ec600
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/Weather Zone.cs: f9ea77b43f195d7600601fa01b943b5f -> fe9af5adf610e5fc6ef80b7f6e1ca49d
+  custom:scripting/monoscript/fileName/Weather.cs: 6986cf6770a3b9f15be4f51b94c7460d -> 00dffe87f054648ffb48a291374576d6
+  custom:scripting/monoscript/fileName/Siege.cs: 4d18a1045f17cd993e326dee7e8ba8a1 -> 6815872d2fca059aa75a70932f771d44
+  custom:scripting/monoscript/fileName/Token.cs: eaaf38c2d587e5e76126b9ad860e251e -> 
+  custom:CustomObjectIndexerAttribute: 232f87dd983dbecb2a4e21e08eb2cef8 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/Clear.cs: 8c664a8230fba69fba6c930b91a1769e -> 5507f0dc756d333e9ca527f087a732a8
+  custom:scripting/monoscript/fileName/Boost.cs: 9b773d3cdb8d3df2fd2e018059458977 -> 58e483b06cca625c5b81cbcc1548ea0b
+  custom:scripting/monoscript/fileName/FromDistance.cs: 1ec810003ea4f3d8c1f3a23722960b65 -> 226fd868a3ca3f1b880b80d846058dd1
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:scripting/monoscript/fileName/Lure.cs: b4e9134aab7e433aa3994e30162b3be8 -> 4dba3651f0e0f00863f465b4aa486ae0
+  custom:scripting/monoscript/fileName/Leader.cs: 3ee81729774188e9d32f256fcd418669 -> dec995df4fc75b887223c5fff5667830
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: 2f0ff77a95e0ac474e3e8eeba4e2f7cb -> 
+  custom:scripting/monoscript/fileName/Melee.cs: e7d23c07d9b9a3f338da9daadea8bcc3 -> ae40d6e12f37f63d37309bc8ed7b48e7
+  custom:scripting/monoscript/fileName/Gold.cs: 9ea5f2aaf266988785e592b92dfc73e3 -> 8508c2357b30f30a8b45b43953b419dc
+  custom:scripting/monoscript/fileName/Game Manager.cs: f6182d712e34e20e3202214886862cdb -> 9933fbcc6190e2a9171c2ec8808a053e
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/Error.cs: 392cfd501603dfdbc9c86428b6e5f918 -> 
+  custom:scripting/monoscript/fileName/Player.cs: 5bb3fdd25abedb90511c7231fb5a2164 -> 007e2e63cbf915a2b71612a7f593548a
+  custom:scripting/monoscript/fileName/Lexer.cs: 3a17243c048ed4362094f6e08a4ef7ae -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: dc1f6d08fed667c725723a7e96487899 -> f480ba5b22d9a7299d1665876007f550

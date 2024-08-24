@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Token : MonoBehaviour
-{
-   public enum TokenType
+public enum TokenType
    {
       //Simbolos
       LeftParenthesis,RightParenthesis,LeftBracket,RightBracket,LeftBrace,RightBrace,Comma,Dot,Colon,SemiColon,Modulus,Pow,
@@ -24,7 +22,7 @@ public class Token : MonoBehaviour
       //Funciones
       Find,Push,SendBottom,Pop,Remove,Shuffle,
       //Cartas
-      Type,Faction,Power,Range,OnActivation,
+      Type,Faction,Power,Range,Owner,OnActivation,
       //On Activation
       Effect,Selector,Source,Single,Predicate,PostAction,
       //Tipos de Datos
@@ -32,8 +30,9 @@ public class Token : MonoBehaviour
       //Final del input
       EOF
    }
-   public class Token
-   {
+public class Token : MonoBehaviour
+{
+   
     public string Value{get; private set;}
     public TokenType Type{get; private set;}
     public object Literal{get; private set;}
@@ -48,6 +47,5 @@ public class Token : MonoBehaviour
     public override string ToString()
     {
         return Type + " " + Value + " " + Literal;
-    }
-   }   
+    }   
 }
