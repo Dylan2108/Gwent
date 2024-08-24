@@ -31,5 +31,23 @@ public class Token : MonoBehaviour
       Numbers,Strings,Booleans,
       //Final del input
       EOF
+   }
+   public class Token
+   {
+    public string Value{get; private set;}
+    public TokenType Type{get; private set;}
+    public object Literal{get; private set;}
+    public int Line{get; private set;}
+    public Token(string value,TokenType type,object literal,int line)
+    {
+        Value = value;
+        Type = type;
+        Literal = literal;
+        Line = line;
+    }
+    public override string ToString()
+    {
+        return Type + " " + Value + " " + Literal;
+    }
    }   
 }

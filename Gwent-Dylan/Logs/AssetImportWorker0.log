@@ -706,3 +706,12 @@ Start importing Assets/Scripts/Gwent-Compiler/Token.cs using Guid(7ad7319e033930
  -> (artifact id: '6ef0feb5b6528818e66887c33fa1f7fa') in 0.002067 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2427.309992 seconds.
+  path: Assets/Scripts/Gwent-Compiler/Error.cs
+  artifactKey: Guid(2c4f53b09ed868aac81ee6d4ab00c368) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Gwent-Compiler/Error.cs using Guid(2c4f53b09ed868aac81ee6d4ab00c368) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 8 workers.
+ -> (artifact id: 'be3313d0c3496069d86d963723c6ffa2') in 0.002329 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
