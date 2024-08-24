@@ -348,6 +348,7 @@
 -analyzer:"/home/dylan/Unity/Hub/Editor/2022.3.41f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"/home/dylan/Unity/Hub/Editor/2022.3.41f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/Gwent-Compiler/Error.cs"
+"Assets/Scripts/Gwent-Compiler/Expressions.cs"
 "Assets/Scripts/Gwent-Compiler/Lexer.cs"
 "Assets/Scripts/Gwent-Compiler/Token.cs"
 "Assets/Scripts/Gwent/Board/FromDistance.cs"
