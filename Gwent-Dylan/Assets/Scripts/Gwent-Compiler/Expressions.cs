@@ -2,9 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Expression : MonoBehaviour
+public interface Expression
 {
-     
+  
+}
+public class NumberExpression : Expression
+{
+    public int Value{get;}
+    public NumberExpression(int value)
+    {
+        Value = value;
+    }
+}
+public class StringExpression : Expression
+{
+    public string Value{get;}
+    public StringExpression(string value)
+    {
+        Value = value;
+    }
+}
+public class BoolExpression : Expression
+{
+    public bool Value{get;}
+    public BoolExpression(bool value)
+    {
+       Value = value;
+    }
 }
 public class BinaryExpression : Expression
 {//Expresiones Binarias
@@ -28,14 +52,6 @@ public class UnaryExpression : Expression
     Right = right;
    }
 }
-public class LiteralExpression : Expression
-{//Literales(Booleanos,Strings,Valores Numericos)
-    public object Value{get;}
-    public LiteralExpression(object value)
-    {
-        Value = value;
-    }
-}
 public class GroupingExpresion : Expression
 {//Expresiones de Agrupamiento
     public Expression Expression{get;}
@@ -44,12 +60,14 @@ public class GroupingExpresion : Expression
         Expression = expression;
     }
 }
-public class AssignExpresion : Expression
+public class AssignExpresion : StatementExpression
 {//Expresiones de Asignacion
+   public VariableExpression Variable{get;}
    public Token ID{get;}
    public Expression Value{get;}
-   public AssignExpresion(Token id,Expression value)
+   public AssignExpresion(VariableExpression variable,Token id,Expression value)
    {
+    Variable = variable;
     ID = id;
     Value = value;
    }
@@ -57,41 +75,98 @@ public class AssignExpresion : Expression
 public class VariableExpression : Expression
 {//Variables
     public Token ID{get;}
+    public string Name{get;}
+    public Type type{get;set;}
+    public bool IsConstant{get;set;}
+    public enum Type
+    {
+        INT,STRING,BOOL,NULL,FIELD,TARGETS,VOID,CARD,CONTEXT
+    }
     public VariableExpression(Token id)
     {
         ID = id;
+        Name = id.Value;
+        type = Type.NULL;
     }
-}
-public class StatementExpression : Expression
-{//Bloques de instrucciones
-    List<Expression> expressions{get;}
-    public StatementExpression()
+    public void SetType(TokenType typeName)
     {
-        expressions = new List<Expression>();
+        if(typeName == TokenType.Booleans) type = Type.BOOL;
+        if(typeName == TokenType.Numbers) type = Type.INT;
+        if(typeName == TokenType.Strings) type = Type.STRING;
     }
 }
-public class FunctionExpression : Expression //No esta completa
+public class VariableCompoundExpression : VariableExpression,StatementExpression
+{
+    public ParamsExpression Argument{get;}
+    public VariableCompoundExpression(Token token) : base(token)
+    {
+        Argument = new ParamsExpression();
+    }
+}
+public interface StatementExpression : Expression
+{//Instrucciones
+
+}
+public class StatementBlockExpression : Expression
+{//Bloques de instrucciones
+    public List<StatementExpression> expressions{get;set;}
+    public StatementBlockExpression()
+    {
+        expressions = new List<StatementExpression>();
+    }
+}
+public class FunctionExpression : StatementExpression
 {//Funciones de las listas de cartas
     public string Name{get;}
-    public ParamsExpression paramsExpression;
+    public ParamsExpression ParamsExpression{get;}
+    public VariableExpression.Type Type{get; set;}
+    public FunctionExpression(string name,ParamsExpression paramsExpression)
+    {
+        Name = name;
+        ParamsExpression = paramsExpression;
+        Type = VariableExpression.Type.NULL;
+        VariableReturn();
+    }
+    public void VariableReturn()
+    {
+        if(Name == "FieldOfPlayer") Type = VariableExpression.Type.CONTEXT;
+        if(Name == "HandOfPlayer") Type = VariableExpression.Type.FIELD;
+        if(Name == "GraveyardOfPlayer") Type = VariableExpression.Type.FIELD;
+        if(Name == "DeckOfPlayer") Type = VariableExpression.Type.FIELD;
+        if(Name == "Find") Type = VariableExpression.Type.TARGETS;
+        if(Name == "Push") Type = VariableExpression.Type.VOID;
+        if(Name == "SendBottom") Type = VariableExpression.Type.VOID;
+        if(Name == "Pop") Type = VariableExpression.Type.CARD;
+        if(Name == "Remove") Type = VariableExpression.Type.VOID;
+        if(Name == "Shuffle") Type = VariableExpression.Type.VOID;
+        if(Name == "Add") Type = VariableExpression.Type.VOID;
+    }
 }
-public class ForExpression : Expression
+public class PointerExpression : Expression
+{
+    public string Pointer{get;}
+    public PointerExpression(string pointer)
+    {
+        Pointer = pointer;
+    }
+}
+public class ForExpression : StatementExpression
 {//Ciclos For
     public VariableExpression Variable{get;}
     public VariableExpression Target{get;}
-    public StatementExpression Body{get;}
-    public ForExpression(VariableExpression variable,VariableExpression target,StatementExpression body)
+    public StatementBlockExpression Body{get;}
+    public ForExpression(VariableExpression variable,VariableExpression target,StatementBlockExpression body)
     {
         Variable = variable;
         Target = target;
         Body = body;
     }
 }
-public class WhileExpression : Expression
+public class WhileExpression : StatementExpression
 {//Ciclos while
     public Expression Condition{get;}
-    public StatementExpression Body{get;}
-    public WhileExpression(Expression condition,StatementExpression body)
+    public StatementBlockExpression Body{get;}
+    public WhileExpression(Expression condition,StatementBlockExpression body)
     {
         Condition = condition;
         Body = body;
@@ -99,14 +174,12 @@ public class WhileExpression : Expression
 }
 public class EffectExpression : Expression
 {//Efectos
-     public NameExpression Name{get;}
-     public ParamsExpression Params{get;}
-     public ActionExpression Action{get;}
-     public EffectExpression(NameExpression name,ParamsExpression Params,ActionExpression action)
+     public NameExpression Name{get;set;}
+     public ParamsExpression Params{get;set;}
+     public ActionExpression Action{get;set;}
+     public EffectExpression()
      {
-        Name = name;
-        this.Params = Params;
-        Action = action; 
+     
      }
 }
 public class NameExpression : Expression
@@ -129,8 +202,8 @@ public class ActionExpression : Expression
 {//Acciones de los efectos
     public VariableExpression Targets{get;}
     public VariableExpression Context{get;}
-    public StatementExpression Body{get;}
-    public ActionExpression(VariableExpression targets,VariableExpression context,StatementExpression body)
+    public StatementBlockExpression Body{get;}
+    public ActionExpression(VariableExpression targets,VariableExpression context,StatementBlockExpression body)
     {
         Targets = targets;
         Context = context;
@@ -139,20 +212,15 @@ public class ActionExpression : Expression
 }
 public class CardExpression : Expression
 {//Cartas
-    public TypeExpression Type{get;}
-    public NameExpression Name{get;}
-    public FactionExpression Faction{get;}
-    public PowerExpression Power{get;}
-    public RangeExpression Range{get;}
-    public OnActivationExpression OnActivation{get;}
-    public CardExpression(TypeExpression type,NameExpression name,FactionExpression faction,PowerExpression power,RangeExpression range,OnActivationExpression onActivation)
+    public TypeExpression Type{get; set;}
+    public NameExpression Name{get; set;}
+    public FactionExpression Faction{get; set;}
+    public PowerExpression Power{get; set;}
+    public RangeExpression Range{get; set;}
+    public OnActivationExpression OnActivation{get; set;}
+    public CardExpression()
     {
-        Type = type;
-        Name = name;
-        Faction = faction;
-        Power = power;
-        Range = range;
-        OnActivation = onActivation;
+      
     }
 }
 public class TypeExpression : Expression
@@ -181,9 +249,9 @@ public class PowerExpression : Expression
 }
 public class RangeExpression : Expression
 {//Los tipos de ataque de la carta
-    public List<Expression> Ranges{get;}
+    public Expression[] Ranges{get;}
     public string Range{get;}
-    public RangeExpression(List<Expression> ranges)
+    public RangeExpression(Expression[] ranges)
     {
         Ranges = ranges;
     }
@@ -201,7 +269,7 @@ public class OnActivationExpression : Expression
     }
 }
 public class OnActivationElementsExpression : Expression
-{//Todos los elementos de los elementos de On Activation
+{//Todos los elementos de On Activation
    public EffectCallExpression EffectCall{get;}
    public SelectorExpression Selector{get;}
    public PostActionExpression PostAction{get;}
@@ -224,7 +292,7 @@ public class EffectCallExpression : Expression
 }
 public class SelectorExpression : Expression
 {//Decide a que cartas se les va a aplicar el efecto
-    public string Source{get;}
+    public string Source{get; set;}
     public SingleExpression Single{get;}
     public PredicateExpression Predicate{get;}
     public SelectorExpression(string source,SingleExpression single,PredicateExpression predicate)

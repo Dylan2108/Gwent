@@ -18,11 +18,11 @@ public enum TokenType
       //Palabras reservadas para ciclos
       While,For,In,
       //Propiedades del contexto
-      TriggerPlayer,Board,HandOfPlayer,FieldOfPlayer,GraveyardOfPlayer,DeckOfPlayer,Hand,Field,Graveyard,Deck,
+      TriggerPlayer,Board,HandOfPlayer,FieldOfPlayer,GraveyardOfPlayer,DeckOfPlayer,Hand,Field,Graveyard,Deck,Function,
       //Funciones
       Find,Push,SendBottom,Pop,Remove,Shuffle,
       //Cartas
-      Type,Faction,Power,Range,Owner,OnActivation,
+      Type,Faction,Power,Range,Owner,OnActivation,Pointer,
       //On Activation
       Effect,Selector,Source,Single,Predicate,PostAction,
       //Tipos de Datos

@@ -350,6 +350,8 @@
 "Assets/Scripts/Gwent-Compiler/Error.cs"
 "Assets/Scripts/Gwent-Compiler/Expressions.cs"
 "Assets/Scripts/Gwent-Compiler/Lexer.cs"
+"Assets/Scripts/Gwent-Compiler/NewBehaviourScript.cs"
+"Assets/Scripts/Gwent-Compiler/Parser.cs"
 "Assets/Scripts/Gwent-Compiler/Token.cs"
 "Assets/Scripts/Gwent/Board/FromDistance.cs"
 "Assets/Scripts/Gwent/Board/Graveyard.cs"
