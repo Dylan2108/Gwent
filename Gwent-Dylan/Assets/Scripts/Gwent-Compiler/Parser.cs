@@ -242,7 +242,7 @@ public class Parser : MonoBehaviour
        Consume(TokenType.LeftBrace,"Se esperaba '{'");
        EffectCallExpression effectCall = null;
        SelectorExpression selector = null;
-       PostActionExpression postAction = null;
+       List<PostActionExpression> postAction = new List<PostActionExpression>();
        while(!Check(TokenType.RightBrace) && !IsAtEnd())
        {
           if(Match(TokenType.Effect))
@@ -264,11 +264,9 @@ public class Parser : MonoBehaviour
           }
           else if(Match(TokenType.PostAction))
           {
-            if(postAction == null)
-            {
+            
                 Consume(TokenType.Colon,"Se esperaba :");
-                postAction = ParsePostAction();
-            }
+                postAction.Add(ParsePostAction());
           }
           else
           {

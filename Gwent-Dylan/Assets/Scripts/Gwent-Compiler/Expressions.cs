@@ -21,6 +21,10 @@ public class StringExpression : Expression
     {
         Value = value;
     }
+    public object Evaluate(Scope scope)
+    {
+       return Value;
+    }
 }
 public class BoolExpression : Expression
 {
@@ -272,8 +276,8 @@ public class OnActivationElementsExpression : Expression
 {//Todos los elementos de On Activation
    public EffectCallExpression EffectCall{get;}
    public SelectorExpression Selector{get;}
-   public PostActionExpression PostAction{get;}
-   public OnActivationElementsExpression(EffectCallExpression effectCall,SelectorExpression selector,PostActionExpression postAction)
+   public List<PostActionExpression> PostAction{get;}
+   public OnActivationElementsExpression(EffectCallExpression effectCall,SelectorExpression selector,List<PostActionExpression> postAction)
    {
      EffectCall = effectCall;
      Selector = selector;

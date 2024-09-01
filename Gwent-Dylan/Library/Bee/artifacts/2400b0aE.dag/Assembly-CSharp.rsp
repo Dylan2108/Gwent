@@ -352,6 +352,7 @@
 "Assets/Scripts/Gwent-Compiler/Lexer.cs"
 "Assets/Scripts/Gwent-Compiler/Parser.cs"
 "Assets/Scripts/Gwent-Compiler/Scope.cs"
+"Assets/Scripts/Gwent-Compiler/Semantic.cs"
 "Assets/Scripts/Gwent-Compiler/Token.cs"
 "Assets/Scripts/Gwent/Board/FromDistance.cs"
 "Assets/Scripts/Gwent/Board/Graveyard.cs"
