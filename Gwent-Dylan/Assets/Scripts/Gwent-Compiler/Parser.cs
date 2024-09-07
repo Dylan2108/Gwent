@@ -14,7 +14,7 @@ public class Parser : MonoBehaviour
         Tokens = tokens;
         CurrentPosition = 0;
     }
-    public Expression ParseProgram()//Parsea un programa
+    public Node ParseProgram()//Parsea un programa
     {
        ProgramExpression program = new ProgramExpression();
        while(!IsAtEnd())

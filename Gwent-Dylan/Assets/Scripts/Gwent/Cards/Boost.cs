@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boost : MonoBehaviour
+public class Boost : SpecialCard
 {
-    public string Name;//Nombre
-    public Player player;//El jugador que pose la carta 
-    public bool invoked;//Para saber si la carta esta invocada
-    public bool destroyed;//Para saber si la carta fue destruida
     public void Start()
     {
       player = transform.parent.GetComponent<Player>();//Toma como refrencia al jugador que sea su padre
@@ -20,16 +16,16 @@ public class Boost : MonoBehaviour
           if(player.EffectLureIsActive) Debug.Log("Debe seleccionar una carta plata en el campo");
          else if(!invoked)
          {//Invoca la carta y activa su efecto
-          if(this.Name == "Pildoras Ninjas")
+          if(this.name == "Pildoras Ninjas")
           {
-            player.ShowMenuSummonBoost(this.gameObject,1);
+            player.ShowMenuSummonBoost(this,1);
             invoked = true;
             player.playedCards++;
             player.ChangedCards = true;
           }
-          else if(this.Name == "Jutsu de la Alianza Shinobi")
+          else if(this.name == "Jutsu de la Alianza Shinobi")
           {
-            player.ShowMenuSummonBoost(this.gameObject,2);
+            player.ShowMenuSummonBoost(this,2);
             invoked = true;
             player.playedCards++;
             player.ChangedCards = true;

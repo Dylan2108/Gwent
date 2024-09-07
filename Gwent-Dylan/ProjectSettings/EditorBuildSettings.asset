@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tie.unity
     guid: fc4b394eb2626fff695278e5ae494fd2
+  - enabled: 1
+    path: Assets/Scenes/Creation of Cards.unity
+    guid: 22787aca6351d82ecbd7fe97058804a5
   m_configObjects: {}

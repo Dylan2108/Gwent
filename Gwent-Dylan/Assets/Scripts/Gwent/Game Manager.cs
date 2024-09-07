@@ -230,4 +230,220 @@ public class GameManager : MonoBehaviour
         if(MyPlayer.isMyTurn && !RivalPlayer.isMyTurn) Debug.Log("Es el turno del jugador 1");//Decide quien comienza la ronda
         if(!MyPlayer.isMyTurn && RivalPlayer.isMyTurn) Debug.Log("Es el turno del jugador 2"); 
     }
+    public int TriggerPlayer()//Devuelve el id del jugador actual
+    {
+      if(MyPlayer.isMyTurn) return 0;
+      return 1;
+    }
+    public List<Card> Board()
+    {
+        List<Card> BoardCards = new List<Card>();
+        for(int i = 0;i<MyPlayer.meleesZones.cardsInZones.Count;i++)
+        {
+           if(MyPlayer.meleesZones.cardsInZones[i]!=null)
+           {
+             BoardCards.Add(MyPlayer.meleesZones.cardsInZones[i]);
+           }
+        }
+        for(int i = 0; i<MyPlayer.fromDistanceZones.cardsInZones.Count;i++)
+        {
+          if(MyPlayer.fromDistanceZones.cardsInZones[i]!=null)
+          {
+            BoardCards.Add(MyPlayer.fromDistanceZones.cardsInZones[i]);
+          }
+        }
+        for(int i = 0;i<MyPlayer.siegeZones.cardsInZones.Count;i++)
+        {
+          if(MyPlayer.siegeZones.cardsInZones[i]!=null)
+          {
+            BoardCards.Add(MyPlayer.siegeZones.cardsInZones[i]);
+          }
+        }
+        for(int i = 0;i<MyPlayer.weatherZones.cardsInZones.Count;i++)
+        {
+          if(MyPlayer.weatherZones.cardsInZones[i]!=null)
+          {
+            BoardCards.Add(MyPlayer.weatherZones.cardsInZones[i]);
+          }
+        }
+        if(MyPlayer.meleesZones.cardInMeleeBoostZone!=null) BoardCards.Add(MyPlayer.meleesZones.cardInMeleeBoostZone);
+        if(MyPlayer.fromDistanceZones.cardInFromDistanceBoostZone!=null) BoardCards.Add(MyPlayer.fromDistanceZones.cardInFromDistanceBoostZone);
+        if(MyPlayer.siegeZones.cardInSiegeBoostZone!=null) BoardCards.Add(MyPlayer.siegeZones.cardInSiegeBoostZone);
+        for(int i =0;i<RivalPlayer.meleesZones.cardsInZones.Count;i++)
+        {
+          if(RivalPlayer.meleesZones.cardsInZones[i]!=null)
+          {
+            BoardCards.Add(RivalPlayer.meleesZones.cardsInZones[i]);
+          }
+        }
+         for(int i =0;i<RivalPlayer.fromDistanceZones.cardsInZones.Count;i++)
+        {
+          if(RivalPlayer.fromDistanceZones.cardsInZones[i]!=null)
+          {
+            BoardCards.Add(RivalPlayer.fromDistanceZones.cardsInZones[i]);
+          }
+        }
+         for(int i =0;i<RivalPlayer.siegeZones.cardsInZones.Count;i++)
+        {
+          if(RivalPlayer.siegeZones.cardsInZones[i]!=null)
+          {
+            BoardCards.Add(RivalPlayer.siegeZones.cardsInZones[i]);
+          }
+        }
+        if(RivalPlayer.meleesZones.cardInMeleeBoostZone!=null) BoardCards.Add(RivalPlayer.meleesZones.cardInMeleeBoostZone);
+        if(RivalPlayer.fromDistanceZones.cardInFromDistanceBoostZone!=null) BoardCards.Add(RivalPlayer.fromDistanceZones.cardInFromDistanceBoostZone);
+        if(RivalPlayer.siegeZones.cardInSiegeBoostZone!=null) BoardCards.Add(RivalPlayer.siegeZones.cardInSiegeBoostZone);
+        return BoardCards;
+    }
+    public List<Card> HandOfPlayer(int ID)
+    {
+      List<Card> HandCards = new List<Card>();
+       if(ID == 0)
+       {
+         for(int i = 0;i<MyPlayer.cardsInHand.Count;i++)
+         {
+             if(MyPlayer.cardsInHand[i]!=null)
+             {
+                HandCards.Add(MyPlayer.cardsInHand[i]);
+             }
+         }
+         return HandCards;
+       }
+       else
+       {
+          for(int i = 0;i<RivalPlayer.cardsInHand.Count;i++)
+         {
+           if(RivalPlayer.cardsInHand[i]!=null)
+            {
+             HandCards.Add(RivalPlayer.cardsInHand[i]);
+            }
+         }
+          return HandCards;
+       }
+    }
+    public List<Card> FieldOfPlayer(int ID)
+    {
+      List<Card> FieldCards = new List<Card>();
+      if(ID == 0)
+      {
+        for(int i = 0;i<MyPlayer.meleesZones.cardsInZones.Count;i++)
+        {
+           if(MyPlayer.meleesZones.cardsInZones[i]!=null)
+           {
+             FieldCards.Add(MyPlayer.meleesZones.cardsInZones[i]);
+           }
+        }
+        for(int i = 0; i<MyPlayer.fromDistanceZones.cardsInZones.Count;i++)
+        {
+          if(MyPlayer.fromDistanceZones.cardsInZones[i]!=null)
+          {
+            FieldCards.Add(MyPlayer.fromDistanceZones.cardsInZones[i]);
+          }
+        }
+        for(int i = 0;i<MyPlayer.siegeZones.cardsInZones.Count;i++)
+        {
+          if(MyPlayer.siegeZones.cardsInZones[i]!=null)
+          {
+            FieldCards.Add(MyPlayer.siegeZones.cardsInZones[i]);
+          }
+        }
+        for(int i = 0;i<MyPlayer.weatherZones.cardsInZones.Count;i++)
+        {
+          if(MyPlayer.weatherZones.cardsInZones[i]!=null)
+          {
+            FieldCards.Add(MyPlayer.weatherZones.cardsInZones[i]);
+          }
+        }
+        if(MyPlayer.meleesZones.cardInMeleeBoostZone!=null) FieldCards.Add(MyPlayer.meleesZones.cardInMeleeBoostZone);
+        if(MyPlayer.fromDistanceZones.cardInFromDistanceBoostZone!=null) FieldCards.Add(MyPlayer.fromDistanceZones.cardInFromDistanceBoostZone);
+        if(MyPlayer.siegeZones.cardInSiegeBoostZone!=null) FieldCards.Add(MyPlayer.siegeZones.cardInSiegeBoostZone);
+        return FieldCards;
+      }
+      else
+      {
+         for(int i = 0;i<RivalPlayer.meleesZones.cardsInZones.Count;i++)
+        {
+           if(RivalPlayer.meleesZones.cardsInZones[i]!=null)
+           {
+             FieldCards.Add(RivalPlayer.meleesZones.cardsInZones[i]);
+           }
+        }
+        for(int i = 0; i<RivalPlayer.fromDistanceZones.cardsInZones.Count;i++)
+        {
+          if(RivalPlayer.fromDistanceZones.cardsInZones[i]!=null)
+          {
+            FieldCards.Add(RivalPlayer.fromDistanceZones.cardsInZones[i]);
+          }
+        }
+        for(int i = 0;i<RivalPlayer.siegeZones.cardsInZones.Count;i++)
+        {
+          if(RivalPlayer.siegeZones.cardsInZones[i]!=null)
+          {
+            FieldCards.Add(RivalPlayer.siegeZones.cardsInZones[i]);
+          }
+        }
+        for(int i = 0;i<RivalPlayer.weatherZones.cardsInZones.Count;i++)
+        {
+          if(RivalPlayer.weatherZones.cardsInZones[i]!=null)
+          {
+            FieldCards.Add(RivalPlayer.weatherZones.cardsInZones[i]);
+          }
+        }
+        if(RivalPlayer.meleesZones.cardInMeleeBoostZone!=null) FieldCards.Add(RivalPlayer.meleesZones.cardInMeleeBoostZone);
+        if(RivalPlayer.fromDistanceZones.cardInFromDistanceBoostZone!=null) FieldCards.Add(RivalPlayer.fromDistanceZones.cardInFromDistanceBoostZone);
+        if(RivalPlayer.siegeZones.cardInSiegeBoostZone!=null) FieldCards.Add(RivalPlayer.siegeZones.cardInSiegeBoostZone);
+        return FieldCards;
+      }
+    }
+    public List<Card> GraveyardOfPlayer(int ID)
+    {   List<Card> GraveyardCards = new List<Card>();
+       if(ID==0)
+       {
+          for(int i = 0;i<MyPlayer.graveyard.cardsInGraveyard.Count;i++)
+          {
+             if(MyPlayer.graveyard.cardsInGraveyard[i]!=null)
+             {
+                GraveyardCards.Add(MyPlayer.graveyard.cardsInGraveyard[i]);
+             }
+          }
+          return GraveyardCards;
+       }
+       else
+       {
+           for(int i = 0;i<RivalPlayer.graveyard.cardsInGraveyard.Count;i++)
+          {
+             if(RivalPlayer.graveyard.cardsInGraveyard[i]!=null)
+             {
+                GraveyardCards.Add(RivalPlayer.graveyard.cardsInGraveyard[i]);
+             }
+          }
+          return GraveyardCards;
+       }
+    }
+    public List<Card> DeckOfPlayer(int ID)
+    {
+      List<Card> DeckCards = new List<Card>();
+      if(ID==0)
+      {
+        for(int i = 0;i<MyPlayer.deck.deck.Count;i++)
+        {
+          if(MyPlayer.deck.deck[i]!=null)
+          {
+            DeckCards.Add(MyPlayer.deck.deck[i]);
+          }
+        }
+        return DeckCards;  
+      }
+      else
+      {
+        for(int i =0;i<RivalPlayer.deck.deck.Count;i++)
+        {
+          if(RivalPlayer.deck.deck[i]!=null)
+          {
+            DeckCards.Add(RivalPlayer.deck.deck[i]);
+          }
+        }
+        return DeckCards;
+      }
+    }
 }

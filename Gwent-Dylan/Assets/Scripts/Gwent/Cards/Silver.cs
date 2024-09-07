@@ -2,21 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Silver : MonoBehaviour
+public class Silver : UnitCard
 {//Cartas Plata
-    public string name;//Nombre
-    public int originalAtk;//Ataque
-    public int atk;
-    public string atkType;//Tipo de ataque 
-    public Player player;//Jugador que posee la carta 
+
     public Lure LureCard;//La carta senuelo que puede elegir a esta carta como objetivo
-    public bool invoked;//Para saber  si esta invocada
-    public bool destroyed;//Para saber si ue destruida 
-    public bool EffectActivated;//Para saber si el efecto fue activado
     public void Start()
     {
-        player = transform.parent.GetComponent<Player>();//Toma como referencia al jugador que sea su padre
-        originalAtk = atk;
+        player = transform.parent.GetComponent<Player>();//Toma como referencia al jugador que sea su padres
     }
     public void Update()
     {
@@ -37,7 +29,7 @@ public class Silver : MonoBehaviour
           if(player.EffectLureIsActive && !invoked) Debug.Log("Debe seleccionar una carta plata en el campo");
          else if(!invoked)
          {//Invoca la carta
-           player.SummonSilverCard(this);
+           player.SummonUnitCard(this);
            invoked = true;
            player.playedCards++;
            player.ChangedCards = true;

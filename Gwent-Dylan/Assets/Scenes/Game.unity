@@ -1033,7 +1033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f44b5c38cad4001a9a0e6054008c738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleesZones:
+  zones:
   - {fileID: 1264025743}
   - {fileID: 836380877}
   - {fileID: 639630852}
@@ -1041,7 +1041,7 @@ MonoBehaviour:
   - {fileID: 213829936}
   - {fileID: 30588954}
   - {fileID: 161463535}
-  cardsInMeleeZone:
+  cardsInZones:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1630,7 +1630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9fb032dc809562ea28d0e4e8695674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  siegeZones:
+  zones:
   - {fileID: 1122502740}
   - {fileID: 199861055}
   - {fileID: 794655917}
@@ -1638,7 +1638,7 @@ MonoBehaviour:
   - {fileID: 861881076}
   - {fileID: 168149667}
   - {fileID: 1957725362}
-  cardsInSiegeZones:
+  cardsInZones:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -4339,7 +4339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53661f0c62437677a6808e1007c7664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fromDistanceZones:
+  zones:
   - {fileID: 1535349284}
   - {fileID: 2080329592}
   - {fileID: 2081138170}
@@ -4347,7 +4347,7 @@ MonoBehaviour:
   - {fileID: 1479902897}
   - {fileID: 511913477}
   - {fileID: 1518307827}
-  cardsInFromDistanceZones:
+  cardsInZones:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -5962,11 +5962,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7cf50eb31a214b18b829eb9602d97d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weatherZones:
+  zones:
   - {fileID: 2011362653}
   - {fileID: 1621145216}
   - {fileID: 442606202}
-  cardsInWeatherZone:
+  cardsInZones:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -8068,7 +8068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9fb032dc809562ea28d0e4e8695674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  siegeZones:
+  zones:
   - {fileID: 989744157}
   - {fileID: 276966759}
   - {fileID: 1167762293}
@@ -8076,7 +8076,7 @@ MonoBehaviour:
   - {fileID: 1815666127}
   - {fileID: 1695943546}
   - {fileID: 104853623}
-  cardsInSiegeZones:
+  cardsInZones:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -8319,7 +8319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f44b5c38cad4001a9a0e6054008c738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleesZones:
+  zones:
   - {fileID: 34232238}
   - {fileID: 1816968570}
   - {fileID: 1820457323}
@@ -8327,7 +8327,7 @@ MonoBehaviour:
   - {fileID: 1213517698}
   - {fileID: 1227435141}
   - {fileID: 638102888}
-  cardsInMeleeZone:
+  cardsInZones:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -11588,11 +11588,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7cf50eb31a214b18b829eb9602d97d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weatherZones:
+  zones:
   - {fileID: 1471824882}
   - {fileID: 1136656421}
   - {fileID: 64151849}
-  cardsInWeatherZone:
+  cardsInZones:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -12357,7 +12357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53661f0c62437677a6808e1007c7664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fromDistanceZones:
+  zones:
   - {fileID: 355390222}
   - {fileID: 963390576}
   - {fileID: 1393506479}
@@ -12365,7 +12365,7 @@ MonoBehaviour:
   - {fileID: 1830301397}
   - {fileID: 1819336489}
   - {fileID: 2095143627}
-  cardsInFromDistanceZones:
+  cardsInZones:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

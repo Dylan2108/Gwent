@@ -1,21 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Gold : MonoBehaviour
+public class Gold : UnitCard
 {//Carta de Oro
-    public string name; //Nombre de la carta
-    public int originalAtk;//Ataque
-    public int atk;
-    public string atkType;//Tipo de ataque
-    public Player player;//El jugador que posee la carta
-    public bool invoked;//Para saber si la carta esta invocada
-    public bool destroyed;//Para saber si la carta fue destruida
-    public bool EffectActivated;//Para saber si el efecto de la carta fue activado
     public void Start()
     {
         player = transform.parent.GetComponent<Player>();//Toma como referencia al jugador que sea su padre
-        originalAtk = atk;
     }
     public void OnMouseDown()
     {
@@ -25,7 +15,7 @@ public class Gold : MonoBehaviour
           if(player.EffectLureIsActive) Debug.Log("Debe seleccionar una carta plata en el campo");
           else if(!invoked)
          {//Invoca la carta
-           player.SummonGoldCard(this);
+           player.SummonUnitCard(this);
            invoked = true;
            player.playedCards++;
            player.ChangedCards  = true;

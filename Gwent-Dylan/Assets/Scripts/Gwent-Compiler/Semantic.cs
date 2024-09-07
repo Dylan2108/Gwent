@@ -312,7 +312,7 @@ public class Semantic : MonoBehaviour
        }
        return false;
     }
-    public void CheckProgram(Expression ast)//Chequea el programa
+    public void CheckProgram(Node ast)//Chequea el programa
     {
         if(ast is ProgramExpression program)
         {
@@ -371,6 +371,6 @@ public class Semantic : MonoBehaviour
     }
     public void CheckEffectCall(EffectExpression effect)
     {
-        if(effectsName.ContainsKey(effect.Name.Name))Error.Report(ErrorType.SemanticError,$"El efecto {effecto.Name} ya esta definido")
+        if(effects.ContainsKey(effect.Name.Name))Error.Report(ErrorType.SemanticError,$"El efecto {effect.Name} ya esta definido");
     }
 }

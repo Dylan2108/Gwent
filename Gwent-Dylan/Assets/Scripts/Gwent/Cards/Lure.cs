@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lure : MonoBehaviour
+public class Lure : SpecialCard
 {
-    public string Name;//Nombre
-    public Player player;//El jugador que posee la carta
-    public bool invoked;//Para saber si la carta fue invocada
-    public bool destroyed;//Para saber si la carta fue destruida
     public void Start()
     {
        player = transform.parent.GetComponent<Player>();//Toma como referencia al jugador que la posee

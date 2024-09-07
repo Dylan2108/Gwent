@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weather : MonoBehaviour
+public class Weather : SpecialCard
 {
-   public string Name;//Nombre
-   public Player player;//El jugador que posee la carta
-   public bool invoked;//Para saber si la carta fue invocada
-   public bool destroyed;//Para saber si la carta fue destruida
    public List<Silver> affectedCards = new List<Silver>();//Lista que contiene las cartas a las cuales les fue modificado su ataque
    public void Start()
    {
@@ -25,8 +21,8 @@ public class Weather : MonoBehaviour
            invoked = true;
            player.playedCards++;
            player.ChangedCards = true;
-            if(this.Name == "Kirin")player.ShowMenuWeatherEffect(this,2);
-            else if(this.Name == "Jutsu Bola de Fuego")player.ShowMenuWeatherEffect(this,1);
+            if(this.name == "Kirin")player.ShowMenuWeatherEffect(this,2);
+            else if(this.name == "Jutsu Bola de Fuego")player.ShowMenuWeatherEffect(this,1);
          }
          else
          {
