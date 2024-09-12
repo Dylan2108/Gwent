@@ -119,12 +119,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6d0407faeba68f6a6bf9c05b88d217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: Silver
   name: Gaara
-  originalAtk: 0
-  atk: 4
-  atkType: Siege
+  faction: 
+  power: 4
+  range:
+  - 
+  - 
+  - 
+  owner: 0
   player: {fileID: 0}
-  LureCard: {fileID: 0}
   invoked: 0
   destroyed: 0
+  atkType: Siege
   EffectActivated: 0
+  LureCard: {fileID: 0}

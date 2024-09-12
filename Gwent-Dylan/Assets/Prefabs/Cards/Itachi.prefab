@@ -119,6 +119,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a688dbd13fd84f17aef135f91eb4b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: Gold
   name: Itachi Uchiha
-  atk: 8
+  faction: Ninja
+  power: 8
+  range:
+  - 
+  - 
+  - 
+  owner: 0
+  player: {fileID: 0}
+  invoked: 0
+  destroyed: 0
   atkType: Melee
+  EffectActivated: 0

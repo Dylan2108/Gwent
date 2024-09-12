@@ -119,4 +119,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc839c9c48ed68db69ec823745459df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Jutsu Bola de Fuego
+  Type: Weather
+  name: Jutsu Bola de Fuego
+  faction: Ninja
+  power: 0
+  range:
+  - 
+  - 
+  - 
+  owner: 0
+  player: {fileID: 0}
+  invoked: 0
+  destroyed: 0
+  affectedCards: []

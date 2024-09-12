@@ -4,15 +4,21 @@ using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
 using System.Text;
+using TMPro;
 
 public class Parser : MonoBehaviour
 {
-    private List<Token> Tokens;
+     private List<Token> Tokens;
     private int CurrentPosition;
+    public TMP_InputField errorText;
     public Parser(List<Token> tokens)
     {
         Tokens = tokens;
         CurrentPosition = 0;
+    }
+     public void ShowError(string error)
+    {
+       errorText.text = error;
     }
     public Node ParseProgram()//Parsea un programa
     {
@@ -33,7 +39,9 @@ public class Parser : MonoBehaviour
           }
           else
           {
-            Error.Report(ErrorType.SyntaxError,"Se esperaba la declaracion de una carta o un efecto");
+            string error = $"Error de Sintaxis. Se esperaba la declaracion de una carta o un efecto : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"Se esperaba la declaracion de una carta o un efecto : linea {Peek().Line}",ErrorType.SyntaxError);
           }
        }
        return program;
@@ -95,60 +103,86 @@ public class Parser : MonoBehaviour
             }
             else
             {
-                Error.Report(ErrorType.SyntaxError,"Se definio incorrectamente la carta");
+                string error = $"Error de Sintaxis. Se definio incorrectamente la carta : linea {Peek().Line}";
+                ShowError(error);
+                throw new Error($"Se definio incorrectamente la carta : linea {Peek().Line}",ErrorType.SyntaxError);
             }
         }
         if(elements[0] < 1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se definio correctamente la propiedad Type");
+            string error = $"Error de Sintaxis. No se definio correctamente la propiedad Type : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se definio correctamente la propiedad Type : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         else if(elements[0] > 1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se puede definir mas de un Type");
+            string error = $"Error de Sintaxis. No se puede definir mas de un Type : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se puede definir mas de un Type : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         if(elements[1] < 1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se definio correctamente la propiedad Name");
+            string error = $"Error de Sintaxis. No se definio correctamente la propiedad Name : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se definio correctamente la propiedad Name : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         else if(elements[1] > 1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se puede definir mas de un Type");
+            string error = $"Error de Sintaxis. No se puede definir mas de un Type : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se puede definir mas de un Type : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         if(elements[2]<1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se definio correctamente la propiedad Faction");
+            string error = $"Error de Sintaxis. No se definio correctamente la propiedad Faction : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se definio correctamente la propiedad Faction : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         else if(elements[2]>1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se puede definir mas de un Faction");
+            string error = $"Error de Sintaxis. No se puede definir mas de un Faction : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se puede definir mas de un Faction : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         if(elements[3]<1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se definio correctamente la propiedad Power");
+            string error = $"Error de Sintaxis. No se definio correctamente la propiedad Power : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se definio correctamente la propiedad Power : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         else if(elements[3]>1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se puede definir mas de un Power");
+            string error = $"Error de Sintaxis. No se puede definir mas de un Power : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se puede definir mas de un Power : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         if(elements[4]<1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se definio correctamente la propiedad Range");
+            string error = $"Error de Sintaxis. No se definio correctamente la propiedad Range : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se definio correctamente la propiedad Range : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         else if(elements[4]>1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se puede definir mas de un range");
+            string error = $"Error de Sintaxis. No se puede definir mas de un range : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se puede definir mas de un range : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         if(elements[5]<1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se definio correctamente la propiedad OnActivation");
+            string error = $"Error de Sintaxis. No se definio correctamente la propiedad OnActivation : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se definio correctamente la propiedad OnActivation : linea {Peek().Line}",ErrorType.SyntaxError);
         } 
         else if(elements[5]>1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se puede definir mas de un OnActivation");
+            string error = $"Error de Sintaxis. No se puede definir mas de un OnActivation : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se puede definir mas de un OnActivation : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         return card;
     }
-    private EffectExpression ParseEffect()//Parsea un efecto
+     private EffectExpression ParseEffect()//Parsea un efecto
     {
         EffectExpression effect = new EffectExpression();
         int[] elements = new int[3];
@@ -175,28 +209,40 @@ public class Parser : MonoBehaviour
             }
             else
             {
-                Error.Report(ErrorType.SyntaxError,"Se definio incorrectamente el efecto");
+                string error = $"Error de Sintaxis. Se definio incorrectamente el efecto : linea {Peek().Line}";
+                ShowError(error);
+                throw new Error($"Se definio incorrectamente el efecto : linea {Peek().Line}",ErrorType.SyntaxError);
             }
         }
         if(elements[0] < 1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se definio correctamente la propiedad Name");
+            string error = $"Error de Sintaxis. No se definio correctamente la propiedad Name : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se definio correctamente la propiedad Name : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         else if(elements[0] > 1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se puede definir mas de un Name");
+            string error = $"Error de Sintaxis. No se puede definir mas de un Name : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se puede definir mas de un Name : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         if(elements[1] > 1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se puede puede definir mas de un Params");
+            string error = $"Error de Sintaxis. No se puede puede definir mas de un Params : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se puede puede definir mas de un Params : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         if(elements[2] < 1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se definio correctamente la propiedad Action");
+            string error = $"Error de Sintaxis. No se definio correctamente la propiedad Action : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se definio correctamente la propiedad Action : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         else if(elements[2] > 1)
         {
-            Error.Report(ErrorType.SyntaxError,"No se puede definir mas de un Action");
+            string error = $"Error de Sintaxis. No se puede definir mas de un Action : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se puede definir mas de un Action : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         return effect;
     }
@@ -208,6 +254,7 @@ public class Parser : MonoBehaviour
        while(!Check(TokenType.RightBracket) && !IsAtEnd())
        {
           onActivation.OnActivation.Add(ParseOnActivationElements());
+          if(!Check(TokenType.RightBracket) && !IsAtEnd()) Consume(TokenType.Comma,"Se esperaba ','");
        }
        Consume(TokenType.RightBracket,"Se esperaba ']'");
        return onActivation;
@@ -231,10 +278,13 @@ public class Parser : MonoBehaviour
          }
          else
          {
-            Error.Report(ErrorType.SyntaxError,"Se esperaba la definicion de Params");
+            string error = $"Error de Sintaxis. Se esperaba la definicion de Params : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"Se esperaba la definicion de Params : linea {Peek().Line}",ErrorType.SyntaxError);
          }
        }
        Consume(TokenType.RightBrace,"Se espera '}'");
+       Consume(TokenType.Comma,"Se esperaba ','");
        return Params;
     }
     private OnActivationElementsExpression ParseOnActivationElements()//Parsea una expresion de OnActivationElements
@@ -259,7 +309,12 @@ public class Parser : MonoBehaviour
             {
                 Consume(TokenType.Colon,"Se esperaba ':'");
                 selector = ParseSelector();
-                if(selector.Source == null) Error.Report(ErrorType.SyntaxError,"Falto la definicion de Source");
+                if(selector.Source == null)
+                {
+                    string error = $"Error de Sintaxis. Falto la definicion de Source : linea {Peek().Line}";
+                    ShowError(error);
+                    throw new Error($"Falto la definicion de Source : linea {Peek().Line}",ErrorType.SyntaxError);
+                } 
             }
           }
           else if(Match(TokenType.PostAction))
@@ -270,7 +325,9 @@ public class Parser : MonoBehaviour
           }
           else
           {
-            Error.Report(ErrorType.SyntaxError,"Expresion de OnActivation invalida");
+            string error = $"Error de Sintaxis. Expresion de OnActivation invalida : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"Expresion de OnActivation invalida : linea {Peek().Line}",ErrorType.SyntaxError);
           }
        }
        Consume(TokenType.RightBrace,"Se esperaba '}'");
@@ -283,8 +340,8 @@ public class Parser : MonoBehaviour
         if(Check(TokenType.Strings))
         {
             value = Advance().Value;
-            Consume(TokenType.Comma,"Se esperaba ','");
-            while(!Check(TokenType.Selector))
+            if(!Check(TokenType.RightBrace))Consume(TokenType.Comma,"Se esperaba ','");
+            while(!Check(TokenType.Selector) && !Check(TokenType.RightBrace))
             {
                 if(Check(TokenType.Identifiers))
                 {
@@ -314,7 +371,9 @@ public class Parser : MonoBehaviour
                         }
                         else
                         {
-                            Error.Report(ErrorType.SyntaxError,"Ya habia sido definido un efecto");
+                            string error = $"Error de Sintaxis. Ya habia sido definido un efecto : linea {Peek().Line}";
+                            ShowError(error);
+                            throw new Error($"Ya habia sido definido un efecto : linea {Peek().Line}",ErrorType.SyntaxError);
                         }
                     }
                     else
@@ -326,7 +385,9 @@ public class Parser : MonoBehaviour
                         }
                         else
                         {
-                            Error.Report(ErrorType.SyntaxError,"Ya habia sido definido un efecto");
+                            string error = $"Error de Sintaxis. Ya habia sido definido un efecto : linea {Peek().Line}";
+                            ShowError(error);
+                            throw new Error($"Ya habia sido definido un efecto : linea {Peek().Line}",ErrorType.SyntaxError);
                         }
                     }
                 }
@@ -345,8 +406,9 @@ public class Parser : MonoBehaviour
         }
         if(value==null)
         {
-            Error.Report(ErrorType.SyntaxError,"No se definio un efecto");
-            return null;
+            string error = $"Error de Sintaxis. No se definio un efecto : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"No se definio un efecto : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         return new EffectCallExpression(value,assign);
     }
@@ -369,12 +431,16 @@ public class Parser : MonoBehaviour
                     }
                     else
                     {
-                        Error.Report(ErrorType.SyntaxError,"Se esperaba la definicion de un Source");
+                        string error = $"Error de Sintaxis. Se esperaba la definicion de un Source : linea {Peek().Line}";
+                        ShowError(error);
+                        throw new Error($"Se esperaba la definicion de un Source : linea {Peek().Line}",ErrorType.SyntaxError);
                     }
                 }
                 else
                 {
-                    Error.Report(ErrorType.SyntaxError,"No puede definir mas de un Source");
+                    string error = $"Error de Sintaxis. No puede definir mas de un Source : linea {Peek().Line}";
+                    ShowError(error);
+                    throw new Error($"No puede definir mas de un Source : linea {Peek().Line}",ErrorType.SyntaxError);
                 }
                 if(!Check(TokenType.RightBrace)) Consume(TokenType.Comma,"Se esperaba ','");
             }
@@ -387,7 +453,9 @@ public class Parser : MonoBehaviour
                 }
                 else
                 {
-                    Error.Report(ErrorType.SyntaxError,"No puede definir mas de un Single");
+                    string error = $"Error de Sintaxis. No puede definir mas de un Single : linea {Peek().Line}";
+                    ShowError(error);
+                    throw new Error($"No puede definir mas de un Single : linea {Peek().Line}",ErrorType.SyntaxError);
                 }
                 if(!Check(TokenType.RightBrace)) Consume(TokenType.Comma,"Se esperaba ','");
             }
@@ -400,20 +468,25 @@ public class Parser : MonoBehaviour
                 }
                 else
                 {
-                    Error.Report(ErrorType.SyntaxError,"No puede definir mas de un Predicate");
+                    string error = $"Error de Sintaxis. No puede definir mas de un Predicate : linea {Peek().Line}";
+                    ShowError(error);
+                    throw new Error($"No puede definir mas de un Predicate : linea {Peek().Line}",ErrorType.SyntaxError);
                 }
                 if(!Check(TokenType.RightBrace)) Consume(TokenType.Comma,"Se esperaba ','");
             }
             else
             {
-                Error.Report(ErrorType.SyntaxError,"Se esperaba la implementacion de los elementos de un Selector");
+                string error = $"Error de Sintaxis. Se esperaba la implementacion de los elementos de un Selector : linea {Peek().Line}";
+                ShowError(error);
+                throw new Error($"Se esperaba la implementacion de los elementos de un Selector : linea{Peek().Line}",ErrorType.SyntaxError);
             }
         }
         Consume(TokenType.RightBrace,"Se esperaba '}'");
         if(single==null! || predicate==null!)
         {
-            Error.Report(ErrorType.SyntaxError,"Se esperaba la implementacion de los elementos de un Selector");
-            return null;
+            string error = $"Error de Sintaxis. Se esperaba la implementacion de los elementos de un Selector : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"Se esperaba la implementacion de los elementos de un Selector : linea {Peek().Line}",ErrorType.SyntaxError);
         }
         return new SelectorExpression(source,single,predicate);
     }
@@ -453,14 +526,17 @@ public class Parser : MonoBehaviour
          }
          else
          {
-            Error.Report(ErrorType.SyntaxError,"Se esperaba la implementacion del los elementos de una expresion PostAction");
+            string error = $"Error de Sintaxis. Se esperaba la implementacion del los elementos de una expresion PostAction : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"Se esperaba la implementacion del los elementos de una expresion PostAction : linea {Peek().Line}",ErrorType.SyntaxError);
          }
        }
        Consume(TokenType.RightBrace,"Se esperaba '}'");
        if(type == null || selector == null)
        {
-          Error.Report(ErrorType.SyntaxError,"No se definio un type o un selector");
-          return null;
+          string error = $"Error de Sintaxis. No se definio un type o un selector : linea {Peek().Line}";
+          ShowError(error);
+          throw new Error($"No se definio un type o un selector : linea {Peek().Line}",ErrorType.SyntaxError);
        }
        return new PostActionExpression(type,selector);
     }
@@ -479,7 +555,7 @@ public class Parser : MonoBehaviour
        VariableExpression targets = ParseVariable();
        Consume(TokenType.Comma,"Se esperaba ','");
        VariableExpression context = ParseVariable();
-       Consume(TokenType.RightParenthesis,"Se esperaba '('");
+       Consume(TokenType.RightParenthesis,"Se esperaba ')'");
        Consume(TokenType.Lambda,"Se esperaba '=>'");
        Consume(TokenType.LeftBrace,"Se esperaba '{'");
        StatementBlockExpression body = ParseStatementBlock();
@@ -512,20 +588,15 @@ public class Parser : MonoBehaviour
         {
             return ParseWhile();
         }
-        else if(Match(TokenType.Identifiers))
+        else if(Check(TokenType.Identifiers))
         {
             VariableExpression variable = ParseVariable();
-            if(variable.GetType() == typeof(VariableCompoundExpression) && Check(TokenType.SemiColon))
+            if(variable is VariableCompoundExpression && Check(TokenType.SemiColon))
             {
                 VariableCompoundExpression variableCompound = variable as VariableCompoundExpression;
                 if(variableCompound.Argument.Params[variableCompound.Argument.Params.Count-1].GetType() == typeof(FunctionExpression))
                 {
                     FunctionExpression function = variableCompound.Argument.Params[variableCompound.Argument.Params.Count-1] as FunctionExpression;
-                    if(function.Type != VariableExpression.Type.VOID)
-                    {
-                        Error.Report(ErrorType.SyntaxError,"");
-                        return null;
-                    }
                 }
                 Consume(TokenType.SemiColon,"Se esperaba ';'");
                 return variable as VariableCompoundExpression;
@@ -535,17 +606,18 @@ public class Parser : MonoBehaviour
                 return ParseAssign(variable);
             }
         }
-        else if(Match(TokenType.Function))
+        else if(Check(TokenType.Function))
         {
             return ParseFunction(Previous().Value);
         }
         else
         {
-            Error.Report(ErrorType.SyntaxError,"");
-            return null;
+            string error = $"Error de Sintaxis. La instruccion declarada no es correcta : linea {Peek().Line}";
+            ShowError(error);
+            throw new Error($"La instruccion declarada no es correcta : linea {Peek().Line}",ErrorType.SyntaxError);
         }
-
     }
+    
     private StatementExpression ParseWhile()//Parsea ciclos while
     {
         Consume(TokenType.LeftParenthesis,"Se esperaba '('");
@@ -575,9 +647,11 @@ public class Parser : MonoBehaviour
             {
                 Params.Params.Add(ParseVariable());
             }
-            else if (Check(TokenType.Function))
+            else if(Match(TokenType.Lambda))
             {
-                Params.Params.Add(ParseFunction(Advance().Value));
+                PredicateExpression predicate = new PredicateExpression(Params.Params[Params.Params.Count-1] as VariableExpression,Expression());
+                Params.Params.RemoveAt(Params.Params.Count-1);
+                Params.Params.Add(predicate);
             }
             else
             {
@@ -632,7 +706,18 @@ public class Parser : MonoBehaviour
                 else if(Match(TokenType.Pointer))
                 {
                     PointerExpression pointer = new PointerExpression(Previous().Value);
-                    variableCompound.Argument.Params.Add(pointer); 
+                    variableCompound.Argument.Params.Add(pointer);
+                    if(Match(TokenType.LeftBracket))
+                    {
+                        IndexExpression index = new IndexExpression(Convert.ToInt32(Advance().Value));
+                        Consume(TokenType.RightBracket,"Se esperaba ']' ");
+                        variableCompound.Argument.Params.Add(index);
+                    } 
+                }
+                else if(Match(TokenType.Owner))
+                {
+                    OwnerExpression owner = new OwnerExpression(Previous().Value as string);
+                    variableCompound.Argument.Params.Add(owner);
                 }
             }
          }
@@ -642,84 +727,64 @@ public class Parser : MonoBehaviour
     }
     private Expression Expression()//Parsea una expresion
     {
-        return Logical();
-    }
-    private Expression Logical()//Parsea una espresion logica(&&,||)
-    {
-       Expression expression = Equality();
-       while(Match(TokenType.And,TokenType.Or))
-       {
-         Token Operator = Previous();
-         Expression right = Equality();
-         expression = new BinaryExpression(expression, Operator, right);
-       }
-       return expression;
+        var equal = Equality();
+        return equal;
     }
     private Expression Equality()//Parsea una expresion de igualda(==,!=)
     {
         Expression expression = Comparison();
-        while(Match(TokenType.Equal,TokenType.NotEqual))
+        while(Match(TokenType.EqualEqual,TokenType.NotEqual))
         {
             Token Operator = Previous();
             Expression right = Comparison();
-            expression = new BinaryExpression(expression,Operator,right); 
+            expression = new BinaryBooleanExpression(expression,Operator,right); 
         }
         return expression;
     }
     private Expression Comparison()//Parsea una expresion de Comparacion(>=,>,<,<=)
     {
-        Expression expression = Concatenation();
+        Expression expression = Term();
         while(Match(TokenType.GreatEqualThan,TokenType.GreaterThan,TokenType.LessThan,TokenType.LessEqualThan))
         {
             Token Operator = Previous();
-            Expression right = Concatenation();
-            expression = new BinaryExpression(expression,Operator,right);  
-        }
-        return expression;
-    }
-    private Expression Concatenation()//Parsea una expresion de concatenacion
-    {
-        Expression expression = Term();
-        while(Match(TokenType.Concatenation,TokenType.SpaceConcatenation))
-        {
-            Token Operator = Previous();
-            Expression right = Concatenation();
-            expression = new BinaryExpression(expression,Operator,right);
+            Expression right = Term();
+            expression = new BinaryBooleanExpression(expression,Operator,right);  
         }
         return expression;
     }
     private Expression Term()//Parsea una expression de un termino(+,-)
     {
          Expression expression = Factor();
-         while(Match(TokenType.Plus,TokenType.Less))
+         if(Check(TokenType.Plus) || Check(TokenType.Less))
          {
+            while(Match(TokenType.Plus,TokenType.Less))
+          {
             Token Operator = Previous();
             Expression right = Factor();
-            expression = new BinaryExpression(expression,Operator,right);
+            expression = new BinaryIntExpression(expression,Operator,right);
+          }
+         }
+         else if(Check(TokenType.Concatenation) || Check(TokenType.SpaceConcatenation))
+         {
+            while(Match(TokenType.Concatenation,TokenType.SpaceConcatenation))
+            {
+                Token Operator = Previous();
+                Expression right = Factor();
+                expression = new BinaryStringExpression(expression,Operator,right);
+            }
          }
          return expression;
     }
     private Expression Factor()//Parsea una expresion de un factor(*,/,%)
     {
-       Expression expression = Pow();
+       Expression expression = Unary();
        while(Match(TokenType.Divide,TokenType.Multiply,TokenType.Modulus))
        {
            Token Operator = Previous();
-           Expression right = Pow();
-           expression = new BinaryExpression(expression,Operator,right);
+           Expression right = Unary();
+           expression = new BinaryIntExpression(expression,Operator,right);
        }
        return expression;
-    }
-    private Expression Pow()//Parsea una expresion de potencia
-    {
-        Expression expression = Unary();
-        if(Match(TokenType.Pow))
-        {
-            Token Operator = Previous();
-            Expression right = Unary();
-            return new BinaryExpression(expression,Operator,right); 
-        }
-        return expression;
     }
     private Expression Unary()//Parsea una expresion Unaria(!,-)
     {
@@ -745,13 +810,17 @@ public class Parser : MonoBehaviour
         if(Match(TokenType.Strings)) return new StringExpression(Previous().Value);
         if(Match(TokenType.LeftParenthesis))
         {
-            Expression expression = Expression();
+            Expression expression = Equality();
             Consume(TokenType.RightParenthesis,"Se esperaba ')' despues de la expresion");
             return new GroupingExpresion(expression);
         }
-        if(Check(TokenType.Identifiers)) return ParseVariable();
-        Error.Report(ErrorType.SyntaxError,"Expresion inesperada");
-        return null;
+        if(Check(TokenType.Identifiers))
+        {
+            return ParseVariable();
+        } 
+        string error = $"Error de Sintaxis. Expresion inesperada : linea {Peek().Line}";
+        ShowError(error);
+        throw new Error($"Expresion inesperada : linea {Peek().Line}",ErrorType.SyntaxError);
     }
     private bool Match(params TokenType[] types)
     {
@@ -778,24 +847,25 @@ public class Parser : MonoBehaviour
     private bool IsAtEnd()
     {
         return Peek().Type == TokenType.EOF;
-    }
-    private Token Advance()
-    {
-       if(!IsAtEnd()) CurrentPosition++;
-       return Previous();   
-    }
-    private Token Peek()
-    {
-        return Tokens[CurrentPosition];
-    }
+    } 
     private Token Previous()
     {
         return Tokens[CurrentPosition - 1];
     }
-    private Token Consume(TokenType type,string message)
+      private Token Advance()
+    {
+       if(!IsAtEnd()) CurrentPosition++;
+       return Previous();   
+    }
+     private Token Consume(TokenType type,string message)
     {
        if(Check(type)) return Advance();
-       Error.Report(ErrorType.SyntaxError,message);
-       return null;
+       string error = $"Error de Sintaxis. {message} : linea {Peek().Line}";
+       ShowError(error);
+       throw new Error($"{message} : linea {Peek().Line}",ErrorType.SyntaxError);
+    }
+     private Token Peek()
+    {
+        return Tokens[CurrentPosition];
     }
 }

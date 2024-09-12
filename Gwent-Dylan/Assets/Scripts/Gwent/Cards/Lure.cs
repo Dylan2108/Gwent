@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Lure : SpecialCard
 {
+  public Scope scope;
     public void Start()
     {
        player = transform.parent.GetComponent<Player>();//Toma como referencia al jugador que la posee
@@ -21,6 +22,15 @@ public class Lure : SpecialCard
            player.EffectLureIsActive = true;
            invoked = true;
            player.ChangedCards = true;
+         }
+         else if(!invoked && this.name != "Jutsu de Sustitucion")
+         {
+            invoked = true;
+            GameObject Context = GameObject.Find("Context");
+            Scope ScopeComponent = Context.GetComponent<Scope>();
+            scope = ScopeComponent;
+            Evaluator evaluator = new Evaluator(this.scope,this);
+            evaluator.EvaluateEffect();
          }
          else
          {

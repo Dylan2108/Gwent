@@ -119,4 +119,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c854b465b9c2285d5a9ee87847c86333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Bijudama
+  Type: Clear
+  name: Bijudama
+  faction: Ninja
+  power: 0
+  range:
+  - 
+  - 
+  - 
+  owner: 0
+  player: {fileID: 0}
+  invoked: 0
+  destroyed: 0

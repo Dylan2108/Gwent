@@ -1,20 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Scope : MonoBehaviour
 {
    public Dictionary<string,Card> Cards = new Dictionary<string, Card>();
    public Dictionary<string,EffectExpression> Effects = new Dictionary<string, EffectExpression>();
    public Dictionary<string,object> Values = new Dictionary<string, object>();
    public GameManager Context;
+   public TMP_InputField errorText;
+   public void ShowError(string error)
+   {
+      errorText.text = error;
+   }
    public void PushCard(string value,Card card)
    {
        Cards[value] = card;
    }
    public void PushEffect(string value,EffectExpression effect)
    {
-      if(Effects.ContainsKey(value)) Error.Report(ErrorType.SemanticError,$"Ya el efecto {value} fue definido");
+      if(Effects.ContainsKey(value))
+      {
+         string error = $"Error Semantico. Ya el efecto {value} fue definido";
+         ShowError(error);
+         throw new Error("Ya el efecto {value} fue definido",ErrorType.SemanticError);
+      } 
       else Effects[value] = effect;
    }
    public EffectExpression GetEffect(string value)
@@ -22,8 +32,9 @@ public class Scope : MonoBehaviour
       if(Effects.ContainsKey(value)) return Effects[value];
       else
       {
-        Error.Report(ErrorType.SemanticError,$"El efecto {value} no ha sido definido");
-        return null;
+        string error = $"Error Semantico. El efecto {value} no ha sido definido";
+        ShowError(error);
+        throw new Error($"El efecto {value} no ha sido definido",ErrorType.SemanticError);
       }
    }
    public Card GetCard(string name)

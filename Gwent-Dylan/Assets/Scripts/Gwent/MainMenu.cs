@@ -17,8 +17,4 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Main Menu");
     }
-    public void CreateCards()
-    {
-        SceneManager.LoadScene("Creation of Cards");
-    }
 }

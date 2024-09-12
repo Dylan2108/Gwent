@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
-   public  List<Card> deck = new List<Card>();
+   public  List<GameObject> deck = new List<GameObject>();
    public Player player;
    public List<bool> emptyZones = new List<bool>();//Las zonas de la mano donde se pueden robar cartas
    public void InvokeLeaderCard(GameObject PrefabLeaderCard,GameObject LeaderZone)
@@ -17,13 +17,13 @@ public class Deck : MonoBehaviour
       if(deck.Count>0)
       {
         int randomIndex = Random.Range(0,deck.Count);//Elije una carta al azar(Barajea)
-        Card prefabCard = deck[randomIndex];
+        GameObject prefabCard = deck[0];
         deck.RemoveAt(randomIndex);
         for(int i = 0;i<emptyZones.Count;i++)
         {
           if(!emptyZones[i])//Verifica si en esa zona puede robarse una carta
           {
-            Card instantiatedCard = Instantiate(prefabCard,player.handZones[i].transform.position,Quaternion.identity);
+            GameObject instantiatedCard = Instantiate(prefabCard,player.handZones[i].transform.position,Quaternion.identity);
             instantiatedCard.transform.SetParent(player.transform);//Establece a la mano como padre de la carta
             player.cardsInHand.Insert(i,instantiatedCard);//Actualiza la lista para saber que cartas tenemos en la mano actualmente
             emptyZones[i] = true;//ACtualiza la mano para saber que esa zona esta ocupada
@@ -31,7 +31,7 @@ public class Deck : MonoBehaviour
           }
           else if(i==9)
           {
-             Card instantiatedCard = Instantiate(prefabCard,player.graveyard.transform.position,Quaternion.identity);
+             GameObject instantiatedCard = Instantiate(prefabCard,player.graveyard.transform.position,Quaternion.identity);
              instantiatedCard.transform.SetParent(player.transform);
              player.graveyard.cardsInGraveyard.Add(instantiatedCard);
           }
@@ -60,8 +60,8 @@ public class Deck : MonoBehaviour
     {
        int randomIndex_1 = Random.Range(0,5);//Selecciona dos cartas  al azar de la mano
        int randomIndex_2 = Random.Range(6,player.cardsInHand.Count - 1);
-       Card card1 = player.cardsInHand[randomIndex_1];
-       Card card2 = player.cardsInHand[randomIndex_2];
+       GameObject card1 = player.cardsInHand[randomIndex_1];
+       GameObject card2 = player.cardsInHand[randomIndex_2];
        player.cardsInHand.RemoveAt(randomIndex_1);
        emptyZones[randomIndex_1] = false;
        player.cardsInHand.RemoveAt(randomIndex_2);

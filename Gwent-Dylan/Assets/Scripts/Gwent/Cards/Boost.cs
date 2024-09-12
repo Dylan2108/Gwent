@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Boost : SpecialCard
 {
+    public Scope scope;
     public void Start()
     {
       player = transform.parent.GetComponent<Player>();//Toma como refrencia al jugador que sea su padre
@@ -33,7 +34,15 @@ public class Boost : SpecialCard
          }
          else
          {
-            Debug.Log("Ya esta carta esta invocada");
+            player.ShowMenuSummonBoost(this,0);
+            invoked = true;
+            player.playedCards++;
+            player.ChangedCards = true;
+            GameObject Context = GameObject.Find("Context");
+            Scope ScopeComponent = Context.GetComponent<Scope>();
+            scope = ScopeComponent;
+            Evaluator evaluator = new Evaluator(this.scope,this);
+            evaluator.EvaluateEffect();
          }
         }
         else if(!player.isMyTurn)Debug.Log("No es tu turno");

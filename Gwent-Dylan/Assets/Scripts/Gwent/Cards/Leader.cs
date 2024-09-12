@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Leader : MonoBehaviour
+public class Leader : SpecialCard
 {
-   public string Name;//Nombre
+   public Scope scope;
    public Deck deck;//Deck al cual pertenece la carta
    public bool EffectActivated;//Para saber si el efecto de la carta fue activado
    void Start()
@@ -20,6 +20,14 @@ public class Leader : MonoBehaviour
             deck.DrawCard();
             EffectActivated = true;
             deck.IncrementPlayedCards();
+      }
+      else if(!EffectActivated && this.name != "Naruto Uzumaki")
+      {
+         GameObject Context = GameObject.Find("Context");
+         Scope ScopeComponent = Context.GetComponent<Scope>();
+         scope = ScopeComponent;
+         Evaluator evaluator = new Evaluator(this.scope,this);
+         evaluator.EvaluateEffect();
       }
       else
       {

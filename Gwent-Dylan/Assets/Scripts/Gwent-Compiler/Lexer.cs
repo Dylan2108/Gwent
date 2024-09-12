@@ -1,24 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Lexer : MonoBehaviour
 {
    private string input; //El texto a analizar
-   private List<Token> tokens;
+   private List<Token> tokens;//La lista de Tokens en que es convertido el texto de entrada
    private int Start;
    private int Current;
    private int Line;
-   private readonly Dictionary<string,TokenType> Keywords = new Dictionary<string, TokenType>{{"card",TokenType.card},{"effect",TokenType.effect},
-   {"Name",TokenType.Name},{"Params",TokenType.Params},{"Action",TokenType.Action},{"while",TokenType.While},{"for",TokenType.For},{"in",TokenType.In},
-   {"TriggerPlayer",TokenType.TriggerPlayer},{"HandOfPlayer",TokenType.HandOfPlayer},{"FieldOfPlayer",TokenType.FieldOfPlayer},
-   {"GraveyardOfPlayer",TokenType.GraveyardOfPlayer},{"DeckOfPlayer",TokenType.DeckOfPlayer},{"Hand",TokenType.Hand},{"Field",TokenType.Field},
-   {"Graveyard",TokenType.Graveyard},{"Deck",TokenType.Deck},{"Board",TokenType.Board},{"Push",TokenType.Push},{"SendBottom",TokenType.SendBottom},
-   {"Pop",TokenType.Pop},{"Remove",TokenType.Remove},{"Shuffle",TokenType.Shuffle},{"Find",TokenType.Find},{"Type",TokenType.Type},{"Faction",TokenType.Faction},
-   {"Power",TokenType.Power},{"Range",TokenType.Range},{"Owner",TokenType.Owner},{"OnActivation",TokenType.OnActivation},{"Effect",TokenType.Effect},
-   {"Selector",TokenType.Selector},{"Source",TokenType.Source},{"Single",TokenType.Single},{"Predicate",TokenType.Predicate},
-   {"PostAction",TokenType.PostAction},{"Number",TokenType.Numbers},{"String",TokenType.Strings},{"Bool",TokenType.Booleans},{"true",TokenType.True},
-   {"false",TokenType.False}};
+   public TMP_InputField errorText;//El texto para los errores
+   private readonly Dictionary<string,Token> Keywords = new Dictionary<string, Token>();//Diccionario que contiene las palabras claves
    public Lexer(string input)
    {
     this.input = input;
@@ -26,6 +19,51 @@ public class Lexer : MonoBehaviour
     Start = 0;
     Current = 0;
     Line = 1;
+    Keywords["card"] = new Token("card",TokenType.card,"card",0);
+    Keywords["effect"] = new Token("effect",TokenType.effect,"effect",0);
+    Keywords["Name"] = new Token("Name",TokenType.Name,"Name",0);
+    Keywords["Params"] = new Token("Params",TokenType.Params,"Params",0);
+    Keywords["Action"] = new Token("Action",TokenType.Action,"Action",0);
+    Keywords["while"] = new Token("while",TokenType.While,"while",0);
+    Keywords["for"] = new Token("for",TokenType.For,"for",0);
+    Keywords["in"] = new Token("in",TokenType.In,"in",0);
+    Keywords["TriggerPlayer"] = new Token("TriggerPlayer",TokenType.Function,"TriggerPlayer",0);
+    Keywords["HandOfPlayer"] = new Token("HandOfPlayer",TokenType.Function,"HandOfPlayer",0);
+    Keywords["FieldOfPlayer"] = new Token("FieldOfPlayer",TokenType.Function,"FieldOfPlayer",0);
+    Keywords["GraveyardOfPlayer"] = new Token("GraveyardOfPlayer",TokenType.Function,"GraveyardOfPlayer",0);
+    Keywords["DeckOfPlayer"] = new Token("DeckOfPlayer",TokenType.Function,"DeckOfPlayer",0);
+    Keywords["Hand"] = new Token("Hand",TokenType.Pointer,"Hand",0);
+    Keywords["Field"] = new Token("Field",TokenType.Pointer,"Field",0);
+    Keywords["Graveyard"] = new Token("Graveyard",TokenType.Pointer,"Graveyard",0);
+    Keywords["Deck"] = new Token("Deck",TokenType.Pointer,"Deck",0);
+    Keywords["Board"] = new Token("Board",TokenType.Pointer,"Board",0);
+    Keywords["Push"] = new Token("Push",TokenType.Function,"Push",0);
+    Keywords["SendBottom"] = new Token("SendBottom",TokenType.Function,"SendBottom",0);
+    Keywords["Pop"] = new Token("Pop",TokenType.Function,"Pop",0);
+    Keywords["Remove"] = new Token("Remove",TokenType.Function,"Remove",0);
+    Keywords["Shuffle"] = new Token("Shuffle",TokenType.Function,"Shuffle",0);
+    Keywords["Find"] = new Token("Find",TokenType.Function,"Find",0);
+    Keywords["Type"] = new Token("Type",TokenType.Type,"Type",0);
+    Keywords["Faction"] = new Token("Faction",TokenType.Faction,"Faction",0);
+    Keywords["Power"] = new Token("Power",TokenType.Power,"Power",0);
+    Keywords["Range"] = new Token("Range",TokenType.Range,"Range",0);
+    Keywords["Owner"] = new Token("Owner",TokenType.Owner,"Owner",0);
+    Keywords["OnActivation"] = new Token("OnActivation",TokenType.OnActivation,"OnActivation",0);
+    Keywords["Effect"] = new Token("Effect",TokenType.Effect,"Effect",0);
+    Keywords["Selector"] = new Token("Selector",TokenType.Selector,"Selector",0);
+    Keywords["Source"] = new Token("Source",TokenType.Source,"Source",0);
+    Keywords["Single"] = new Token("Single",TokenType.Single,"Single",0);
+    Keywords["Predicate"] = new Token("Predicate",TokenType.Predicate,"Predicate",0);
+    Keywords["PostAction"] = new Token("PostAction",TokenType.PostAction,"PostAction",0);
+    Keywords["Number"] = new Token("Number",TokenType.Numbers,"Number",0);
+    Keywords["String"] = new Token("String",TokenType.Strings,"String",0);
+    Keywords["Bool"] = new Token("Bool",TokenType.Booleans,"Bool",0);
+    Keywords["true"] = new Token("true",TokenType.True,"true",0);
+    Keywords["false"] = new Token("false",TokenType.False,"false",0);
+   }
+   public void ShowError(string error)//Muestra el error en pantalla
+   {
+       errorText.text = error;
    }
    public List<Token> GetTokens()
    {//Escanea el texto de entrada y genera la lista de tokens
@@ -77,11 +115,21 @@ public class Lexer : MonoBehaviour
         case '@' : AddToken(Match('=')? TokenType.ConcatenationEqual : Match('@')? TokenType.SpaceConcatenation : TokenType.Concatenation); break;
         case '&':
            if(Match('&')) AddToken(TokenType.And);
-           else Error.Report(ErrorType.LexicalError,"Caracter inesperado");
+           else
+           {
+              string error = $"Error Lexico. Caracter inesperado : linea {Line}";
+              ShowError(error);
+              throw new Error($"Caracter inesperado : linea {Line}",ErrorType.LexicalError);
+           }
            break;
         case '|':
            if(Match('|')) AddToken(TokenType.Or);
-           else Error.Report(ErrorType.LexicalError,"Caracter inesperado");
+           else
+           {
+               string error = $"Error Lexico. Caracter inesperado : linea {Line}";
+               ShowError(error);
+               throw new Error($"Caracter inesperado: linea {Line}",ErrorType.LexicalError);
+           }
            break;
         case '/':
            if(Match('/'))
@@ -101,17 +149,19 @@ public class Lexer : MonoBehaviour
         case '\n': Line++; break;
         case '"' : String(); break;
         default:
-        if(char.IsDigit(c))
+        if(IsDigit(c))
         {
             Number();
         }
-        else if(char.IsLetter(c) || c == '_')
+        else if(IsAlpha(c) || c == '_')
         {
             Identifier();
         }
         else
         {
-            Error.Report(ErrorType.LexicalError,$"El caracter {c} es incorrecto");
+            string error = $"Error Lexico. El caracter {c} es incorrecto : linea {Line}";
+            ShowError(error);
+            throw new Error($"El caracter {c} es incorrecto : linea {Line}",ErrorType.LexicalError);
         }
         break;
      }
@@ -133,6 +183,23 @@ public class Lexer : MonoBehaviour
       if(IsAtEnd()) return '\0'; //Si ya llego al final devuelve el valor predeterminado de char
       return input[Current];
    }
+   private char PeekNext()
+   {
+      if(Current + 1 >= input.Length) return '\0';
+      return input[Current + 1];
+   }   
+   private bool IsDigit(char c)
+   {
+      return c>= '0' && c <= '9';
+   }
+   private bool IsAlpha(char c)
+   {
+      return (c>= 'a' && c<= 'z') || (c>='A' && c<='Z') || c=='_';
+   }
+   private bool IsAlphaNumeric(char c)
+   {
+      return IsDigit(c) || IsAlpha(c);
+   }
    private void String()
    {//Permite obtener el valor de un string y agregarlo a la lista de tokens
       while(Peek() !='"' && !IsAtEnd())
@@ -140,38 +207,39 @@ public class Lexer : MonoBehaviour
         if(Peek() == '\n') Line++;
         Advance();
       }
-      if(IsAtEnd()) Error.Report(ErrorType.LexicalError,"Error ,cadena sin terminar");
+      if(IsAtEnd())
+      {
+         string error = $"Error Lexico. Cadena sin terminar : linea {Line} ";
+         ShowError(error);
+         throw new Error($"Cadena sin terminar : linea{Line}",ErrorType.LexicalError);
+      }
       Advance();
       string value = input.Substring(Start + 1,Current-(Start + 1));
       AddToken(TokenType.Strings,value);
    }
    private void Number()
    {//Obtiene el valor del numero que se esta analizando
-      int dotCounter = 0;
-      bool isValidNumber = true;
-      while(char.IsLetterOrDigit(Peek()) || Peek() == '.')
+      while(IsDigit(Peek())) Advance();
+      if(Peek() == '.' && IsDigit(PeekNext()))
       {
-        if(Peek() == '.') dotCounter++;
-        if(char.IsLetter(Peek())) isValidNumber = false;
-        Advance();
+         Advance();
+         while(IsDigit(Peek())) Advance();
       }
-      if(dotCounter == 1 && (IsAtEnd() || Peek() == '.')) isValidNumber = false;
-      if(dotCounter > 1 || !isValidNumber) Error.Report(ErrorType.LexicalError,$"Token invalido en '{input.Substring(Start,Current-Start)}'");
-      else AddToken(TokenType.Numbers,double.Parse(input.Substring(Start,Current - Start)));
+      AddToken(TokenType.Numbers,double.Parse(input.Substring(Start,Current - Start)));
    }
    private void Identifier()
    {//Determina si una palabra es una palabra clave o un identificador
-     TokenType tokenType;
-     while(char.IsLetterOrDigit(Peek()) || Peek() == '_') Advance();
+     while(IsAlphaNumeric(Peek())) Advance();
      string text = input.Substring(Start,Current - Start);
+     TokenType tokenType = TokenType.Identifiers;
      if(Keywords.ContainsKey(text))
      {
-        tokenType = Keywords[text];
+        Token token = Keywords[text];
+        tokens.Add(new Token(token.Value,token.Type,token.Literal,Line));
      }
      else
      {
-        tokenType = TokenType.Identifiers;
+        AddToken(tokenType);
      }
-     AddToken(tokenType);
    }
 }

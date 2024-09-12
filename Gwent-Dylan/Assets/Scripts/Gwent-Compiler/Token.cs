@@ -10,17 +10,15 @@ public enum TokenType
       Not,NotEqual,Plus,PlusEqual,PlusPlus,Less,LessEqual,LessLess,Multiply,MultiplyEqual,Divide,DivideEqual,Equal,EqualEqual,Lambda,GreaterThan,
       GreatEqualThan,LessThan,LessEqualThan,Concatenation,SpaceConcatenation,ConcatenationEqual,And,Or,
       //Tipos de Literales
-      Identifiers,StringsLiterals,NumbersLiterals,True,False,
+      Identifiers,True,False,
       //Principales palabras reservadas
       card,effect,
       //Palabras reservadas para los efectos
       Name,Params,Action,
       //Palabras reservadas para ciclos
       While,For,In,
-      //Propiedades del contexto
-      TriggerPlayer,Board,HandOfPlayer,FieldOfPlayer,GraveyardOfPlayer,DeckOfPlayer,Hand,Field,Graveyard,Deck,Function,
       //Funciones
-      Find,Push,SendBottom,Pop,Remove,Shuffle,
+      Function,
       //Cartas
       Type,Faction,Power,Range,Owner,OnActivation,Pointer,
       //On Activation

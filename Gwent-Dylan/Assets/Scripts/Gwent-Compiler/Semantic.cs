@@ -14,12 +14,18 @@ public class Semantic : MonoBehaviour
     private Dictionary<string,EffectExpression> effectsName = new Dictionary<string, EffectExpression>();//Los nombres de los efectos
     private Dictionary<string,CardExpression> cardsName = new Dictionary<string, CardExpression>();//Los nombres de las cartas
     private  EffectExpression currentEffect;//El efecto actual que se esta chequeando
+    public TMP_InputField errorText;
+    public void ShowError(string error)
+    {
+       errorText.text = error;
+    }
     public VariableExpression GetVariable(string name)//Verifica si ya una variable ya fue definida
     {
         if(!variables.TryGetValue(name,out var variable))
         {
-            Error.Report(ErrorType.SemanticError,$"La variable {name} no esta definida");
-            return null;
+            string error = $"Error Semantico. La variable {name} no esta definida";
+            ShowError(error);
+            throw new Error($"La variable {name} no esta definida",ErrorType.SemanticError);
         }
         return variable;
     }
@@ -27,8 +33,9 @@ public class Semantic : MonoBehaviour
     {
         if(effects.ContainsKey(effect.Name.Name))
         {
-            Error.Report(ErrorType.SemanticError,$"Ya el efecto {effect.Name} fue definido");
-            return;
+            string error = $"Error Semantico. Ya el efecto {effect.Name} fue definido";
+            ShowError(error);
+            throw new Error($"Ya el efecto {effect.Name} fue definido",ErrorType.SemanticError);
         }
         effects[effect.Name.Name] = effect;
     }
@@ -36,8 +43,9 @@ public class Semantic : MonoBehaviour
     {
        if(!effects.TryGetValue(name, out var effect))
        {
-          Error.Report(ErrorType.SemanticError,$"El efecto {effect.Name} no esta definido");
-          return null;
+          string error = $"Error Semantico. El efecto {effect.Name} no esta definido";
+          ShowError(error);
+          throw new Error($"El efecto {effect.Name} no esta definido",ErrorType.SemanticError);
        }
        return effect;
     }
@@ -107,12 +115,16 @@ public class Semantic : MonoBehaviour
                   {
                     if(!IsVariableDeclaredInParams(variableValue.Name))
                     {
-                        Error.Report(ErrorType.SemanticError,$"La variable {variableValue.Name} no esta definida en los parametros del efecto");
+                        string Errors = $"Error Semantico. La variable {variableValue.Name} no esta definida en los parametros del efecto";
+                        ShowError(Errors);
+                        throw new Error($"La variable {variableValue.Name} no esta definida en los parametros del efecto",ErrorType.SemanticError);
                     }
                   }
                   else if(!(assign.Value is NumberExpression))
                   {
-                     Error.Report(ErrorType.SemanticError,$"La propiedad Power debe contener un valor de tipo Number");
+                     string errorss = $"Error Semantico. La propiedad Power debe contener un valor de tipo Number";
+                     ShowError(errorss);
+                     throw new Error($"La propiedad Power debe contener un valor de tipo Number",ErrorType.SemanticError);
                   }
                   break;
                   case "type":
@@ -122,17 +134,22 @@ public class Semantic : MonoBehaviour
                   {
                     if(!IsVariableDeclaredInParams(variableVal.Name))
                     {
-                        Error.Report(ErrorType.SemanticError,$"La variable {variableVal.Name} no esta definida en los parametros");
+                        string errors = $"Error Semantico. La variable {variableVal.Name} no esta definida en los parametros";
+                        ShowError(errors);
+                        throw new Error($"La variable {variableVal.Name} no esta definida en los parametros",ErrorType.SemanticError);
                     }
                   }
                   else if(!(assign.Value is StringExpression))
                   {
-                    Error.Report(ErrorType.SemanticError,$"La propiedad Name debe contener un valor de tipo String");
+                    string Error = $"Error Semantico. La propiedad Name debe contener un valor de tipo String";
+                    ShowError(Error);
+                    throw new Error($"La propiedad Name debe contener un valor de tipo String",ErrorType.SemanticError);
                   }
                   break;
                   default:
-                  Error.Report(ErrorType.SemanticError,$"La asignacion a la propiedad {propertyName} no permitida");
-                  break;
+                  string error = $"Error Semantico. La asignacion a la propiedad {propertyName} no permitida";
+                  ShowError(error);
+                  throw new Error($"La asignacion a la propiedad {propertyName} no permitida",ErrorType.SemanticError);
              }
         }
     }
@@ -153,7 +170,9 @@ public class Semantic : MonoBehaviour
     {
         if(!IsVariableDeclared(variable.Name))
         {
-            Error.Report(ErrorType.SemanticError,$"La variable {variable.Name} ya esta definida");
+            string error = $"Error Semantico. La variable {variable.Name} ya esta definida";
+            ShowError(error);
+            throw new Error($"La variable {variable.Name} ya esta definida",ErrorType.SemanticError);
         }
         if(variable is VariableCompoundExpression variableCompound)
         {
@@ -187,7 +206,9 @@ public class Semantic : MonoBehaviour
               string propertyName = variableCompound.Argument.Params.Last().ToString().ToLower();
               if(propertyName=="power"||propertyName=="pow"||propertyName=="name"||propertyName=="type"||propertyName=="faction"||propertyName=="range")
               {
-                Error.Report(ErrorType.SemanticError,$"Se esta accediendo a la propiedad {propertyName} sin asignarle un valor");
+                string error = $"Error Semantico. Se esta accediendo a la propiedad {propertyName} sin asignarle un valor";
+                ShowError(error);
+                throw new Error($"Se esta accediendo a la propiedad {propertyName} sin asignarle un valor",ErrorType.SemanticError);
               }
            }
        } 
@@ -223,7 +244,9 @@ public class Semantic : MonoBehaviour
         {
             if(!IsVariableDeclared(variable.Name))
             {
-                Error.Report(ErrorType.SemanticError,$"La variable {variable.Name} no esta declarada");
+                string error = $"Error Semantico. La variable {variable.Name} no esta declarada";
+                ShowError(error);
+                throw new Error($"La variable {variable.Name} no esta declarada",ErrorType.SemanticError);
             }
         }
         else if(expression is BinaryExpression binary)
@@ -249,7 +272,9 @@ public class Semantic : MonoBehaviour
                     string effectName = elemento.EffectCall.Name;
                     if(!effectsName.ContainsKey(effectName))
                     {
-                        Error.Report(ErrorType.SemanticError,$"El efecto {effectName} mencionado en la carta {cardName} no fue definido");
+                        string error = $"Error Semantico. El efecto {effectName} mencionado en la carta {cardName} no fue definido";
+                        ShowError(error);
+                        throw new Error($"El efecto {effectName} mencionado en la carta {cardName} no fue definido",ErrorType.SemanticError);
                     }
                     EffectExpression declaredEffect = effectsName[effectName];
                     foreach(var param in elemento.EffectCall.Params)
@@ -257,19 +282,27 @@ public class Semantic : MonoBehaviour
                         var declaredParam = declaredEffect.Params.Params.FirstOrDefault(p=>(p as VariableExpression)?.Name==param.Variable.Name) as VariableExpression;
                         if(declaredParam == null)
                         {
-                            Error.Report(ErrorType.SemanticError,$"El parametro {param.Variable.Name} no esta definido en el efecto {effectName}");
+                            string error = $"Error Semantico. El parametro {param.Variable.Name} no esta definido en el efecto {effectName}";
+                            ShowError(error);
+                            throw new Error($"El parametro {param.Variable.Name} no esta definido en el efecto {effectName}",ErrorType.SemanticError);
                         }
                         if(param.Value is BoolExpression && declaredParam.type!=VariableExpression.Type.BOOL)
                         {
-                            Error.Report(ErrorType.SemanticError,$"El parametro {param.Variable.Name} se le asigno un valor incorrecto");
+                            string error = $"Error Semantico. El parametro {param.Variable.Name} se le asigno un valor incorrecto";
+                            ShowError(error);
+                            throw new Error($"El parametro {param.Variable.Name} se le asigno un valor incorrecto",ErrorType.SemanticError);
                         }
                         else if(param.Value is StringExpression && declaredParam.type!=VariableExpression.Type.STRING)
                         {
-                            Error.Report(ErrorType.SemanticError,$"El parametro {param.Variable.Name} se le asigno un valor incorrecto");
+                            string error = $"Error Semantico. El parametro {param.Variable.Name} se le asigno un valor incorrecto";
+                            ShowError(error);
+                            throw new Error($"El parametro {param.Variable.Name} se le asigno un valor incorrecto",ErrorType.SemanticError);
                         }
                         else if(param.Value is NumberExpression && declaredParam.type!=VariableExpression.Type.INT)
                         {
-                            Error.Report(ErrorType.SemanticError,$"El parametro {param.Variable.Name} se le asigno un valor incorrecto");
+                            string error = $"Error Semantico. El parametro {param.Variable.Name} se le asigno un valor incorrecto";
+                            ShowError(error);
+                            throw new Error($"El parametro {param.Variable.Name} se le asigno un valor incorrecto",ErrorType.SemanticError);
                         }
                     }
                 }
@@ -292,11 +325,15 @@ public class Semantic : MonoBehaviour
                         }
                         else
                         {
-                            Error.Report(ErrorType.SemanticError,$"Tipo de PostAction invalido en la carta {cardName}, se experaba una expresion de cadena o una variable");
+                            string error = $"Error Semantico. Tipo de PostAction invalido en la carta {cardName}, se experaba una expresion de cadena o una variable";
+                            ShowError(error);
+                            throw new Error($"Tipo de PostAction invalido en la carta {cardName}, se experaba una expresion de cadena o una variable",ErrorType.SemanticError);
                         }
                         if(!effectsName.ContainsKey(postActionEffectName))
                         {
-                            Error.Report(ErrorType.SemanticError,$"El efecto {postActionEffectName} mencionado en el PostAction de la carta {cardName} no esta definido");
+                            string error = $"Error Semantico. El efecto {postActionEffectName} mencionado en el PostAction de la carta {cardName} no esta definido";
+                            ShowError(error);
+                            throw new Error($"El efecto {postActionEffectName} mencionado en el PostAction de la carta {cardName} no esta definido",ErrorType.SemanticError);
                         }
                     }
                 }
@@ -319,7 +356,12 @@ public class Semantic : MonoBehaviour
             foreach(EffectExpression effect in program.CompiledEffects)
             {
                 string effectName = ((StringExpression)effect.Name.Name).Value;
-                if(effectsName.ContainsKey(effectName)) Error.Report(ErrorType.SemanticError,$"El efecto {effectName} ya esta definido");
+                if(effectsName.ContainsKey(effectName))
+                {
+                    string error = $"El efecto {effectName} ya esta definido";
+                    ShowError(error);
+                    throw new Error($"El efecto {effectName} ya esta definido",ErrorType.SemanticError);
+                }
                 effectsName[effectName] = effect;
                 CheckEffect(effect);
                 Debug.Log("Analisis semantico del efecto completado");
@@ -371,6 +413,11 @@ public class Semantic : MonoBehaviour
     }
     public void CheckEffectCall(EffectExpression effect)
     {
-        if(effects.ContainsKey(effect.Name.Name))Error.Report(ErrorType.SemanticError,$"El efecto {effect.Name} ya esta definido");
+        if(effects.ContainsKey(effect.Name.Name))
+        {
+            string error = $"Error Semantico. El efecto {effect.Name} ya esta definido";
+            ShowError(error);
+            throw new Error($"El efecto {effect.Name} ya esta definido",ErrorType.SemanticError);
+        }
     }
 }

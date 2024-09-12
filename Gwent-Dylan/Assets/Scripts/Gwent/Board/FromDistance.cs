@@ -5,5 +5,5 @@ using UnityEngine;
 public class FromDistance : Zone
 {
    public GameObject fromDistanceBoostZone;//Espacio para la carta aumento
-   public Card cardInFromDistanceBoostZone;//Carta aumento
+   public GameObject cardInFromDistanceBoostZone;//Carta aumento
 }

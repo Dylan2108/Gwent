@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Gold : UnitCard
 {//Carta de Oro
+     public Scope scope;
     public void Start()
     {
         player = transform.parent.GetComponent<Player>();//Toma como referencia al jugador que sea su padre
@@ -67,6 +68,16 @@ public class Gold : UnitCard
             else if(this.name == "Sasuke Uchiha")
             {
                 player.EliminateRow();
+                EffectActivated = true;
+                player.playedCards++;
+            }
+            else
+            {
+                GameObject Context = GameObject.Find("Context");
+                Scope ScopeComponent = Context.GetComponent<Scope>();
+                scope = ScopeComponent;
+                Evaluator evaluator = new Evaluator(this.scope,this);
+                evaluator.EvaluateEffect();
                 EffectActivated = true;
                 player.playedCards++;
             }

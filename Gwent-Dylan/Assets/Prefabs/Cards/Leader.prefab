@@ -119,4 +119,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24616e44f803599538c5d64554acdc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Naruto Uzumaki
+  Type: Leader
+  name: Naruto Uzumaki
+  faction: Ninja
+  power: 0
+  range:
+  - 
+  - 
+  - 
+  owner: 0
+  player: {fileID: 0}
+  invoked: 0
+  destroyed: 0
+  deck: {fileID: 0}
+  EffectActivated: 0

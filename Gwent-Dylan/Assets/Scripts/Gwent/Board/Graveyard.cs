@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Graveyard : MonoBehaviour
 {
-    public List<Card> cardsInGraveyard = new List<Card>();//Lista de las cartas en el cementerio
+    public List<GameObject> cardsInGraveyard = new List<GameObject>();//Lista de las cartas en el cementerio
 }

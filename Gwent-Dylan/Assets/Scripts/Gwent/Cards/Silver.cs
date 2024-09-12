@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Silver : UnitCard
 {//Cartas Plata
-
+     public Scope scope;
     public Lure LureCard;//La carta senuelo que puede elegir a esta carta como objetivo
     public void Start()
     {
@@ -63,6 +63,16 @@ public class Silver : UnitCard
             else if(this.name == "Sakura Haruno")
             {
                 player.EffectDrawCard();
+                EffectActivated = true;
+                player.playedCards++;
+            }
+            else
+            {
+                GameObject Context = GameObject.Find("Context");
+                Scope ScopeComponent = Context.GetComponent<Scope>();
+                scope = ScopeComponent;
+                Evaluator evaluator = new Evaluator(this.scope,this);
+                evaluator.EvaluateEffect();
                 EffectActivated = true;
                 player.playedCards++;
             }

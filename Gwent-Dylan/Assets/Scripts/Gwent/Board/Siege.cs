@@ -5,5 +5,5 @@ using UnityEngine;
 public class Siege : Zone
 {
     public GameObject siegeBoostZone;//Espacio para la carta aumento
-    public Card cardInSiegeBoostZone;//Carta aumento
+    public GameObject cardInSiegeBoostZone;//Carta aumento
 }

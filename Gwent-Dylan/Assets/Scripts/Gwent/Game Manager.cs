@@ -235,9 +235,9 @@ public class GameManager : MonoBehaviour
       if(MyPlayer.isMyTurn) return 0;
       return 1;
     }
-    public List<Card> Board()
+    public List<GameObject> Board()
     {
-        List<Card> BoardCards = new List<Card>();
+        List<GameObject> BoardCards = new List<GameObject>();
         for(int i = 0;i<MyPlayer.meleesZones.cardsInZones.Count;i++)
         {
            if(MyPlayer.meleesZones.cardsInZones[i]!=null)
@@ -295,9 +295,9 @@ public class GameManager : MonoBehaviour
         if(RivalPlayer.siegeZones.cardInSiegeBoostZone!=null) BoardCards.Add(RivalPlayer.siegeZones.cardInSiegeBoostZone);
         return BoardCards;
     }
-    public List<Card> HandOfPlayer(int ID)
+    public List<GameObject> HandOfPlayer(int ID)
     {
-      List<Card> HandCards = new List<Card>();
+      List<GameObject> HandCards = new List<GameObject>();
        if(ID == 0)
        {
          for(int i = 0;i<MyPlayer.cardsInHand.Count;i++)
@@ -321,9 +321,9 @@ public class GameManager : MonoBehaviour
           return HandCards;
        }
     }
-    public List<Card> FieldOfPlayer(int ID)
+    public List<GameObject> FieldOfPlayer(int ID)
     {
-      List<Card> FieldCards = new List<Card>();
+      List<GameObject> FieldCards = new List<GameObject>();
       if(ID == 0)
       {
         for(int i = 0;i<MyPlayer.meleesZones.cardsInZones.Count;i++)
@@ -395,8 +395,8 @@ public class GameManager : MonoBehaviour
         return FieldCards;
       }
     }
-    public List<Card> GraveyardOfPlayer(int ID)
-    {   List<Card> GraveyardCards = new List<Card>();
+    public List<GameObject> GraveyardOfPlayer(int ID)
+    {   List<GameObject> GraveyardCards = new List<GameObject>();
        if(ID==0)
        {
           for(int i = 0;i<MyPlayer.graveyard.cardsInGraveyard.Count;i++)
@@ -420,9 +420,9 @@ public class GameManager : MonoBehaviour
           return GraveyardCards;
        }
     }
-    public List<Card> DeckOfPlayer(int ID)
+    public List<GameObject> DeckOfPlayer(int ID)
     {
-      List<Card> DeckCards = new List<Card>();
+      List<GameObject> DeckCards = new List<GameObject>();
       if(ID==0)
       {
         for(int i = 0;i<MyPlayer.deck.deck.Count;i++)

@@ -119,4 +119,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31bfc1fe0e9b3c7398b6ba9b578a81da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Pildoras Ninjas
+  Type: Boost
+  name: Pildoras Ninjas
+  faction: Ninja
+  power: 0
+  range:
+  - 
+  - 
+  - 
+  owner: 0
+  player: {fileID: 0}
+  invoked: 0
+  destroyed: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Clear : SpecialCard
 {
+    public Scope scope;
     public void Start()
     {
         player = transform.parent.GetComponent<Player>();//Toma como referencia al jugador que sea su padre
@@ -22,6 +23,14 @@ public class Clear : SpecialCard
            player.ChangedCards = true;
            if(this.name == "Bijudama")player.EffectClear(1);
            else if(this.name == "Flecha de Indra")player.EffectClear(3);
+           else
+           {
+              GameObject Context = GameObject.Find("Context");
+              Scope ScopeComponent = Context.GetComponent<Scope>();
+              scope = ScopeComponent;
+              Evaluator evaluator = new Evaluator(this.scope,this);
+              evaluator.EvaluateEffect();
+           }
          }
         }
         else if(!player.isMyTurn)Debug.Log("No es tu turno");

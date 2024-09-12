@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Weather : SpecialCard
 {
+   public Scope scope;
    public List<Silver> affectedCards = new List<Silver>();//Lista que contiene las cartas a las cuales les fue modificado su ataque
    public void Start()
    {
@@ -23,6 +24,15 @@ public class Weather : SpecialCard
            player.ChangedCards = true;
             if(this.name == "Kirin")player.ShowMenuWeatherEffect(this,2);
             else if(this.name == "Jutsu Bola de Fuego")player.ShowMenuWeatherEffect(this,1);
+            else
+            {
+               player.SummonWeatherCard(this);
+               invoked = true;
+               player.playedCards++;
+               player.ChangedCards = true;
+               Evaluator evaluator = new Evaluator(this.scope,this);
+               evaluator.EvaluateEffect();
+            }
          }
          else
          {

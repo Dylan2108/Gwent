@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
+using System;
 public enum ErrorType
 {
     LexicalError, // Ocurren cuando el Lexer encuentra un token invalido
     SyntaxError, //Ocurren cuando el parser encuentra una expresion invalida
     SemanticError //Ocurren cuando el evaluador encuentra una expresion invalida
 }
-public static class Error  
+public  class Error : Exception 
 {
-    public static void Report(ErrorType errorType,string message)
+    public string Message{get;}
+    public ErrorType ErrorType{get;}
+    public Error(string message,ErrorType errorType)
     {
-        Debug.LogError($"{errorType} : {message} ");
+        Message = message;
+        ErrorType = errorType;
+    }
+    public string Report()
+    {
+        return $"{ErrorType}: {Message}";
     }
 }

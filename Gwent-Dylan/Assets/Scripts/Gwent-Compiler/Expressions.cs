@@ -11,10 +11,10 @@ public interface Node
 }
 public abstract class Expression : Node
 {
-  public abstract object Evaluate(Scope scope);
+  public abstract object Evaluate(Scope scope);//Evalua cada una de las expresiones
 }
 public class NumberExpression : Expression
-{
+{//Numeros
     public int Value{get;}
     public NumberExpression(int value)
     {
@@ -26,7 +26,7 @@ public class NumberExpression : Expression
     }
 }
 public class StringExpression : Expression
-{
+{//Strings
     public string Value{get;}
     public StringExpression(string value)
     {
@@ -38,7 +38,7 @@ public class StringExpression : Expression
     }
 }
 public class BoolExpression : Expression
-{
+{//Booleanos
     public bool Value{get;}
     public BoolExpression(bool value)
     {
@@ -81,8 +81,7 @@ public class BinaryExpression : Expression
                 case TokenType.NotEqual : return !left.Equals(right);
                 case TokenType.EqualEqual : return left.Equals(right);
                 default:
-                Error.Report(ErrorType.SemanticError,"Operacion invalida");
-                return null;
+                throw new InvalidOperationException("Operador Invalido" + Symbol.Value);
             }
         }
         else if(left is string && right is string)
@@ -93,8 +92,7 @@ public class BinaryExpression : Expression
                 case TokenType.SpaceConcatenation : return left.ToString() + " " + right.ToString();
                 case TokenType.EqualEqual: return left.Equals(right);
                 default:
-                Error.Report(ErrorType.SemanticError,"Operacion invalida");
-                return null;
+                throw new InvalidOperationException("Operador Invalido" + Symbol.Value);
             }
         }
         else if(left is Card && right is string)
@@ -108,8 +106,7 @@ public class BinaryExpression : Expression
                 case TokenType.GreatEqualThan: return Convert.ToDouble(left) >= Convert.ToDouble(right);
                 case TokenType.NotEqual: return !left.Equals(right);
                 default:
-                Error.Report(ErrorType.SemanticError,"Operacion invalida");
-                return null;
+                throw new InvalidOperationException("Operador Invalido" + Symbol.Value);
             }
         }
         else if(left is Card && right is int)
@@ -123,8 +120,7 @@ public class BinaryExpression : Expression
                 case TokenType.GreatEqualThan: return Convert.ToDouble(left) >= Convert.ToDouble(right);
                 case TokenType.NotEqual: return !left.Equals(right);
                 default:
-                Error.Report(ErrorType.SemanticError,"Operacion invalida");
-                return null;
+                throw new InvalidOperationException("Operador invalido" + Symbol.Value);
             }
         }
         else if(left is int && right is int)
@@ -144,15 +140,34 @@ public class BinaryExpression : Expression
                 case TokenType.Modulus: return Convert.ToDouble(left) % Convert.ToDouble(right);
                 case TokenType.Pow: return Math.Pow(Convert.ToDouble(left),Convert.ToDouble(right));
                 default:
-                Error.Report(ErrorType.SemanticError,"Operacion Invalida");
-                return null;
+                throw new InvalidOperationException("Operador invalido" + Symbol.Value);
             }
         }
         else
         {
-            Error.Report(ErrorType.SemanticError,"Operacion invalida");
-            return null;
+            throw new InvalidOperationException("Operador invalido" + Symbol.Value);
         }
+    }
+}
+public class BinaryIntExpression : BinaryExpression
+{
+    public BinaryIntExpression(Expression left,Token symbol,Expression right) : base(left,symbol,right)
+    {
+
+    }
+}
+public class BinaryStringExpression : BinaryExpression
+{
+    public BinaryStringExpression(Expression left,Token symbol,Expression right) : base(left,symbol,right)
+    {
+
+    }
+}
+public class BinaryBooleanExpression : BinaryExpression
+{
+    public BinaryBooleanExpression(Expression left,Token symbol,Expression right) : base(left,symbol,right)
+    {
+        
     }
 }
 public class UnaryExpression : Expression
@@ -182,8 +197,7 @@ public class UnaryExpression : Expression
             scope.Values[(Right as VariableExpression).Name] = newValue_2;
             return newValue_2;
             default:
-            Error.Report(ErrorType.SemanticError,"Operacion Invalida");
-            return null;
+            throw new InvalidOperationException("Operador invalido" + Symbol.Value);
         }
     }
 }
@@ -250,14 +264,10 @@ public class AssignExpresion : StatementExpression
             }
             scope.Values[Variable.Name] = card;
         }
-        else
-        {
-            Error.Report(ErrorType.SemanticError,"Operacion invalida");
-        }
       }
       else
       {
-        Error.Report(ErrorType.SemanticError,"Operacion invalida");
+        throw new InvalidOperationException($"Operacion invalida para los tipos {Variable?.GetType()} y {Value?.GetType()}");
       }
    }
 }
@@ -289,8 +299,8 @@ public class VariableExpression : Expression
     }
 }
 public class VariableCompoundExpression : VariableExpression,StatementExpression
-{
-    public ParamsExpression Argument{get;}
+{//Variables Compuestas(Argumentos,Indices,Punteros,Proiedades)
+    public ParamsExpression Argument{get;}//Los argumentos de la variable
     public VariableCompoundExpression(Token token) : base(token)
     {
         Argument = new ParamsExpression();
@@ -299,17 +309,17 @@ public class VariableCompoundExpression : VariableExpression,StatementExpression
     {
        object last = null;
        if(Name != "context") last = scope.Values[Name];
-       foreach(var arg in Argument.Params)
+       foreach(var arg in Argument.Params)//Recorre todos los argumentos
        {
-          if(arg is FunctionExpression)
+          if(arg is FunctionExpression) //Verifica si el argumento es una funcion
           {
-            last = (arg as FunctionExpression).ValueReturn(scope,last);
+            last = (arg as FunctionExpression).ValueReturn(scope,last);//Devuelve el valor de la funcion
           }
-          else if(arg is PointerExpression)
+          else if(arg is PointerExpression)//Verifica si el argumento es un puntero
           {
             PointerExpression pointer = arg as PointerExpression;
             switch(pointer.Pointer)
-            {
+            {//Segun la entrada devuelve la lista correspondiente
                 case "Hand": last = scope.Context.HandOfPlayer(scope.Context.TriggerPlayer()); break;
                 case "Deck": last = scope.Context.DeckOfPlayer(scope.Context.TriggerPlayer()); break;
                 case "Graveyard": last = scope.Context.GraveyardOfPlayer(scope.Context.TriggerPlayer()); break;
@@ -320,7 +330,7 @@ public class VariableCompoundExpression : VariableExpression,StatementExpression
        }
     }
     public override object Evaluate(Scope scope)
-    {
+    {//Similar al metodo Evaluater pero devuelve el resultado de la evaluacion
         object last = null;
         if(Name != "context") last = scope.Values[Name];
         foreach(var arg in Argument.Params)
@@ -329,13 +339,13 @@ public class VariableCompoundExpression : VariableExpression,StatementExpression
             {
                 last = (arg as FunctionExpression).ValueReturn(scope,last);
             }
-            else if(arg is IndexExpression)
+            else if(arg is IndexExpression)//Verifica si es un indexador
             {
                 if(last is List<Card> list)
                 {
                     List<Card> cards = list;
                     IndexExpression index = arg as IndexExpression;
-                    last = cards[index.Index];
+                    last = cards[index.Index];//Asigna el valor de la lista
                 }
                 else
                 {
@@ -360,7 +370,7 @@ public class VariableCompoundExpression : VariableExpression,StatementExpression
             {
                 Card card = last as Card;
                 switch(arg)
-                {
+                {//Verifica si uno de los argumentos es la propiedad de la carta
                     case TypeExpression : last = card.Type; break;
                     case NameExpression : last = card.name; break;
                     case FactionExpression : last = card.faction; break;

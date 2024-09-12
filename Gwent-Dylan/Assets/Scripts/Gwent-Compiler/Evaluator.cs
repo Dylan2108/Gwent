@@ -72,12 +72,12 @@ public class Evaluator : MonoBehaviour
    {
       EvaluateStatementBlock(action.Body);
    }
-   private List<Card> EvaluateSelector(SelectorExpression selector,string name = null)
+   private List<GameObject> EvaluateSelector(SelectorExpression selector,string name = null)
    {
-      List<Card> cards = new List<Card>();
+      List<GameObject> cards = new List<GameObject>();
       if(selector.Source == @"""parent""") cards = EvaluateSource(name);
       else cards = EvaluateSource(selector.Source);
-      List<Card> cards_2 = new List<Card>();
+      List<GameObject> cards_2 = new List<GameObject>();
       foreach(var card in cards)
       {
         scope.Values[selector.Predicate.Variable.Name] = card;
@@ -86,7 +86,7 @@ public class Evaluator : MonoBehaviour
       }
       if(selector.Single.Value)
       {
-        List<Card> cards_3 = new List<Card>{cards_2[0]};
+        List<GameObject> cards_3 = new List<GameObject>{cards_2[0]};
         return cards_3;
       }
       else
@@ -101,7 +101,7 @@ public class Evaluator : MonoBehaviour
           statement.Evaluater(scope);
        }
    }
-   private List<Card> EvaluateSource(string name)
+   private List<GameObject> EvaluateSource(string name)
    {
        switch(name)
        {
@@ -120,13 +120,5 @@ public class Evaluator : MonoBehaviour
           case @"""board""": return scope.Context.Board();
           default: return scope.Context.Board();
        }
-   }
-   private Func<Card,bool> EvaluatePreddicate(PredicateExpression predicate)
-   {
-      return Cards =>
-      {
-        scope.Values[predicate.Variable.Name] = Cards;
-        return (bool)predicate.Condition.Evaluate(scope);
-      };
    }
 }
